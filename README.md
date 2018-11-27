@@ -1,3 +1,9 @@
+# TLED-React
+
+For prototyping a new TLED site using React.
+
+Eventually this repo and the main TLED repo should be merged into one, but there is a lot of stuff in the old project.  For the sake of simplicity lets just start fresh.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
