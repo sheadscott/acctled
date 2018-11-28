@@ -12,7 +12,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "proxy": "browser-sync start --https --proxy 'localhost:3000' --files 'src/**/*.js'"
   },
   "eslintConfig": {
     "extends": "react-app"
