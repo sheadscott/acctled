@@ -17,13 +17,14 @@ export default class Page extends Component {
     }
   }
   render() {
-    const pageContent = this.state.pageContent
+    const slug = this.props.match.params.slug;
+    const pageContent = this.state.pageContent;
     return (
       <div style={{ padding: '3rem' }}>
         <h1>This is a page component</h1>
-        {this.props.match.params.slug && (<div>
+        {slug && (<div>
           <h2>{pageContent && pageContent.title.rendered}</h2>
-          Slug: {this.props.match.params.slug}
+          <h3>Slug: {slug}</h3>
         </div>)}
       </div>
     )
