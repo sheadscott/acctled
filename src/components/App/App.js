@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import TitleBar from '../TitleBar/TitleBar';
-import SecondaryNav from '../SecondaryNav/SecondaryNav';
+import TitleBar from "../TitleBar/TitleBar";
+import SecondaryNav from "../SecondaryNav/SecondaryNav";
+import Footer from "../Footer/Footer";
 
 import WPPage from '../Pages/WPPage';
 import HomePage from '../Pages/HomePage';
@@ -18,16 +19,14 @@ class App extends Component {
             <SecondaryNav />
           </header>
 
-
           <main>
             <Route path="/" exact component={HomePage} />
             <Route path="/test/:slug" component={WPPage} />
+
+            <Link to="/test/test-page">WP Test Page</Link>
           </main>
 
-          <footer>
-            This is the footer.
-            <Link to="/test/test-page">WP Test Page</Link>
-          </footer>
+          <Footer />
         </div>
       </Router>
     );
