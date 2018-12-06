@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import Axios from "axios";
-import { kebabToCamelCase, spacesToBreak } from "../../helpers";
+// import { kebabToCamelCase, spacesToBreak } from "../../helpers";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 // Import Images
 import { ReactComponent as ACCLogo } from "../../img/ACC.svg";
-import tledLogo from "../../img/tledLogo.svg";
+// import tledLogo from "../../img/tledLogo.svg";
 import calendarIcon from "../../img/calendarIcon.svg";
 import searchIcon from "../../img/searchIcon.svg";
 import hamburgerMenu from "../../img/hamburgerMenu.svg";
@@ -37,42 +37,28 @@ const SiteIdentity = styled.div`
   align-items: center;
 `;
 
-// max-width: ${props => props.longestWord / 2}em;
-const A = styled(Link)`
-  flex: 2;
-  color: white;
-  display: inline-block;
-  font-size: 1em;
-  text-decoration: none;
+const TitleBarNav = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.5rem;
 
-  &:hover {
-    text-decoration: underline;
+  a {
+    color: white;
+    display: block;
+    font-size: 1em;
+    text-decoration: none;
+    max-width: 100px;
+    text-align: center;
+    margin: 0 0.5rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;
 
-const Icon = styled.a`
-  img {
-    height: 50px;
-    padding: 0 10px;
-  }
-
-  img#acc-home {
-    border-right: 1px solid #fff;
-  }
-
-  img#calendar {
-    width: 24px;
-  }
-
-  img#search {
-    width: 36px;
-  }
-
-  img#hamburgerMenu {
-    width: 36px;
-    padding-left: 5px;
-  }
-`;
+const TitleBarControls = styled.div``;
 
 const SiteTitle = styled.div`
   font-size: 1.4rem;
@@ -119,44 +105,34 @@ export default class TitleBar extends Component {
           </SiteTitle>
         </SiteIdentity>
 
-        {this.state.titleBarItems.map(item => {
-          // Use slug to assign icons to links
-          const itemContent = {
-            calendar: { calendarIcon },
-            search: { searchIcon }
-          };
 
-          const camelSlug = kebabToCamelCase(item.object_slug);
-          const icon = itemContent[camelSlug];
+        <TitleBarNav>
+          {this.state.titleBarItems.map(item => {
 
-          if (icon) {
-            return (
-              <Icon key={item.id} href={item.url}>
-                <img
-                  id={item.object_slug}
-                  src={Object.values(icon)}
-                  alt={item.title}
-                />
-              </Icon>
-            );
-          }
+            // Internal links using React Router
+            if (item.type === "post_type") {
+              return <Link key={item.id} to={`/${item.object_slug}`}>{item.title}</Link>
+            }
 
-          return (
-            <A
-              dangerouslySetInnerHTML={{ __html: spacesToBreak(item.title) }}
-              key={item.id}
-              to={item.url}
-            />
-          );
-        })}
+            // external links
+            return <a key={item.id} href={item.url}>{item.title}</a>
 
-        <Link to="/calendar">
-          <img id="calendarIcon" src={searchIcon} alt="Calendar" />
-        </Link>
+          })}
+        </TitleBarNav>
 
-        <Button>
-          <img id="hamburgerMenu" src={hamburgerMenu} alt="Mobile Menu" />
-        </Button>
+        <TitleBarControls>
+          <Link to='/calendar' title="Link to Calendar Page">
+            <img src={calendarIcon} alt="calendar" />
+          </Link>
+
+          <Button>
+            <img src={searchIcon} alt="Search" />
+          </Button>
+
+          <Button>
+            <img id="hamburgerMenu" src={hamburgerMenu} alt="Mobile Menu" />
+          </Button>
+        </TitleBarControls>
       </Nav>
     );
   }
