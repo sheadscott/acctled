@@ -30,11 +30,11 @@ export default class SecondaryNav extends Component {
 
               // Internal links using React Router
               if (item.type === "post_type") {
-                return <ListItem><Link key={item.id} to={`/${item.object_slug}`}>{item.title}</Link></ListItem>;
+                return <ListItem key={item.id}><Link to={`/${item.object_slug}`}>{item.title}</Link></ListItem>;
               }
 
               // external links
-              return <ListItem><a key={item.id} href={item.url}>{item.title}</a></ListItem>
+              return <ListItem key={item.id}><a href={item.url}>{item.title}</a></ListItem>
             })}
           </NavList>
         </nav>

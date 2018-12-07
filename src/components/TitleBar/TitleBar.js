@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Axios from "axios";
+import axios from "axios";
 // import { kebabToCamelCase, spacesToBreak } from "../../helpers";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -82,7 +82,7 @@ export default class TitleBar extends Component {
     titleBarItems: []
   };
   componentDidMount() {
-    Axios.get(
+    axios.get(
       "https://instruction.austincc.edu/tled/wp-json/wp-api-menus/v2/menus/3"
     ).then(response => {
       const titleBarItems = response.data.items;

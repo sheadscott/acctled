@@ -12,6 +12,6 @@ export default function Container(props) {
 const Wrapper = styled.div`
   margin: 0 auto;
   max-width: 60em;
-  padding: 0 2rem;
+  padding: 0 1rem;
 `
 

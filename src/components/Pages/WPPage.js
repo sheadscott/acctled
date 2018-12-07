@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 
-import { Container } from 'reactstrap';
+import Container from '../Container/Container';
 import ACF from '../ACF/ACF';
 import Section from '../Section/Section';
 import SectionHeading from '../SectionHeading/SectionHeading';
