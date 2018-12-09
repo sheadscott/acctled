@@ -2,7 +2,7 @@ import React from 'react';
 import OneColumn from './OneColumn';
 import TwoColumn from './TwoColumn';
 import ThreeColumn from './ThreeColumn';
-import Accordion from './Accordion';
+// import Accordion from './Accordion';
 
 export default (props) => {
   console.log('layouts', props.layouts);

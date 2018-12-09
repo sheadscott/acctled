@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import TitleBar from "../TitleBar/TitleBar";
 import SecondaryNav from "../SecondaryNav/SecondaryNav";
@@ -26,8 +26,6 @@ class App extends Component {
               <Route path="/calendar" component={CalendarPage} />
               <Route path="/:slug" component={WPPage} />
             </Switch>
-
-            <Link to="/test/test-page">WP Test Page</Link>
           </main>
 
           <Footer />

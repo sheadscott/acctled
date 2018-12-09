@@ -1,6 +1,6 @@
 import React from 'react';
 import Parser from 'html-react-parser';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Column as Col } from '../Grid/Grid';
 import styled, { css } from 'styled-components';
 import SectionHeading from '../SectionHeading/SectionHeading';
 
@@ -10,7 +10,7 @@ export default (props) => {
       <Container>
         <Row>
           {props.layout.heading && (
-            <Col sm={12}>
+            <Col width={1}>
               <SectionHeading color={props.layout.text_mode === 'light' ? 'white' : 'rgb(26, 82, 118)'}>
                 {Parser(props.layout.heading)}
               </SectionHeading>
