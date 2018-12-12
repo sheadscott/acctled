@@ -58,7 +58,9 @@ const TitleBarNav = styled.div`
   }
 `;
 
-const TitleBarControls = styled.div``;
+const TitleBarControls = styled.div`
+  margin-left: 50px;
+`;
 
 const SiteTitle = styled.div`
   font-size: 1.4rem;
@@ -82,13 +84,15 @@ export default class TitleBar extends Component {
     titleBarItems: []
   };
   componentDidMount() {
-    axios.get(
-      "https://instruction.austincc.edu/tled/wp-json/wp-api-menus/v2/menus/3"
-    ).then(response => {
-      const titleBarItems = response.data.items;
-      console.log('titlebar items', titleBarItems);
-      this.setState({ titleBarItems });
-    });
+    axios
+      .get(
+        "https://instruction.austincc.edu/tled/wp-json/wp-api-menus/v2/menus/3"
+      )
+      .then(response => {
+        const titleBarItems = response.data.items;
+        // console.log("titlebar items", titleBarItems);
+        this.setState({ titleBarItems });
+      });
   }
   render() {
     return (
@@ -99,29 +103,32 @@ export default class TitleBar extends Component {
           </a>
 
           <SiteTitle>
-            <TLED to="/">
-              TLED
-            </TLED>
+            <TLED to="/">TLED</TLED>
           </SiteTitle>
         </SiteIdentity>
 
-
         <TitleBarNav>
           {this.state.titleBarItems.map(item => {
-
             // Internal links using React Router
             if (item.type === "post_type") {
-              return <Link key={item.id} to={`/${item.object_slug}`}>{item.title}</Link>
+              return (
+                <Link key={item.id} to={`/${item.object_slug}`}>
+                  {item.title}
+                </Link>
+              );
             }
 
             // external links
-            return <a key={item.id} href={item.url}>{item.title}</a>
-
+            return (
+              <a key={item.id} href={item.url}>
+                {item.title}
+              </a>
+            );
           })}
         </TitleBarNav>
 
         <TitleBarControls>
-          <Link to='/calendar' title="Link to Calendar Page">
+          <Link to="/calendar" title="Link to Calendar Page">
             <img src={calendarIcon} alt="calendar" />
           </Link>
 
