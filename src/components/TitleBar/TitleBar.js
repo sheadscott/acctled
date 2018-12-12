@@ -7,16 +7,75 @@ import { Link } from "react-router-dom";
 // Import Images
 import { ReactComponent as ACCLogo } from "../../img/ACC.svg";
 // import tledLogo from "../../img/tledLogo.svg";
-import calendarIcon from "../../img/calendarIcon.svg";
-import searchIcon from "../../img/searchIcon.svg";
-import hamburgerMenu from "../../img/hamburgerMenu.svg";
+import { ReactComponent as CalendarIcon } from "../../img/calendarIcon.svg";
+import { ReactComponent as SearchIcon } from "../../img/searchIcon.svg";
+import { ReactComponent as HamburgerMenu } from "../../img/hamburgerMenu.svg";
 
-/*
-  The title bar is the top level nav
-  it includes the logo, search, calendar and hamburger menu button
-  its included on every page
-  icons are svg from material design
-*/
+export default class TitleBar extends Component {
+  state = {
+    titleBarItems: []
+  };
+  componentDidMount() {
+    axios
+      .get(
+        "https://instruction.austincc.edu/tled/wp-json/wp-api-menus/v2/menus/3"
+      )
+      .then(response => {
+        const titleBarItems = response.data.items;
+        // console.log("titlebar items", titleBarItems);
+        this.setState({ titleBarItems });
+      });
+  }
+  render() {
+    return (
+      <Nav>
+        <SiteIdentity>
+          <a title="ACC Home Link" href="http://www.austincc.edu">
+            <ACCLogo />
+          </a>
+
+          <SiteTitle>
+            <TLED to="/">TLED</TLED>
+          </SiteTitle>
+        </SiteIdentity>
+
+        <TitleBarNav>
+          {this.state.titleBarItems.map(item => {
+            // Internal links using React Router
+            if (item.type === "post_type") {
+              return (
+                <Link key={item.id} to={`/${item.object_slug}`}>
+                  {item.title}
+                </Link>
+              );
+            }
+
+            // external links
+            return (
+              <a key={item.id} href={item.url}>
+                {item.title}
+              </a>
+            );
+          })}
+        </TitleBarNav>
+
+        <TitleBarControls>
+          <Link to="/calendar" title="Link to Calendar Page">
+            <CalendarIcon />
+          </Link>
+
+          <Button>
+            <SearchIcon />
+          </Button>
+
+          <Button>
+            <HamburgerMenu />
+          </Button>
+        </TitleBarControls>
+      </Nav>
+    );
+  }
+}
 
 const Nav = styled.nav`
   display: flex;
@@ -78,69 +137,3 @@ const Button = styled.button`
   background: transparent;
   border: none;
 `;
-
-export default class TitleBar extends Component {
-  state = {
-    titleBarItems: []
-  };
-  componentDidMount() {
-    axios
-      .get(
-        "https://instruction.austincc.edu/tled/wp-json/wp-api-menus/v2/menus/3"
-      )
-      .then(response => {
-        const titleBarItems = response.data.items;
-        // console.log("titlebar items", titleBarItems);
-        this.setState({ titleBarItems });
-      });
-  }
-  render() {
-    return (
-      <Nav>
-        <SiteIdentity>
-          <a title="ACC Home Link" href="http://www.austincc.edu">
-            <ACCLogo />
-          </a>
-
-          <SiteTitle>
-            <TLED to="/">TLED</TLED>
-          </SiteTitle>
-        </SiteIdentity>
-
-        <TitleBarNav>
-          {this.state.titleBarItems.map(item => {
-            // Internal links using React Router
-            if (item.type === "post_type") {
-              return (
-                <Link key={item.id} to={`/${item.object_slug}`}>
-                  {item.title}
-                </Link>
-              );
-            }
-
-            // external links
-            return (
-              <a key={item.id} href={item.url}>
-                {item.title}
-              </a>
-            );
-          })}
-        </TitleBarNav>
-
-        <TitleBarControls>
-          <Link to="/calendar" title="Link to Calendar Page">
-            <img src={calendarIcon} alt="calendar" />
-          </Link>
-
-          <Button>
-            <img src={searchIcon} alt="Search" />
-          </Button>
-
-          <Button>
-            <img id="hamburgerMenu" src={hamburgerMenu} alt="Mobile Menu" />
-          </Button>
-        </TitleBarControls>
-      </Nav>
-    );
-  }
-}

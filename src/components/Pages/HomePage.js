@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { HR } from "../Elements/Elements";
 import { Container, Row, Column } from "../Grid/Grid";
 
-import HomeSlider from "../HomeSlide/HomeSlider";
+import HomeSlider from "../HomeSlider/HomeSlider";
 
 import teachingGraphic from "../../img/deconstructing.png";
 import callForSpeakers from "../../img/callForSpeakers.jpg";
