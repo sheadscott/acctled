@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@emotion/core": "^10.0.2",
+    "@rebass/grid": "^6.0.0-6",
     "axios": "^0.18.0",
     "bootstrap": "4",
     "foundation-sites": "^6.5.1",

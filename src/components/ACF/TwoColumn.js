@@ -1,6 +1,6 @@
 import React from 'react';
 import Parser from 'html-react-parser';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Column as Col } from '../Grid/Grid';
 import styled, { css } from 'styled-components';
 import SectionHeading from '../SectionHeading/SectionHeading';
 
@@ -10,7 +10,7 @@ export default (props) => {
       <Container>
         {props.layout.heading && (
           <Row>
-            <Col sm={12}>
+            <Col width={1}>
               <SectionHeading>
                 {Parser(props.layout.heading)}
               </SectionHeading>
@@ -18,10 +18,10 @@ export default (props) => {
           </Row>
         )}
         <Row>
-          <Col med={6} sm={12} lg={6}>
+          <Col width={[1, 1 / 2]}>
             {Parser(props.layout.column_1)}
           </Col>
-          <Col med={6} sm={12} lg={6}>
+          <Col width={[1, 1 / 2]}>
             {Parser(props.layout.column_2)}
           </Col>
         </Row>
