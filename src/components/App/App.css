@@ -3,6 +3,8 @@
 body {
   font-family: "Montserrat", sans-serif;
   background: #133952;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 img {

@@ -99,10 +99,18 @@ const Wrapper = styled.div`
 `;
 
 const NavList = styled.ul`
-  padding: 0;
+  padding: 0.5rem 0;
   margin: 0 -0.5rem;
   list-style: none;
   display: flex;
+  flex-direction: column;
+
+
+  @media (min-width: 800px) {
+    flex-direction: row;
+    padding: 0;
+    justify-content: center;
+  }
 `;
 
 const ListItem = styled.li`
@@ -115,11 +123,14 @@ const ListItem = styled.li`
     display: block;
     color: #f1ebab;
     text-decoration: none;
-    padding: 1rem
+    padding: 0.5rem 1rem;
     text-transform: uppercase;
     box-sizing: border-box;
     height: 100%;
     font-family: Montserrat;
+    @media (min-width: 800px) {
+      padding: 1rem
+    }
   }
 
   a:hover,

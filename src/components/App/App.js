@@ -47,4 +47,6 @@ const Main = styled.main`
   position: relative;
   z-index: 800;
   background: white;
+  width: 100%;
+  box-sizing: border-box;
 `;

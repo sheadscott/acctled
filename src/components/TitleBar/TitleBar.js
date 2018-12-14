@@ -60,7 +60,7 @@ export default class TitleBar extends Component {
         </TitleBarNav>
 
         <TitleBarControls>
-          <Link to="/calendar" title="Link to Calendar Page">
+          <Link to="/calendar" title="Link to Calendar Page" style={{ marginRight: '10px' }}>
             <CalendarIcon />
           </Link>
 
@@ -97,19 +97,26 @@ const SiteIdentity = styled.div`
 `;
 
 const TitleBarNav = styled.div`
-  display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 0.5rem;
+  display: none;
+
+  @media (min-width: 800px) {
+    display: flex;
+  }
 
   a {
     color: white;
     display: block;
-    font-size: 1em;
+    font-size: 1rem;
     text-decoration: none;
-    max-width: 100px;
     text-align: center;
-    margin: 0 0.5rem;
+    margin: 0 1rem;
+
+    @media (min-width: 960px) {
+      margin: 0 2rem;
+    }
 
     &:hover {
       text-decoration: underline;
@@ -119,6 +126,8 @@ const TitleBarNav = styled.div`
 
 const TitleBarControls = styled.div`
   margin-left: 50px;
+  display: flex;
+  flex-wrap: nowrap;
 `;
 
 const SiteTitle = styled.div`
