@@ -40,8 +40,9 @@ export default class Footer extends Component {
     return (
       <Wrapper>
         <Container>
-          <FooterHTML>
-            <WpLinks>
+          <Row flexWrap="noWrap">
+
+            <WpLinks width={[1, '75%']}>
               {this.state.footerItems.map(item => {
                 return (
                   <ul key={item.id + "ul"}>
@@ -51,11 +52,25 @@ export default class Footer extends Component {
                 );
               })}
             </WpLinks>
-            <Contact>
+
+            <Contact widht={[1, '25%']}>
               <TLEDLogo />
-              <p>Address goes here</p>
+
+              <div className="vcard" style={{ marginLeft: '10px' }}>
+                <div className="org">Austin Community College District</div>
+                <div className="adr">
+                  <div className="street-address">5930 Middle Fiskville Rd.</div>
+                  <div>
+                    <span className="locality">Austin</span>,
+                    <span className="region">Texas</span>
+                    <span className="postal-code">78752</span>
+                  </div>
+                  <div className="country-name">U.S.A.</div>
+                </div>
+                <div className="tel">512-223-4ACC (4222)</div>
+              </div>
             </Contact>
-          </FooterHTML>
+          </Row>
         </Container>
       </Wrapper>
     );
@@ -69,23 +84,19 @@ const Wrapper = styled.div`
     color: white;
   }
 `;
-const FooterHTML = styled.footer`
-  display: flex;
-`;
 
-const WpLinks = styled.div`
+const WpLinks = styled(Column)`
   columns: 3;
   column-width: 33%;
-  flex: 3;
 
   ul {
     list-style: none inside none;
-    -webkit-column-break-inside: avoid;
     page-break-inside: avoid;
     break-inside: avoid;
     display: inline-block;
     font-size: 0.9em;
-    margin-right: 10%;
+    margin: 0;
+    padding: 0;
 
     li {
       padding: 3px 0;
@@ -93,11 +104,11 @@ const WpLinks = styled.div`
   }
 `;
 
-const Contact = styled.div`
-  flex: 1;
+const Contact = styled(Column)`
   margin-top: 34px;
 
   svg {
-    width: 80%;
+    max-width: 175px;
+    margin-bottom: 2rem;
   }
 `;

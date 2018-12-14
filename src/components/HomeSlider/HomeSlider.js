@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./carousel.css";
 import { Carousel } from "react-responsive-carousel";
-import image1 from "../../img/homeslide/1.jpeg";
-import image2 from "../../img/homeslide/2.jpeg";
-import image3 from "../../img/homeslide/3.jpeg";
+// import image1 from "../../img/homeslide/1.jpeg";
+// import image2 from "../../img/homeslide/2.jpeg";
+// import image3 from "../../img/homeslide/3.jpeg";
 
 export default class HomeSlider extends Component {
   state = {
@@ -18,7 +18,7 @@ export default class HomeSlider extends Component {
         const slideData = [];
         const slideShowItems =
           response.data.acf.hero_content[0].carousel_content;
-        slideShowItems.forEach(function(slide) {
+        slideShowItems.forEach(function (slide) {
           const info = {};
           info.url = slide.image_content.url;
           info.description = slide.image_description;
