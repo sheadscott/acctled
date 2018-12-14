@@ -1,5 +1,17 @@
+
+import React from 'react';
+import { Link } from "react-router-dom";
 import { Box } from '@rebass/grid';
 import styled from 'styled-components';
+
+
+const A = (props) => {
+  if (props.href) { return <a href={props.href}>{props.children}</a> };
+
+  return (
+    <Link to={`/${props.data.object_slug}`}>{props.children}</Link>
+  )
+}
 
 const HR = styled(Box)`
   display: block;
@@ -20,4 +32,4 @@ HR.defaultProps = {
   as: 'hr'
 }
 
-export { HR }
+export { A, HR }
