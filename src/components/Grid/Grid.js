@@ -5,7 +5,9 @@ const Container = styled(Box)`
   max-width: 75em;
   width: 100%;
   box-sizing: border-box;
-  overflow-x: hidden;
+
+  // this may cause bugs
+  overflow: hidden;
 `
 
 Container.defaultProps = {

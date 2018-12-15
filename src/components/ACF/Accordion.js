@@ -18,6 +18,9 @@ export default class AccordionComponent extends Component {
     // const $dropdown = new Accordion('.accordion');
     $(this.myRef.current).foundation();
   }
+  shouldComponentUpdate() {
+    return false;
+  }
   render() {
     return (
       <Section>

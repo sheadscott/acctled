@@ -64,9 +64,9 @@ export default class TitleBar extends Component {
             <CalendarIcon />
           </Link>
 
-          <Button>
+          <a role="button" href="/#searchForm" onClick={e => this.props.toggleSearch(e)} aria-controls="searchForm" aria-expanded={this.props.searchExpanded} >
             <SearchIcon />
-          </Button>
+          </a>
 
           <Button>
             <HamburgerMenu />

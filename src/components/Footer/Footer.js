@@ -14,7 +14,6 @@ export default class Footer extends Component {
       "https://instruction.austincc.edu/tled/wp-json/wp-api-menus/v2/menus/5"
     ).then(response => {
       const footerItems = response.data.items;
-      console.log("Footer Menu", footerItems);
       this.setState({ footerItems });
     });
   }
