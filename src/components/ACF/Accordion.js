@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
+import 'foundation-sites';
 
 import Parser from 'html-react-parser';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Column as Col } from '../Grid/Grid';
 import styled from 'styled-components';
 import Section from '../Section/Section';
 import SectionHeading from '../SectionHeading/SectionHeading';
@@ -27,17 +28,18 @@ export default class AccordionComponent extends Component {
         <Container>
           <Row>
             {this.props.layout.heading && (
-              <Col sm={12}>
+              <Col width={1}>
                 <SectionHeading color={this.props.layout.text_mode === 'light' ? 'white' : 'rgb(26, 82, 118)'}>
                   {Parser(this.props.layout.heading)}
                 </SectionHeading>
               </Col>
             )}
-            <AccordionContent>
+
+            <AccordionContent width={1}>
               <ul className="accordion" data-accordion ref={this.myRef}>
                 {this.props.layout.accordion.map(item => (
                   <li className="accordion-item" data-accordion-item>
-                    <a href="#" className="accordion-title">{Parser(item.title)}</a>
+                    <a href="#0" className="accordion-title">{Parser(item.title)}</a>
                     <div className="accordion-content" data-tab-content>
                       {Parser(item.description)}
                     </div>

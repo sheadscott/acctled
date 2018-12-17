@@ -2,7 +2,7 @@ import React from 'react';
 import OneColumn from './OneColumn';
 import TwoColumn from './TwoColumn';
 import ThreeColumn from './ThreeColumn';
-// import Accordion from './Accordion';
+import Accordion from './Accordion';
 
 export default (props) => {
   console.log('layouts', props.layouts);
@@ -19,7 +19,7 @@ export default (props) => {
           return <ThreeColumn key={`acf_layout_${index}`} layout={layout} />
         }
         if (layout.acf_fc_layout === 'accordion') {
-          //return <Accordion key={`acf_layout_${index}`} layout={layout} />
+          return <Accordion key={`acf_layout_${index}`} layout={layout} />
         }
 
         return null
