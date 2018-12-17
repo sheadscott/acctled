@@ -8,6 +8,82 @@ import SectionHeading from '../SectionHeading/SectionHeading';
 
 // import 'bootstrap/dist/css/bootstrap.css';
 
+const HeroImage = ({ data }) => {
+  // check if hero image has a description
+  if (data.image_description) {
+    return (
+      <div className="container">
+        <figure className="hero-content" style={{ margin: 0 }}>
+          <img src={data.image_content.url} alt={data.image_content.alt} />
+          <figcaption style={{ textAlign: 'right', opacity: 0.5, fontStyle: 'italic' }}>
+            {data.image_description}
+          </figcaption>
+        </figure>
+      </div>
+    )
+  }
+
+  return (
+    <div className="container">
+      <div className="hero-content">
+        <img src={data.image_content} alt="" />
+      </div>
+    </div>
+  )
+}
+
+const HeroHTML = ({ data }) => (
+  <div className="container">';
+    <div className="hero-content">
+      <div dangerouslySetInnerHTML={{ __html: data.html_markup }} />
+    </div>
+  </div>
+);
+
+const HeroCarousel = ({ data }) => {
+  return <div>Hero Carousel</div>
+  // <div className="container"><div className="hero main-carousel"></div></div>
+  //   const $carouselContainer = $('.main-carousel');
+
+  //   const carouselLength = ACFData.hero[0].carousel_content.length;
+
+  //   let innerCarousel = '';
+
+  //   for (let i = 0; i < carouselLength; i++) {
+  //     var img = getImage(ACFData.hero[0].carousel_content[i].image_content, ACFData.hero[0].image_alt_text, true);
+  //     let imgHTML = '<div className="carousel-cell">' + img + '</div>';
+
+  //     addToCarousel(imgHTML);
+  //     if (i === carouselLength - 1) {
+  //       $carouselContainer.append(innerCarousel);
+  //       createCarousel();
+  //     }
+  //   };
+
+  //   function addToCarousel(imgHTML) {
+  //     innerCarousel += imgHTML;
+  //   }
+
+  //   function createCarousel() {
+  //     $carouselContainer.flickity({
+  //       // options
+  //       contain: true,
+  //       cellAlign: 'left',
+  //       lazyLoad: true,
+  //       draggable: true,
+  //       wrapAround: true,
+  //       accessibility: true,
+  //       prevNextButtons: true,
+  //       autoPlay: 4000,
+  //       pageDots: true,
+  //       imagesLoaded: true,
+  //       // fullscreen: true,
+  //     });
+  //   }
+  // }
+}
+
+
 export default class WPPage extends Component {
   state = {
     slug: '',
@@ -45,6 +121,18 @@ export default class WPPage extends Component {
       <div>
         <Section>
           <Container>
+            {ACFData && ACFData.hero_content && (
+              <Row flexWrap="nowrap">
+                <Column width={1} className="hero">
+                  {/* check for type of hero content */}
+                  {ACFData.hero_content[0].acf_fc_layout === 'image' ? <HeroImage data={ACFData.hero_content[0]} /> : null}
+
+                  {ACFData.hero_content[0].acf_fc_layout === 'html' ? <HeroHTML data={ACFData.hero_content[0]} /> : null}
+
+                  {ACFData.hero_content[0].acf_fc_layout === "carousel" ? <HeroCarousel data={ACFData.hero_content[0]} /> : null}
+                </Column>
+              </Row>
+            )}
 
             {/*
               Yeah this isn't very DRY
