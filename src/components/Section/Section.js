@@ -57,7 +57,6 @@ export default (props) => {
 
 const Section = styled.section`
   position: relative;
-  overflow: hidden;
   padding: 2rem 0;
 
   .section__bg {

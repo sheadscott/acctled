@@ -44,7 +44,7 @@ export default class AccordionComponent extends Component {
             </AccordionContent>
           </Row>
         </Container>
-      </Section >
+      </Section>
     )
   }
 }
