@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import objectFitImages from 'object-fit-images';
 
 class Img extends React.Component {
@@ -18,8 +19,32 @@ class Img extends React.Component {
     }
     */
 
-    return <img src={props.src} alt={props.alt} {...props} />
+    return (
+      <Wrapper>
+      <img src={props.src} alt={props.alt} {...props}/>
+      </Wrapper>
+    );
   };
 }
 
 export default Img;
+
+const Wrapper = styled.div`
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 41.425%;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    object-fit: cover;
+    object-position: center;
+  }
+`;

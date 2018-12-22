@@ -8,7 +8,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
+
+/* body {
+  font-family: "Montserrat", sans-serif;
+  background: #133952;
+  width: 100%;
+  overflow-x: hidden;
+} */

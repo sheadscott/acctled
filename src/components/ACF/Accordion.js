@@ -10,8 +10,6 @@ import styled from 'styled-components';
 import Section from '../Section/Section';
 import SectionHeading from '../SectionHeading/SectionHeading';
 
-import './Accordion.scss';
-
 export default class AccordionComponent extends Component {
   constructor(props) {
     super(props);
@@ -44,7 +42,7 @@ export default class AccordionComponent extends Component {
             )}
 
             <AccordionContent width={1}>
-              <ul className="accordion" data-accordion ref={this.myRef}>
+              <ul className="accordion" data-accordion data-multi-expand="true" data-allow-all-closed="true" ref={this.myRef}>
                 {this.props.layout.accordion.map((item, index) => (
                   <li key={`${this.state.id}-${index}`} className="accordion-item" data-accordion-item>
                     <a href="#0" className="accordion-title">{Parser(item.title)}</a>

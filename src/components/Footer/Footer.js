@@ -79,6 +79,7 @@ export default class Footer extends Component {
 const Wrapper = styled.div`
   width: 100%;
   background: #133952;
+  margin-top: 2rem;
   * {
     color: white;
   }
@@ -88,13 +89,20 @@ const WpLinks = styled(Column)`
   columns: 3;
   column-width: 33%;
 
+  h4 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: rgb(244, 239, 172);
+  }
+
   ul {
     list-style: none inside none;
     page-break-inside: avoid;
     break-inside: avoid;
     display: inline-block;
     font-size: 0.9em;
-    margin: 0;
+    margin: 0 0 1rem 0;
     padding: 0;
 
     li {
@@ -104,7 +112,7 @@ const WpLinks = styled(Column)`
 `;
 
 const Contact = styled(Column)`
-  margin-top: 34px;
+  // margin-top: 34px;
 
   svg {
     max-width: 175px;

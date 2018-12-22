@@ -17,12 +17,14 @@ export default class Search extends Component {
     return (
       <Wrapper {...this.props}>
         <Container>
-          <Column>
-            <Form id="searchForm" action="#">
-              <input ref={el => this.searchField = el} />
-              <button>Search TLED</button>
-            </Form>
-          </Column>
+          <Row>
+            <Column>
+              <Form id="searchForm" action="#">
+                <input ref={el => this.searchField = el} />
+                <button>Search TLED</button>
+              </Form>
+            </Column>
+          </Row>
         </Container>
       </Wrapper>
     )

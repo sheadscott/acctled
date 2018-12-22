@@ -3,7 +3,8 @@ import axios from "axios";
 import "./carousel.css";
 import { Carousel } from "react-responsive-carousel";
 import styled from 'styled-components';
-import { hidden } from "ansi-colors";
+import Img from '../Img/Img';
+// import { hidden } from "ansi-colors";
 
 // import image1 from "../../img/homeslide/1.jpeg";
 // import image2 from "../../img/homeslide/2.jpeg";
@@ -54,7 +55,8 @@ export default class HomeSlider extends Component {
               <div key={index} className="slide">
 
                 <div className="slide__wrapper">
-                  <img src={slide.url} alt={slide.alt} className="slide__image" /></div>
+                  <img src={slide.url} alt={slide.alt} className="slide__image" />
+                </div>
 
                 <div
                   className="legend"
@@ -67,7 +69,7 @@ export default class HomeSlider extends Component {
 
         <CarouselControls>
           {this.state.slideData.map((item, index) => (
-            <li>
+            <li key={`thumbnail-${item.url}`}>
               <CarouselControl onClick={() => { this.changeCarousel(index) }} bg={item.url} title={item.title}>
                 <div style={{ width: 0, height: 0, overflow: 'hidden' }}>Skip to Slide {index + 1}</div>
                 <div>{item.title}</div>

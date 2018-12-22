@@ -5,6 +5,7 @@ import { Container, Row, Column } from '../Grid/Grid';
 import ACF from '../ACF/ACF';
 import Section from '../Section/Section';
 import SectionHeading from '../SectionHeading/SectionHeading';
+import Img from '../Img/Img';
 
 // import 'bootstrap/dist/css/bootstrap.css';
 
@@ -14,7 +15,7 @@ const HeroImage = ({ data }) => {
     return (
       <div className="container">
         <figure className="hero-content" style={{ margin: 0 }}>
-          <img src={data.image_content.url} alt={data.image_content.alt} />
+          <Img src={data.image_content.url} alt={data.image_content.alt} />
           <figcaption style={{ textAlign: 'right', opacity: 0.5, fontStyle: 'italic' }}>
             {data.image_description}
           </figcaption>

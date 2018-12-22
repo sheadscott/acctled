@@ -25,8 +25,8 @@ Row.defaultProps = {
 }
 
 const Column = styled(Box)`
-  padding-left: ${props => props.px};
-  padding-right: ${props => props.px};
+  // padding-left: ${props => props.px};
+  // padding-right: ${props => props.px};
   // border: 1px dotted red;
 `;
 
