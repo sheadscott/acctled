@@ -15,12 +15,14 @@ const Row = styled(Flex)`
   // margin-left: ${props => props.mx};
   // margin-right: ${props => props.mx};
   // padding: 2rem;
-  padding: 2rem;
-  margin: -2rem;
+  // padding: 0 2rem;
+  // margin: 0 -2rem;
 `;
 
 Row.defaultProps = {
   flexWrap: 'wrap',
+  padding: '0 2rem',
+  margin: '0 -2rem'
   // mx: '-1rem'
 }
 

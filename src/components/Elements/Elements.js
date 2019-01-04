@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { Box } from '@rebass/grid';
 import styled, { css } from 'styled-components';
+import Img from './Img';
 
 
 const A = (props) => {
@@ -67,4 +68,4 @@ HR.defaultProps = {
   as: 'hr'
 }
 
-export { A, HR, Heading }
+export { A, HR, Heading, Img }

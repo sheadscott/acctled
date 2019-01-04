@@ -39,7 +39,7 @@ export default class Footer extends Component {
     return (
       <Wrapper>
         <Container>
-          <Row flexWrap="noWrap">
+          <Row flexWrap="noWrap" py="3rem">
 
             <WpLinks width={[1, '75%']}>
               {this.state.footerItems.map(item => {

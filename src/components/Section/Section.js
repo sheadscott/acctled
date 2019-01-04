@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 // import Img from 'gatsby-image';
-import Img from '../Img/Img';
+import { Img } from '../Elements/Elements';
+// import MediaContainer from '../MediaContainer/MediaContainer';
 
 // <img 
 // data-flickity-lazyload-srcset="{{ slide.image_content.url|resize(480) }} 480w, 

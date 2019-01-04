@@ -5,7 +5,8 @@ import { Container, Row, Column } from '../Grid/Grid';
 import ACF from '../ACF/ACF';
 import Section from '../Section/Section';
 import SectionHeading from '../SectionHeading/SectionHeading';
-import Img from '../Img/Img';
+import { Img } from '../Elements/Elements';
+import MediaContainer from '../MediaContainer/MediaContainer';
 
 // import 'bootstrap/dist/css/bootstrap.css';
 
@@ -15,7 +16,9 @@ const HeroImage = ({ data }) => {
     return (
       <div className="container">
         <figure className="hero-content" style={{ margin: 0 }}>
-          <Img src={data.image_content.url} alt={data.image_content.alt} />
+          <MediaContainer>
+            {mediaLoaded => <Img src={data.image_content.url} sizes={data.image_content.sizes} alt={data.image_content.alt} onLoad={mediaLoaded} />}
+          </MediaContainer>
           <figcaption style={{ textAlign: 'right', opacity: 0.5, fontStyle: 'italic' }}>
             {data.image_description}
           </figcaption>
@@ -27,7 +30,9 @@ const HeroImage = ({ data }) => {
   return (
     <div className="container">
       <div className="hero-content">
-        <img src={data.image_content} alt="" />
+        <MediaContainer>
+          {mediaLoaded => <Img src={data.image_content.url} sizes={data.image_content.sizes} alt={data.image_content.alt} onLoad={mediaLoaded} />}
+        </MediaContainer>
       </div>
     </div>
   )
@@ -123,7 +128,7 @@ export default class WPPage extends Component {
         <Section>
           <Container>
             {ACFData && ACFData.hero_content && (
-              <Row flexWrap="nowrap">
+              <Row flexWrap="nowrap" mb='2rem'>
                 <Column width={1} className="hero">
                   {/* check for type of hero content */}
                   {ACFData.hero_content[0].acf_fc_layout === 'image' ? <HeroImage data={ACFData.hero_content[0]} /> : null}

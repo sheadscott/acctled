@@ -45,7 +45,7 @@ export default class HomePage extends Component {
 
           {ACFData && ACFData.sidebar_left && (
             <React.Fragment>
-              <Row flexWrap="nowrap">
+              <Intro flexWrap="nowrap">
                 <Column width={[1, '35%']}>
                   <section dangerouslySetInnerHTML={{ __html: ACFData.sidebar_left }} style={{ textAlign: 'center' }} />
                 </Column>
@@ -53,14 +53,15 @@ export default class HomePage extends Component {
                 <Column width={[1, '65%']}>
                   {pageContent && <section dangerouslySetInnerHTML={{ __html: pageContent.content.rendered }} />}
                 </Column>
-              </Row>
+              </Intro>
 
-              <HR my={4} />
             </React.Fragment>
           )}
 
+
           {pageSections && pageSections.featured && (
             <Row>
+              <HR mx="1rem" my={'4rem'} />
               <Column width={[1, 1 / 2]}>
                 <div dangerouslySetInnerHTML={{ __html: this.state.pageSections.featured.column_1 }} />
               </Column>
@@ -68,7 +69,7 @@ export default class HomePage extends Component {
               <Column width={[1, 1 / 2]}>
                 <div dangerouslySetInnerHTML={{ __html: this.state.pageSections.featured.column_2 }} />
               </Column>
-              <HR mx="1rem" mt={4} />
+              <HR mx="1rem" mt={'3rem'} mb={'2rem'} />
             </Row>
           )}
 
@@ -80,10 +81,10 @@ export default class HomePage extends Component {
                     <Column as="section" width={1} px={0}>
                       <Heading as="h2" fontSize={'1.3rem'} underline="false" caps="true" dangerouslySetInnerHTML={{ __html: this.state.pageSections.culturallyResponsiveTeaching.heading }} />
                       <Row>
-                        <Column width={1 / 2} px={0} style={{ paddingRight: '1rem' }}>
+                        <Column width={[1, 1, 1 / 2]} px={0} style={{ paddingRight: '1rem' }}>
                           <div dangerouslySetInnerHTML={{ __html: this.state.pageSections.culturallyResponsiveTeaching.column_1 }} />
                         </Column>
-                        <Column width={1 / 2}>
+                        <Column width={[1, 1, 1 / 2]}>
                           <div dangerouslySetInnerHTML={{ __html: this.state.pageSections.culturallyResponsiveTeaching.column_2 }} />
                         </Column>
                       </Row>
@@ -97,10 +98,10 @@ export default class HomePage extends Component {
                   <Column as="section" width={1} px={0}>
                     <Heading as="h2" fontSize={'1.3rem'} underline="false" caps="true" dangerouslySetInnerHTML={{ __html: this.state.pageSections.spotlight.heading }} />
                     <Row>
-                      <Column width={1 / 2} px={0} style={{ paddingRight: '1rem' }} >
+                      <Column width={[1, 1, 1 / 2]} px={0} style={{ paddingRight: '1rem' }} >
                         <div dangerouslySetInnerHTML={{ __html: this.state.pageSections.spotlight.column_1 }} />
                       </Column>
-                      <Column width={1 / 2}>
+                      <Column width={[1, 1, 1 / 2]}>
                         <div dangerouslySetInnerHTML={{ __html: this.state.pageSections.spotlight.column_2 }} />
                       </Column>
                     </Row>
@@ -173,6 +174,16 @@ export default class HomePage extends Component {
     );
   }
 }
+
+const Intro = styled(Row)`
+  h2 {
+    font-size: 1.6rem !important;
+    font-weight: 700 !important;
+  }
+  a.button {
+    margin: 0 1rem;
+  }
+`;
 
 const EventList = styled.ul`
   margin: 0;
