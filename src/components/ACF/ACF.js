@@ -3,6 +3,7 @@ import OneColumn from './OneColumn';
 import TwoColumn from './TwoColumn';
 import ThreeColumn from './ThreeColumn';
 import Accordion from './Accordion';
+import FlickityCarousel from '../Flickity/Flickity';
 
 export default (props) => {
   console.log('layouts', props.layouts);
@@ -20,6 +21,9 @@ export default (props) => {
         }
         if (layout.acf_fc_layout === 'accordion') {
           return <Accordion key={`acf_layout_${index}`} layout={layout} />
+        }
+        if (layout.acf_fc_layout === 'carousel') {
+          return <FlickityCarousel height={'200px'} key={`acf_layout_${index}`} layout={layout} />
         }
 
         return null
