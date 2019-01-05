@@ -12,19 +12,21 @@ Container.defaultProps = {
   px: '2rem'
 }
 
-const Row = styled(Flex)``;
+const Row = styled(Flex)`
+  // border: 1px dotted blue;
+`;
 
 Row.defaultProps = {
   flexWrap: 'wrap',
-  mx: '-1rem'
+  // mx: '-1rem'
 }
 
 const Column = styled(Box)`
-  // border: 1px dotted red;
+  border: 1px dotted red;
 `;
 
 Column.defaultProps = {
-  px: '1rem'
+  // px: '1rem'
 }
 
 export { Container, Row, Column }

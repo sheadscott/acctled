@@ -149,14 +149,14 @@ export default class WPPage extends Component {
             {/* sidebar right and left */}
             {ACFData && ACFData.sidebar_left && ACFData.sidebar_right && (
               <Row flexWrap="nowrap">
-                <Column width={[1, '25%']}><section dangerouslySetInnerHTML={{ __html: ACFData.sidebar_left }} /></Column>
+                <Column width={[1, '25%']} pr={[0, '2rem']}><section dangerouslySetInnerHTML={{ __html: ACFData.sidebar_left }} /></Column>
 
                 <Column flex="1 1 auto" width="auto">
                   <SectionHeading>{pageContent && pageContent.title.rendered}</SectionHeading>
                   {pageContent && <section dangerouslySetInnerHTML={{ __html: pageContent.content.rendered }} />}
                 </Column>
 
-                <Column width={[1, '25%']} > <section dangerouslySetInnerHTML={{ __html: ACFData.sidebar_right }} /></Column>
+                <Column width={[1, '25%']} pl={[0, '2rem']}> <section dangerouslySetInnerHTML={{ __html: ACFData.sidebar_right }} /></Column>
               </Row>
             )}
 
@@ -168,14 +168,14 @@ export default class WPPage extends Component {
                   {pageContent && <section dangerouslySetInnerHTML={{ __html: pageContent.content.rendered }} />}
                 </Column>
 
-                <Column width={[1, '25%']} > <section dangerouslySetInnerHTML={{ __html: ACFData.sidebar_right }} /></Column>
+                <Column width={[1, '25%']} pl={[0, '2rem']}> <section dangerouslySetInnerHTML={{ __html: ACFData.sidebar_right }} /></Column>
               </Row>
             )}
 
             {/* sidebar left only */}
             {ACFData && ACFData.sidebar_left && !ACFData.sidebar_right && (
               <Row flexWrap="nowrap">
-                <Column width={[1, '25%']}><section dangerouslySetInnerHTML={{ __html: ACFData.sidebar_left }} /></Column>
+                <Column width={[1, '25%']} pr={[0, '2rem']}><section dangerouslySetInnerHTML={{ __html: ACFData.sidebar_left }} /></Column>
 
                 <Column width={[1, '75%']}>
                   <SectionHeading>{pageContent && pageContent.title.rendered}</SectionHeading>

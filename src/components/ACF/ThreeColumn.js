@@ -17,14 +17,14 @@ export default (props) => {
             </Col>
           </Row>
         )}
-        <Row>
-          <Col width={[1, 1 / 3]}>
+        <Row mx={[0, '-1rem']}>
+          <Col width={[1, 1 / 3]} px={[0, '1rem']}>
             {Parser(props.layout.column_1)}
           </Col>
-          <Col width={[1, 1 / 3]}>
+          <Col width={[1, 1 / 3]} px={[0, '1rem']}>
             {Parser(props.layout.column_2)}
           </Col>
-          <Col width={[1, 1 / 3]}>
+          <Col width={[1, 1 / 3]} px={[0, '1rem']}>
             {Parser(props.layout.column_3)}
           </Col>
         </Row>

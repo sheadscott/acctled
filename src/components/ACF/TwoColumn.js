@@ -18,10 +18,10 @@ export default (props) => {
           </Row>
         )}
         <Row>
-          <Col width={[1, 1 / 2]}>
+          <Col width={[1, 1 / 2]} pr={[0, '1rem']}>
             {Parser(props.layout.column_1)}
           </Col>
-          <Col width={[1, 1 / 2]}>
+          <Col width={[1, 1 / 2]} pl={[0, '1rem']}>
             {Parser(props.layout.column_2)}
           </Col>
         </Row>
