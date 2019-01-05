@@ -13,21 +13,46 @@ const A = (props) => {
   )
 }
 
-// color => color
+
+function printHeadingColor(color) {
+  if (color) {
+    if (color === 'light') {
+      return css`color: white;`;
+    }
+
+    return css`color: ${color}`;
+  }
+
+  return css`color: rgb(26, 82, 118);`
+}
+
+function printUnderline(color, underline) {
+  if (underline) {
+    return css`
+      border-bottom-style: solid;
+      border-bottom-width: 2px;
+      border-bottom-color: ${color || 'rgb(26, 82, 118)'};`;
+  }
+
+  return null;
+}
+
+
 // underline => boolean
 // emphasis => boolean
-// size => font-size
 // caps => boolean
 const Heading = styled(Box)`
-  color: rgb(26, 82, 118);
   font-weight: 700;
   margin-bottom: 1.5rem;
-
+  
   &:after {
     content: '';
     display: block;
     opacity: 0.35;
+    ${props => printUnderline(props.color, props.underline)};
   }
+
+  ${props => printHeadingColor(props.color)};
 
   ${props => props.caps && css`
     text-transform: uppercase;
@@ -36,16 +61,6 @@ const Heading = styled(Box)`
   // emphasis prop turns on text shadow
   ${props => props.emphasis && css`
     text-shadow: 2px 2px 0 rgba(0,0,0,0.4);
-  `}
-
-  ${props => props.color && css`
-    color: ${props.color};
-  `}
-
-  ${props => props.color && props.underline && css`
-    &:after {
-      border-bottom: 2px solid ${props.color || 'rgb(26, 82, 118)'};
-    }
   `}
 `;
 

@@ -8,7 +8,7 @@ import Parser from 'html-react-parser';
 import { Container, Row, Column as Col } from '../Grid/Grid';
 import styled from 'styled-components';
 import Section from '../Section/Section';
-import SectionHeading from '../SectionHeading/SectionHeading';
+import { Heading } from '../Elements/Elements';
 
 export default class AccordionComponent extends Component {
   constructor(props) {
@@ -35,9 +35,9 @@ export default class AccordionComponent extends Component {
           <Row>
             {this.props.layout.heading && (
               <Col width={1}>
-                <SectionHeading color={this.props.layout.text_mode === 'light' ? 'white' : 'rgb(26, 82, 118)'}>
+                <Heading as="h1" caps={true} underline={true} color={this.props.layout.text_mode}>
                   {Parser(this.props.layout.heading)}
-                </SectionHeading>
+                </Heading>
               </Col>
             )}
 

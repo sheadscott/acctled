@@ -5,11 +5,18 @@ import styled from 'styled-components';
 import { Container, Row, Column } from '../Grid/Grid';
 import MediaContainer from '../MediaContainer/MediaContainer';
 import { Img } from '../Elements/Elements';
+import uuidv1 from 'uuid/v1';
 
 import 'flickity/css/flickity.css';
 
 class FlickityCarousel extends React.Component {
-  componentShouldUpdate() {
+  state = { id: null };
+
+  componentWillMount() {
+    this.setState({ id: uuidv1() });
+  }
+
+  shouldComponentUpdate() {
     return false;
   }
 
@@ -25,24 +32,20 @@ class FlickityCarousel extends React.Component {
   render() {
     return (
       <Container>
-        <Row>
-          <Column width={1}>
-            <Carousel height={this.props.height} ref={element => this.carouselContainer = element} className="carousel">
-              {this.props.layout.carousel_content.map(item => {
-                if (item.acf_fc_layout === "image") {
-                  return (
-                    <Cell height={this.props.height}>
-                      <MediaContainer ratio={this.props.height}>
-                        {(mediaLoaded) => <Img onLoad={mediaLoaded} sizes={item.image_content.sizes} alt={item.image_content.alt} />}
-                      </MediaContainer>
-                    </Cell>
-                  )
-                }
-                return <Cell height={this.props.height} dangerouslySetInnerHTML={{ __html: item.html_markup }} />
-              })}
-            </Carousel>
-          </Column>
-        </Row>
+        <Carousel height={this.props.height} ref={element => this.carouselContainer = element} className="carousel">
+          {this.props.layout.carousel_content.map((item, index) => {
+            if (item.acf_fc_layout === "image") {
+              return (
+                <Cell key={`carousel-${this.state.id}-${index}`} height={this.props.height}>
+                  <MediaContainer ratio={this.props.height}>
+                    {(mediaLoaded) => <Img onLoad={mediaLoaded} sizes={item.image_content.sizes} alt={item.image_content.alt} />}
+                  </MediaContainer>
+                </Cell>
+              )
+            }
+            return <Cell key={`carousel-${this.state.id}-${index}`} height={this.props.height} dangerouslySetInnerHTML={{ __html: item.html_markup }} />
+          })}
+        </Carousel>
       </Container>
     )
   }

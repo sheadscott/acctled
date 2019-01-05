@@ -8,27 +8,18 @@ const Container = styled(Box)`
 `
 
 Container.defaultProps = {
-  mx: 'auto'
+  mx: 'auto',
+  px: '2rem'
 }
 
-const Row = styled(Flex)`
-  // margin-left: ${props => props.mx};
-  // margin-right: ${props => props.mx};
-  // padding: 2rem;
-  // padding: 0 2rem;
-  // margin: 0 -2rem;
-`;
+const Row = styled(Flex)``;
 
 Row.defaultProps = {
   flexWrap: 'wrap',
-  padding: '0 2rem',
-  margin: '0 -2rem'
-  // mx: '-1rem'
+  mx: '-1rem'
 }
 
 const Column = styled(Box)`
-  // padding-left: ${props => props.px};
-  // padding-right: ${props => props.px};
   // border: 1px dotted red;
 `;
 

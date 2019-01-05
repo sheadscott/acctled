@@ -2,7 +2,7 @@ import React from 'react';
 import Parser from 'html-react-parser';
 import { Container, Row, Column as Col } from '../Grid/Grid';
 import styled, { css } from 'styled-components';
-import SectionHeading from '../SectionHeading/SectionHeading';
+import { Heading } from '../Elements/Elements';
 
 export default (props) => {
   return (
@@ -11,20 +11,20 @@ export default (props) => {
         {props.layout.heading && (
           <Row>
             <Col width={1}>
-              <SectionHeading>
+              <Heading as="h1" caps={true} underline={true} color={props.layout.text_mode}>
                 {props.layout.heading}
-              </SectionHeading>
+              </Heading>
             </Col>
           </Row>
         )}
         <Row>
-          <Col width={1 / 3}>
+          <Col width={[1, 1 / 3]}>
             {Parser(props.layout.column_1)}
           </Col>
-          <Col width={1 / 3}>
+          <Col width={[1, 1 / 3]}>
             {Parser(props.layout.column_2)}
           </Col>
-          <Col width={1 / 3}>
+          <Col width={[1, 1 / 3]}>
             {Parser(props.layout.column_3)}
           </Col>
         </Row>
