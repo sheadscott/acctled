@@ -3,9 +3,7 @@ import Axios from 'axios';
 
 import { Container, Row, Column } from '../Grid/Grid';
 import ACF from '../ACF/ACF';
-import Section from '../Section/Section';
-import SectionHeading from '../SectionHeading/SectionHeading';
-import { Img } from '../Elements/Elements';
+import { Section, Img, Heading } from '../Elements/Elements';
 import MediaContainer from '../MediaContainer/MediaContainer';
 
 // import 'bootstrap/dist/css/bootstrap.css';
@@ -152,7 +150,7 @@ export default class WPPage extends Component {
                 <Column width={[1, '25%']} pr={[0, '2rem']}><section dangerouslySetInnerHTML={{ __html: ACFData.sidebar_left }} /></Column>
 
                 <Column flex="1 1 auto" width="auto">
-                  <SectionHeading>{pageContent && pageContent.title.rendered}</SectionHeading>
+                  <Heading>{pageContent && pageContent.title.rendered}</Heading>
                   {pageContent && <section dangerouslySetInnerHTML={{ __html: pageContent.content.rendered }} />}
                 </Column>
 
@@ -164,7 +162,7 @@ export default class WPPage extends Component {
             {ACFData && ACFData.sidebar_right && !ACFData.sidebar_left && (
               <Row flexWrap="nowrap">
                 <Column width={[1, '75%']}>
-                  <SectionHeading>{pageContent && pageContent.title.rendered}</SectionHeading>
+                  <Heading>{pageContent && pageContent.title.rendered}</Heading>
                   {pageContent && <section dangerouslySetInnerHTML={{ __html: pageContent.content.rendered }} />}
                 </Column>
 
@@ -178,7 +176,7 @@ export default class WPPage extends Component {
                 <Column width={[1, '25%']} pr={[0, '2rem']}><section dangerouslySetInnerHTML={{ __html: ACFData.sidebar_left }} /></Column>
 
                 <Column width={[1, '75%']}>
-                  <SectionHeading>{pageContent && pageContent.title.rendered}</SectionHeading>
+                  <Heading>{pageContent && pageContent.title.rendered}</Heading>
                   {pageContent && <section dangerouslySetInnerHTML={{ __html: pageContent.content.rendered }} />}
                 </Column>
               </Row>
@@ -188,7 +186,7 @@ export default class WPPage extends Component {
             {ACFData && !ACFData.sidebar_left && !ACFData.sidebar_right && (
               <Row flexWrap="nowrap">
                 <Column>
-                  <SectionHeading>{pageContent && pageContent.title.rendered}</SectionHeading>
+                  <Heading>{pageContent && pageContent.title.rendered}</Heading>
                   {pageContent && <section dangerouslySetInnerHTML={{ __html: pageContent.content.rendered }} />}
                 </Column>
               </Row>

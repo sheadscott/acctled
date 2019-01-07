@@ -7,8 +7,7 @@ import uuidv1 from 'uuid/v1';
 import Parser from 'html-react-parser';
 import { Container, Row, Column as Col } from '../Grid/Grid';
 import styled from 'styled-components';
-import Section from '../Section/Section';
-import { Heading } from '../Elements/Elements';
+import { Section, Heading } from '../Elements/Elements';
 
 export default class AccordionComponent extends Component {
   constructor(props) {

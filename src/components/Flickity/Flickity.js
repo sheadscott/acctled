@@ -2,7 +2,7 @@ import React from 'react';
 // import $ from 'jquery';
 import Flickity from 'flickity';
 import styled from 'styled-components';
-import { Container, Row, Column } from '../Grid/Grid';
+import { Container } from '../Grid/Grid';
 import MediaContainer from '../MediaContainer/MediaContainer';
 import { Img } from '../Elements/Elements';
 import uuidv1 from 'uuid/v1';
