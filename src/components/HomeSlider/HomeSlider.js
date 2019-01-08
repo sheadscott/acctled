@@ -53,7 +53,7 @@ export default class HomeSlider extends Component {
               <div key={index} className="slide">
 
 
-                <MediaContainer className="slide__wrapper">
+                <MediaContainer ratio="41.4%" className="slide__wrapper">
                   {mediaLoaded => <Img src={slide.url} sizes={slide.sizes} alt={slide.alt} onLoad={mediaLoaded} className="slide__image" />}
                 </MediaContainer>
 
@@ -69,6 +69,7 @@ export default class HomeSlider extends Component {
             );
           })}
         </Carousel>
+
 
         <CarouselControls>
           {this.state.slideData.map((item, index) => (
@@ -88,14 +89,23 @@ export default class HomeSlider extends Component {
 const SlideText = styled(Column)`
   h2 {
     color: white;
+    font-size: 1rem;
+    margin: 0;
+    @media (min-width: 600px) {
+      font-size: 1.5rem;
+    }
+  }
+  h3 {
+    color: white;
     font-size: 1.5rem;
     margin: 0;
-  }
-    h3 {
-    color: white;
-    font-size: 3rem;
-    margin: 0;
     font-weight: 700;
+    @media (min-width: 700px) {
+      font-size: 2rem;
+    }
+    @media (min-width: 800px) {
+      font-size: 3rem;
+    }
   }
   p {
     color: #e7e2a3;
@@ -112,10 +122,12 @@ const SlideText = styled(Column)`
 
 const CarouselControls = styled.ul`
   display: flex;
+  flex-wrap: wrap;
   margin: 0;
   padding: 0;
   list-style: none;
   width: 100%;
+  max-width: 75em;
   align-items: center;
   justify-content: center;
   position: relative;

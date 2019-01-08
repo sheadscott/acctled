@@ -140,6 +140,12 @@ const SiteTitle = styled.div`
 const TLED = styled(Link)`
   color: white;
   text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: white;
+    text-decoration: underline;
+  }
 `;
 
 const Button = styled.button`

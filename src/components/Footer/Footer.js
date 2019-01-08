@@ -41,7 +41,7 @@ export default class Footer extends Component {
         <Container>
           <Row py="3rem">
 
-            <WpLinks width={[1, 3 / 4]}>
+            <WpLinks width={[1, 1, 3 / 4]} mb={['2rem', '2rem', 0]}>
               {this.state.footerItems.map(item => {
                 return (
                   <ul key={item.id + "ul"}>
@@ -52,7 +52,7 @@ export default class Footer extends Component {
               })}
             </WpLinks>
 
-            <Contact widht={[1, 1 / 4]}>
+            <Contact width={[1, 1, 1 / 4]} pl={[0, 0, '2rem']}>
               <TLEDLogo />
 
               <div className="vcard" style={{ marginLeft: '10px' }}>
@@ -86,8 +86,13 @@ const Wrapper = styled.div`
 `;
 
 const WpLinks = styled(Column)`
-  columns: 3;
-  column-width: 33%;
+
+  @media (min-width: 400px) {
+    columns: 2;
+  }
+  @media (min-width: 600px) {
+    columns: 3;
+  }
 
   h4 {
     font-size: 1rem;

@@ -45,12 +45,12 @@ export default class HomePage extends Component {
 
           {ACFData && ACFData.sidebar_left && (
             <React.Fragment>
-              <Intro flexWrap="nowrap">
-                <Column width={[1, '35%']}>
+              <Intro>
+                <Column width={[1, '35%']} pr={[0, '1rem']} order={[2, 1]}>
                   <section dangerouslySetInnerHTML={{ __html: ACFData.sidebar_left }} style={{ textAlign: 'center' }} />
                 </Column>
 
-                <Column width={[1, '65%']}>
+                <Column width={[1, '65%']} pl={[0, '1rem']} mb={['2rem', 0]} order={[1, 2]}>
                   {pageContent && <section dangerouslySetInnerHTML={{ __html: pageContent.content.rendered }} />}
                 </Column>
               </Intro>
@@ -214,8 +214,11 @@ const StayUpdated = styled.h2`
 
   span {
     display: block;
-    padding: 0 4rem;
+    padding: 0 1rem;
     flex-shrink: 0;
+    @media (min-width: 600px) {
+      padding: 0 4rem;
+    }
   }
 
   &:before,
@@ -231,6 +234,7 @@ const SocialMediaList = styled.ul`
   padding: 0;
   list-style: none;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 
