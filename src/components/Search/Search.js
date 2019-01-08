@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import styled from 'styled-components';
-import { Container } from '../Grid/Grid';
+import { Container, Row, Column } from '../Grid/Grid';
 import { Heading } from '../Elements/Elements';
 
 /*
@@ -60,27 +60,33 @@ export default class Search extends Component {
       <Wrapper {...this.props}>
         <Container>
           <Form id="searchForm" onSubmit={(e) => this.handleSubmit(e)}>
-            <fieldset>
-              <legend>Search TLED</legend>
-              <div className="input-group">
-                <label className="input-group-label">TLED</label>
-                <input className="input-group-field" onFocus={() => this.setFocus('tled')} ref={el => this.searchTLEDField = el} />
-                <div className="input-group-button">
-                  <button type="submit" className="button">Search TLED</button>
-                </div>
-              </div>
-            </fieldset>
+            <Row style={{ width: '100%' }}>
+              <Column width={[1, 1 / 2]} pr={[0, '1rem']}>
+                <fieldset>
+                  <legend>Search TLED</legend>
+                  <label for="searchTLEDField" className="show-for-sr">TLED</label>
+                  <div className="input-group">
+                    <input id="searchTLEDField" className="input-group-field" onFocus={() => this.setFocus('tled')} ref={el => this.searchTLEDField = el} />
+                    <div className="input-group-button">
+                      <button type="submit" className="button">Search TLED</button>
+                    </div>
+                  </div>
+                </fieldset>
+              </Column>
 
-            <fieldset>
-              <legend>Search ACC</legend>
-              <div className="input-group">
-                <label className="input-group-label">ACC</label>
-                <input className="input-group-field" onFocus={() => this.setFocus('acc')} ref={el => this.searchACCField = el} />
-                <div className="input-group-button">
-                  <button type="submit" className="button">Search ACC</button>
-                </div>
-              </div>
-            </fieldset>
+              <Column width={[1, 1 / 2]} pl={[0, '1rem']}>
+                <fieldset>
+                  <legend>Search ACC</legend>
+                  <label for="searchACCField" className="show-for-sr">ACC</label>
+                  <div className="input-group">
+                    <input id="searchACCField" className="input-group-field" onFocus={() => this.setFocus('acc')} ref={el => this.searchACCField = el} />
+                    <div className="input-group-button">
+                      <button type="submit" className="button">Search ACC</button>
+                    </div>
+                  </div>
+                </fieldset>
+              </Column>
+            </Row>
           </Form>
         </Container>
       </Wrapper>
@@ -96,7 +102,11 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   transition: height 0.2s linear;
-  height: ${props => props.searchExpanded ? '100px' : '0px'}
+  height: ${props => props.searchExpanded ? '175px' : '0px'}
+
+  @media (min-width: 640px) {
+    height: ${props => props.searchExpanded ? '100px' : '0px'}
+  }
 `;
 
 const Form = styled.form`

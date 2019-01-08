@@ -39,9 +39,9 @@ export default class Footer extends Component {
     return (
       <Wrapper>
         <Container>
-          <Row flexWrap="noWrap" py="3rem">
+          <Row py="3rem">
 
-            <WpLinks width={[1, '75%']}>
+            <WpLinks width={[1, 3 / 4]}>
               {this.state.footerItems.map(item => {
                 return (
                   <ul key={item.id + "ul"}>
@@ -52,7 +52,7 @@ export default class Footer extends Component {
               })}
             </WpLinks>
 
-            <Contact widht={[1, '25%']}>
+            <Contact widht={[1, 1 / 4]}>
               <TLEDLogo />
 
               <div className="vcard" style={{ marginLeft: '10px' }}>

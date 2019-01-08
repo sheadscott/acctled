@@ -160,20 +160,20 @@ $header-lineheight: 1.4;
 $header-margin-bottom: 0.5rem;
 $header-styles: (
   small: (
-    'h1': ('font-size': 24),
-    'h2': ('font-size': 20),
-    'h3': ('font-size': 19),
-    'h4': ('font-size': 18),
-    'h5': ('font-size': 17),
-    'h6': ('font-size': 16),
+    'h1': ('font-size': 32),
+    'h2': ('font-size': 24.2515),
+    'h3': ('font-size': 21.1122),
+    'h4': ('font-size': 16),
+    'h5': ('font-size': 13.9288),
+    'h6': ('font-size': 12.996),
   ),
   medium: (
-    'h1': ('font-size': 48),
-    'h2': ('font-size': 40),
-    'h3': ('font-size': 31),
-    'h4': ('font-size': 25),
-    'h5': ('font-size': 20),
-    'h6': ('font-size': 16),
+    'h1': ('font-size': 32),
+    'h2': ('font-size': 24.2515),
+    'h3': ('font-size': 21.1122),
+    'h4': ('font-size': 16),
+    'h5': ('font-size': 13.9288),
+    'h6': ('font-size': 12.996),
   ),
 );
 $header-text-rendering: optimizeLegibility;
@@ -1018,6 +1018,6 @@ $progress-radius: $global-radius;
 //   // Helpers
 //   @include foundation-float-classes;
 //   @if $flex { @include foundation-flex-classes; }
-//   @include foundation-visibility-classes;
+  @include foundation-visibility-classes;
 //   @if $prototype { @include foundation-prototype-classes; }
 // }

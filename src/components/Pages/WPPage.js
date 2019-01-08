@@ -126,16 +126,14 @@ export default class WPPage extends Component {
         <Section>
           <Container>
             {ACFData && ACFData.hero_content && (
-              <Row flexWrap="nowrap" mb='2rem'>
-                <Column width={1} className="hero">
-                  {/* check for type of hero content */}
-                  {ACFData.hero_content[0].acf_fc_layout === 'image' ? <HeroImage data={ACFData.hero_content[0]} /> : null}
+              <div className="hero">
+                {/* check for type of hero content */}
+                {ACFData.hero_content[0].acf_fc_layout === 'image' ? <HeroImage data={ACFData.hero_content[0]} /> : null}
 
-                  {ACFData.hero_content[0].acf_fc_layout === 'html' ? <HeroHTML data={ACFData.hero_content[0]} /> : null}
+                {ACFData.hero_content[0].acf_fc_layout === 'html' ? <HeroHTML data={ACFData.hero_content[0]} /> : null}
 
-                  {ACFData.hero_content[0].acf_fc_layout === "carousel" ? <HeroCarousel data={ACFData.hero_content[0]} /> : null}
-                </Column>
-              </Row>
+                {ACFData.hero_content[0].acf_fc_layout === "carousel" ? <HeroCarousel data={ACFData.hero_content[0]} /> : null}
+              </div>
             )}
 
             {/*
@@ -146,15 +144,21 @@ export default class WPPage extends Component {
 
             {/* sidebar right and left */}
             {ACFData && ACFData.sidebar_left && ACFData.sidebar_right && (
-              <Row flexWrap="nowrap">
-                <Column width={[1, '25%']} pr={[0, '2rem']}><section dangerouslySetInnerHTML={{ __html: ACFData.sidebar_left }} /></Column>
-
-                <Column flex="1 1 auto" width="auto">
-                  <Heading>{pageContent && pageContent.title.rendered}</Heading>
-                  {pageContent && <section dangerouslySetInnerHTML={{ __html: pageContent.content.rendered }} />}
+              <Row>
+                <Column width={[1, 1 / 4]} order={[2, 1]} pr={[0, '2rem']}>
+                  <aside dangerouslySetInnerHTML={{ __html: ACFData.sidebar_left }} />
                 </Column>
 
-                <Column width={[1, '25%']} pl={[0, '2rem']}> <section dangerouslySetInnerHTML={{ __html: ACFData.sidebar_right }} /></Column>
+                <Column width={[1, 1 / 2]} order={[1, 2]}>
+                  {pageContent && (<Section>
+                    <Heading as="h1" underline={true} caps={true}>{pageContent && pageContent.title.rendered}</Heading>
+                    <div dangerouslySetInnerHTML={{ __html: pageContent.content.rendered }} />
+                  </Section>)}
+                </Column>
+
+                <Column width={[1, 1 / 4]} order={[3, 3]} pl={[0, '2rem']}>
+                  <aside dangerouslySetInnerHTML={{ __html: ACFData.sidebar_right }} />
+                </Column>
               </Row>
             )}
 
@@ -162,7 +166,7 @@ export default class WPPage extends Component {
             {ACFData && ACFData.sidebar_right && !ACFData.sidebar_left && (
               <Row flexWrap="nowrap">
                 <Column width={[1, '75%']}>
-                  <Heading>{pageContent && pageContent.title.rendered}</Heading>
+                  <Heading as="h1" underline={true} caps={true}>{pageContent && pageContent.title.rendered}</Heading>
                   {pageContent && <section dangerouslySetInnerHTML={{ __html: pageContent.content.rendered }} />}
                 </Column>
 
@@ -176,17 +180,17 @@ export default class WPPage extends Component {
                 <Column width={[1, '25%']} pr={[0, '2rem']}><section dangerouslySetInnerHTML={{ __html: ACFData.sidebar_left }} /></Column>
 
                 <Column width={[1, '75%']}>
-                  <Heading>{pageContent && pageContent.title.rendered}</Heading>
+                  <Heading as="h1" underline={true} caps={true}>{pageContent && pageContent.title.rendered}</Heading>
                   {pageContent && <section dangerouslySetInnerHTML={{ __html: pageContent.content.rendered }} />}
                 </Column>
               </Row>
             )}
 
             {/* no sidebars */}
-            {ACFData && !ACFData.sidebar_left && !ACFData.sidebar_right && (
+            {ACFData && !ACFData.sidebar_left && !ACFData.sidebar_right && pageContent.content && (
               <Row flexWrap="nowrap">
                 <Column>
-                  <Heading>{pageContent && pageContent.title.rendered}</Heading>
+                  <Heading as="h1" underline={true} caps={true}>{pageContent && pageContent.title.rendered}</Heading>
                   {pageContent && <section dangerouslySetInnerHTML={{ __html: pageContent.content.rendered }} />}
                 </Column>
               </Row>

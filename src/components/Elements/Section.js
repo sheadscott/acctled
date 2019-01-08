@@ -29,7 +29,7 @@ import { Box } from '@rebass/grid';
 
 export default (props) => {
   return (
-    <Section as="section" image={props.sizes} bg={props.bg} bgAlign={props.bgAlign}>
+    <Section as="section" image={props.sizes} bg={props.bg} bgAlign={props.bgAlign} {...props}>
       {props.sizes && <Img
         sizes={props.sizes}
         style={{
