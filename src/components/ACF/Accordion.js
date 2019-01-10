@@ -7,10 +7,7 @@ import uuidv1 from 'uuid/v1';
 import Parser from 'html-react-parser';
 import { Container, Row, Column as Col } from '../Grid/Grid';
 import styled from 'styled-components';
-import Section from '../Section/Section';
-import SectionHeading from '../SectionHeading/SectionHeading';
-
-import './Accordion.scss';
+import { Section, Heading } from '../Elements/Elements';
 
 export default class AccordionComponent extends Component {
   constructor(props) {
@@ -37,14 +34,14 @@ export default class AccordionComponent extends Component {
           <Row>
             {this.props.layout.heading && (
               <Col width={1}>
-                <SectionHeading color={this.props.layout.text_mode === 'light' ? 'white' : 'rgb(26, 82, 118)'}>
+                <Heading as="h1" caps={true} underline={true} color={this.props.layout.text_mode}>
                   {Parser(this.props.layout.heading)}
-                </SectionHeading>
+                </Heading>
               </Col>
             )}
 
             <AccordionContent width={1}>
-              <ul className="accordion" data-accordion ref={this.myRef}>
+              <ul className="accordion" data-accordion data-multi-expand="true" data-allow-all-closed="true" ref={this.myRef}>
                 {this.props.layout.accordion.map((item, index) => (
                   <li key={`${this.state.id}-${index}`} className="accordion-item" data-accordion-item>
                     <a href="#0" className="accordion-title">{Parser(item.title)}</a>
@@ -57,7 +54,7 @@ export default class AccordionComponent extends Component {
             </AccordionContent>
           </Row>
         </Container>
-      </Section >
+      </Section>
     )
   }
 }

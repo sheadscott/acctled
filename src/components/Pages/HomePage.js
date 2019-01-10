@@ -1,117 +1,113 @@
 import React, { Component } from "react";
+import Axios from 'axios';
 import styled from "styled-components";
-import { HR } from "../Elements/Elements";
+import { HR, Heading } from "../Elements/Elements";
 import { Container, Row, Column } from "../Grid/Grid";
 
 import HomeSlider from "../HomeSlider/HomeSlider";
 import EventList from "../EventList/EventList";
 
-import teachingGraphic from "../../img/deconstructing.png";
-import callForSpeakers from "../../img/callForSpeakers.jpg";
+import { ReactComponent as YouTube } from "../../img/youtube.svg";
+import { ReactComponent as Twitter } from "../../img/twitter.svg";
+import { ReactComponent as Instagram } from "../../img/instagram.svg";
+import { ReactComponent as Facebook } from "../../img/facebook.svg";
 export default class HomePage extends Component {
+  state = {
+    pageContent: {}
+  }
+
+  componentDidMount() {
+    Axios.get(`https://instruction.austincc.edu/tled/wp-json/wp/v2/pages?slug=home`).then(response => {
+      this.setState({
+        pageContent: response.data[0],
+      });
+
+      const pageSections = {};
+      response.data[0].acf.layouts.forEach(item => {
+        if (item.id) {
+          pageSections[item.id] = item;
+        }
+      });
+
+      this.setState({ pageSections });
+    });
+  }
+
   render() {
+    const pageContent = this.state.pageContent;
+    const pageSections = this.state.pageSections;
+    const ACFData = pageContent ? this.state.pageContent.acf : null;
+
     return (
       <React.Fragment>
         <HomeSlider />
 
         <Container>
-          <Row>
-            <Column width={1}>
-              <h1>
-                Empowering you to enhance learning environments and advance
-                student success
-              </h1>
 
-              <p>
-                Whether you're a new or experienced faculty member, the Teaching
-                & learning Excellence Division can help you further your
-                teaching practice. Use the links at the top to learn more.
-              </p>
+          {ACFData && ACFData.sidebar_left && (
+            <React.Fragment>
+              <Intro>
+                <Column width={[1, '35%']} pr={[0, '1rem']} order={[2, 1]}>
+                  <section dangerouslySetInnerHTML={{ __html: ACFData.sidebar_left }} style={{ textAlign: 'center' }} />
+                </Column>
 
-              <div>
-                <a href="#0" className="button">
-                  Initiate a Project
-                </a>
-              </div>
-              <div>
-                <a href="#0" className="button">
-                  Get Help
-                </a>
-              </div>
-            </Column>
-          </Row>
+                <Column width={[1, '65%']} pl={[0, '1rem']} mb={['2rem', 0]} order={[1, 2]}>
+                  {pageContent && <section dangerouslySetInnerHTML={{ __html: pageContent.content.rendered }} />}
+                </Column>
+              </Intro>
 
-          <Row>
-            <Column width={[1, 1 / 2]}>
-              <img
-                style={{ maxWidth: "100%" }}
-                src="https://imgplaceholder.com/420x320/cccccc/333333/fa-image"
-                alt=""
-              />
-            </Column>
+            </React.Fragment>
+          )}
 
-            <Column width={[1, 1 / 2]}>
-              <p>#TXDigicon</p>
 
-              <p>
-                Austin Community College is inviting faculty members from across
-                Texas in higher education to attend our Texas Digital Learning
-                Conference (#TXdigicon) on October 25-26th.
-              </p>
+          {pageSections && pageSections.featured && (
+            <Row>
+              <HR my={'4rem'} />
+              <Column width={[1, 1 / 2]}>
+                <div dangerouslySetInnerHTML={{ __html: this.state.pageSections.featured.column_1 }} />
+              </Column>
 
-              <p>
-                Digital Learning promotes personlalized learning, provides data
-                for student support, frees time for active and collaborative
-                strategies, and helps close equity gaps.
-              </p>
-
-              <button className="button">Register</button>
-            </Column>
-            <HR mx="1rem" mt={4} />
-          </Row>
+              <Column width={[1, 1 / 2]} pl={[0, "4rem"]}>
+                <div dangerouslySetInnerHTML={{ __html: this.state.pageSections.featured.column_2 }} />
+              </Column>
+              <HR mt={'3rem'} mb={'2rem'} />
+            </Row>
+          )}
 
           <Row>
             <Column width={[1, 1 / 2]}>
               <Row as="section">
-                <Column as="section" width={1} px={0}>
-                  <h2>Culturally Responsive Teaching</h2>
-                  <Row>
-                    <Column width={1 / 2}>
-                      <img src={teachingGraphic} alt="" />
+                {pageSections && pageSections.culturallyResponsiveTeaching && (
+                  <React.Fragment>
+                    <Column as="section" width={1} px={0}>
+                      <Heading as="h2" fontSize={'1.3rem'} underline={false} caps={true} dangerouslySetInnerHTML={{ __html: this.state.pageSections.culturallyResponsiveTeaching.heading }} />
+                      <Row>
+                        <Column width={[1, 1, 1 / 2]} px={0} style={{ paddingRight: '1rem' }}>
+                          <div dangerouslySetInnerHTML={{ __html: this.state.pageSections.culturallyResponsiveTeaching.column_1 }} />
+                        </Column>
+                        <Column width={[1, 1, 1 / 2]}>
+                          <div dangerouslySetInnerHTML={{ __html: this.state.pageSections.culturallyResponsiveTeaching.column_2 }} />
+                        </Column>
+                      </Row>
                     </Column>
-                    <Column width={1 / 2}>
-                      <h3>5 Ways to Challenge you Implicit Bias</h3>
-                      <p>
-                        Our 2018-2019 calendar emphasizes developing an
-                        understanding & responding to the context of your
-                        classroom. We start with an ...
-                      </p>
+                    <HR my={4} />
+                  </React.Fragment>
+                )}
 
-                      <a href="#0">More ></a>
-                    </Column>
-                  </Row>
 
-                  <HR my={4} />
-                </Column>
-
-                <Column as="section" width={1} px={0}>
-                  <h2>In the Spotlight</h2>
-                  <Row>
-                    <Column width={1 / 2}>
-                      <img src={callForSpeakers} alt="" />
-                    </Column>
-                    <Column width={1 / 2}>
-                      <h3>Call for Speakers: Global Issues Speaker Series</h3>
-                      <p>
-                        International Programs is seeking ACC faculty who would
-                        like to share their global expertise in their Spring
-                        2019 "Global Issues Speaker Series"
-                      </p>
-
-                      <a href="#0">More ></a>
-                    </Column>
-                  </Row>
-                </Column>
+                {pageSections && pageSections.spotlight && (
+                  <Column as="section" width={1} px={0}>
+                    <Heading as="h2" fontSize={'1.3rem'} underline={false} caps={true} dangerouslySetInnerHTML={{ __html: this.state.pageSections.spotlight.heading }} />
+                    <Row>
+                      <Column width={[1, 1, 1 / 2]} px={0} style={{ paddingRight: '1rem' }} >
+                        <div dangerouslySetInnerHTML={{ __html: this.state.pageSections.spotlight.column_1 }} />
+                      </Column>
+                      <Column width={[1, 1, 1 / 2]}>
+                        <div dangerouslySetInnerHTML={{ __html: this.state.pageSections.spotlight.column_2 }} />
+                      </Column>
+                    </Row>
+                  </Column>
+                )}
               </Row>
             </Column>
 
@@ -120,16 +116,18 @@ export default class HomePage extends Component {
             </Column>
           </Row>
 
-          <Row>
+          <Row py="4rem">
             <Column width={1}>
               <StayUpdated>
                 <span>Stay Updated</span>
               </StayUpdated>
-              <ul>
-                <li>Item One</li>
-                <li>Item Two</li>
-                <li>Item Three</li>
-              </ul>
+              <SocialMediaList>
+                <li><a href="#0" className="button">TLED NEWSLETTER</a></li>
+                <li><a href="#0" title="youtube"><YouTube /></a></li>
+                <li><a href="#0" title="facebook"><Facebook /></a></li>
+                <li><a href="#0" title="twitter"><Twitter /></a></li>
+                <li><a href="#0" title="instagram"><Instagram /></a></li>
+              </SocialMediaList>
             </Column>
           </Row>
         </Container>
@@ -138,16 +136,53 @@ export default class HomePage extends Component {
   }
 }
 
+<<<<<<< HEAD
+=======
+const Intro = styled(Row)`
+  h2 {
+    font-size: 1.6rem !important;
+    font-weight: 700 !important;
+  }
+  a.button {
+    margin: 0 1rem;
+  }
+`;
+
+const EventList = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: rgb(93, 93, 93);
+
+  li {
+    margin-bottom: 1rem;
+    font-weight: bold;
+  }
+
+  a {
+    display: inline-block;
+    margin-left: 5px;
+    font-weight: normal;
+    text-decoration: none;
+  }
+`;
+
+>>>>>>> 75ba405015c8a7be6b220f44830cd4135e41c8dc
 const StayUpdated = styled.h2`
   display: flex;
   align-items: center;
   text-transform: uppercase;
   color: #555;
+  font-size: 1.3rem;
+
 
   span {
     display: block;
-    padding: 0 4rem;
+    padding: 0 1rem;
     flex-shrink: 0;
+    @media (min-width: 600px) {
+      padding: 0 4rem;
+    }
   }
 
   &:before,
@@ -155,5 +190,40 @@ const StayUpdated = styled.h2`
     content: "";
     border-bottom: 2px solid rgba(26, 82, 118, 0.35);
     width: 100%;
+  }
+`;
+
+const SocialMediaList = styled.ul`
+  margin: 2rem 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  li {
+    margin: 0 3rem;
+  }
+
+  a {
+    display: block;
+    height: 100%;
+  }
+
+  a.button {
+    background: rgb(91, 43, 112);
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    margin-top: 5px;
+  }
+
+  svg {
+    fill: rgb(91, 43, 112);
+    width: 30px;
+  }
+  
+  a[title="youtube"] svg {
+    width: 40px;
   }
 `;

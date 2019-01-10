@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-// import Img from 'gatsby-image';
-import Img from '../Img/Img';
+import { Img } from '../Elements/Elements';
+import { Box } from '@rebass/grid';
 
 // <img 
 // data-flickity-lazyload-srcset="{{ slide.image_content.url|resize(480) }} 480w, 
@@ -29,7 +29,7 @@ import Img from '../Img/Img';
 
 export default (props) => {
   return (
-    <Section image={props.sizes} bg={props.bg} bgAlign={props.bgAlign}>
+    <Section as="section" image={props.sizes} bg={props.bg} bgAlign={props.bgAlign} {...props}>
       {props.sizes && <Img
         sizes={props.sizes}
         style={{
@@ -55,9 +55,8 @@ export default (props) => {
   )
 }
 
-const Section = styled.section`
+const Section = styled(Box)`
   position: relative;
-  // overflow: hidden;
   padding: 2rem 0;
 
   .section__bg {

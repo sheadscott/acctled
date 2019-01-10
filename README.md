@@ -12,6 +12,9 @@ We are using rebass/grid for our grid system, which has styled-system as a depen
 
 Styled elements like hr and a tags are in a component called Elements. You should check the exports of the elements component to see what we've already done before adding new stuff.
 
+## Style
+
+We are using styled components for style, but create react app also supports importing css and sass direcly. If you need to import stylesheets do it at the component level.  We should be very careful about importing styles at the app level.  We are using Foundation styles at the app level, so those classes are available if needed.  Remember to use `className` instead of `class` when adding classes in jsx code.
 
 ## Available Scripts
 

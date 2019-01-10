@@ -10,13 +10,14 @@ import Footer from "../Footer/Footer";
 import WPPage from '../Pages/WPPage';
 import HomePage from '../Pages/HomePage';
 import CalendarPage from '../Pages/CalendarPage';
+import SearchPage from '../Pages/SearchPage';
 
 import './App.css';
 class App extends Component {
   state = {
     searchExpanded: false
   }
-  s
+
   toggleSearch = (event) => {
     this.setState(prevState => {
       return {
@@ -29,12 +30,20 @@ class App extends Component {
     }
   }
 
+  searchSubmitted = () => {
+    this.setState({ searchExpanded: false });
+  }
+
+  // componentWillReceiveProps() {
+  //   console.log('match', this.props.match);
+  // }
+
   render() {
     return (
       <Router>
         <div className="App">
           <Header className="App-header">
-            <Search searchExpanded={this.state.searchExpanded} />
+            <Search searchExpanded={this.state.searchExpanded} searchSubmitted={this.searchSubmitted} />
             <TitleBar searchExpanded={this.state.searchExpanded} toggleSearch={this.toggleSearch} />
             <SecondaryNav />
           </Header>
@@ -42,6 +51,7 @@ class App extends Component {
           <Main>
             <Switch>
               <Route path="/" exact component={HomePage} />
+              <Route path="/search" exact component={SearchPage} />
               <Route path="/calendar" component={CalendarPage} />
               <Route path="/:slug" component={WPPage} />
             </Switch>

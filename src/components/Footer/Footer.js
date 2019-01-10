@@ -39,9 +39,9 @@ export default class Footer extends Component {
     return (
       <Wrapper>
         <Container>
-          <Row flexWrap="noWrap">
+          <Row py="3rem">
 
-            <WpLinks width={[1, '75%']}>
+            <WpLinks width={[1, 1, 3 / 4]} mb={['2rem', '2rem', 0]}>
               {this.state.footerItems.map(item => {
                 return (
                   <ul key={item.id + "ul"}>
@@ -52,7 +52,7 @@ export default class Footer extends Component {
               })}
             </WpLinks>
 
-            <Contact widht={[1, '25%']}>
+            <Contact width={[1, 1, 1 / 4]} pl={[0, 0, '2rem']}>
               <TLEDLogo />
 
               <div className="vcard" style={{ marginLeft: '10px' }}>
@@ -79,14 +79,27 @@ export default class Footer extends Component {
 const Wrapper = styled.div`
   width: 100%;
   background: #133952;
+  margin-top: 2rem;
   * {
     color: white;
   }
 `;
 
 const WpLinks = styled(Column)`
-  columns: 3;
-  column-width: 33%;
+
+  @media (min-width: 400px) {
+    columns: 2;
+  }
+  @media (min-width: 600px) {
+    columns: 3;
+  }
+
+  h4 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: rgb(244, 239, 172);
+  }
 
   ul {
     list-style: none inside none;
@@ -94,7 +107,7 @@ const WpLinks = styled(Column)`
     break-inside: avoid;
     display: inline-block;
     font-size: 0.9em;
-    margin: 0;
+    margin: 0 0 1rem 0;
     padding: 0;
 
     li {
@@ -104,7 +117,7 @@ const WpLinks = styled(Column)`
 `;
 
 const Contact = styled(Column)`
-  margin-top: 34px;
+  // margin-top: 34px;
 
   svg {
     max-width: 175px;
