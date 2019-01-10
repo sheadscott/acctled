@@ -4,6 +4,7 @@ import { HR } from "../Elements/Elements";
 import { Container, Row, Column } from "../Grid/Grid";
 
 import HomeSlider from "../HomeSlider/HomeSlider";
+import EventList from "../EventList/EventList";
 
 import teachingGraphic from "../../img/deconstructing.png";
 import callForSpeakers from "../../img/callForSpeakers.jpg";
@@ -115,47 +116,7 @@ export default class HomePage extends Component {
             </Column>
 
             <Column width={[1, 1 / 2]} as="section" p={"2rem"}>
-              <div
-                style={{ background: "#ccc", padding: "1rem", height: "100%" }}
-              >
-                <h2>Events & Important Dates</h2>
-
-                <h3>This Week</h3>
-
-                <EventList>
-                  <li>
-                    Nov 8:
-                    <a href="#0">Diversity & Equity: What's the Difference?</a>
-                  </li>
-                  <li>
-                    Nov 8:<a href="#0">Computerside Chats</a>
-                  </li>
-                  <li>
-                    Nov 8 & 9:<a href="#0">Sabbatical Info Sessions</a>
-                  </li>
-                  <li>
-                    Nov 9:<a href="#0">Distance Education Symposium</a>
-                  </li>
-                  <li>
-                    Nov 9:<a href="#0">EduTech</a>
-                  </li>
-                  <li>
-                    Nov 10:<a href="#0">ACC Boots & Bats Gala</a>
-                  </li>
-                  <li>
-                    Submit by Nov 16:
-                    <a href="#0">
-                      Performances for National Day of Racial Healing
-                    </a>
-                  </li>
-                  <li>
-                    Apply bo Nov 16:
-                    <a href="#0">Lilly Conference Schoilarships</a>
-                  </li>
-                </EventList>
-
-                <a href="#0">More Events ></a>
-              </div>
+              <EventList length="10" />
             </Column>
           </Row>
 
@@ -176,24 +137,6 @@ export default class HomePage extends Component {
     );
   }
 }
-
-const EventList = styled.ul`
-  margin: 0;
-  padding: 0;
-  list-style: none;
-
-  li {
-    margin-bottom: 1rem;
-    font-weight: bold;
-  }
-
-  a {
-    display: inline-block;
-    margin-left: 5px;
-    font-weight: normal;
-    text-decoration: none;
-  }
-`;
 
 const StayUpdated = styled.h2`
   display: flex;

@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Flex, Box } from '@rebass/grid';
+import styled from "styled-components";
+import { Flex, Box } from "@rebass/grid";
 
 const Container = styled(Box)`
   max-width: 75em;
@@ -8,11 +8,11 @@ const Container = styled(Box)`
 
   // this may cause bugs
   overflow: hidden;
-`
+`;
 
 Container.defaultProps = {
-  mx: 'auto'
-}
+  mx: "auto"
+};
 
 const Row = styled(Flex)`
   // margin-left: ${props => props.mx};
@@ -23,9 +23,9 @@ const Row = styled(Flex)`
 `;
 
 Row.defaultProps = {
-  flexWrap: 'wrap',
+  flexWrap: "wrap"
   // mx: '-1rem'
-}
+};
 
 const Column = styled(Box)`
   padding-left: ${props => props.px};
@@ -34,7 +34,7 @@ const Column = styled(Box)`
 `;
 
 Column.defaultProps = {
-  px: '1rem'
-}
+  px: "1rem"
+};
 
-export { Container, Row, Column }
+export { Container, Row, Column };
