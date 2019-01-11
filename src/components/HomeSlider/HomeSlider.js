@@ -50,7 +50,7 @@ export default class HomeSlider extends Component {
         >
           {this.state.slideData.map((slide, index) => {
             return (
-              <div key={index} className="slide">
+              <Slide key={index} className="slide" id={slide.title}>
 
 
                 <MediaContainer ratio="41.4%" className="slide__wrapper">
@@ -65,7 +65,7 @@ export default class HomeSlider extends Component {
                     </Row>
                   </Container>
                 </div>
-              </div>
+              </Slide>
             );
           })}
         </Carousel>
@@ -85,6 +85,22 @@ export default class HomeSlider extends Component {
     );
   }
 }
+
+const colors = {
+  'On Campus Assistance': '#295b82',
+  'Library Help': '#7d484c',
+  'Blackboard': '#ad8d6e',
+  'Technology': '#20a2b1',
+  'Learning Depot': '#9977a7'
+};
+
+const Slide = styled.div`
+  h2 {
+    border-bottom: 4px solid white;
+
+    border-bottom-color: ${props => colors[props.id]};
+  }
+`;
 
 const SlideText = styled(Column)`
   h2 {
@@ -123,7 +139,7 @@ const SlideText = styled(Column)`
 const CarouselControls = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   list-style: none;
   width: 100%;
@@ -141,14 +157,6 @@ const CarouselControls = styled.ul`
   //   border-right-width: 8px;
   // }
 `;
-
-const colors = {
-  'On Campus Assistance': '#295b82',
-  'Library Help': '#7d484c',
-  'Blackboard': '#ad8d6e',
-  'Technology': '#20a2b1',
-  'Learning Depot': '#9977a7'
-};
 
 const CarouselControl = styled.button`
   display: flex;
