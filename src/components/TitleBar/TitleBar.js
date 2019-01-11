@@ -60,11 +60,11 @@ export default class TitleBar extends Component {
         </TitleBarNav>
 
         <TitleBarControls>
-          <Link to="/calendar" title="Link to Calendar Page" style={{ marginRight: '10px' }}>
+          <Link to="/calendar" title="Link to Calendar Page" style={{ marginRight: '15px' }}>
             <CalendarIcon />
           </Link>
 
-          <a role="button" style={{ marginRight: '10px' }} href="/#searchForm" onClick={e => this.props.toggleSearch(e)} aria-controls="searchForm" aria-expanded={this.props.searchExpanded} >
+          <a role="button" style={{ marginRight: '15px' }} href="/#searchForm" onClick={e => this.props.toggleSearch(e)} aria-controls="searchForm" aria-expanded={this.props.searchExpanded} >
             <SearchIcon />
           </a>
 
@@ -113,6 +113,7 @@ const TitleBarNav = styled.div`
     text-decoration: none;
     text-align: center;
     margin: 0 1rem;
+    line-height: 1rem;
 
     @media (min-width: 960px) {
       margin: 0 2rem;

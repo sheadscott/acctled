@@ -24,14 +24,14 @@ export default (props) => {
 
                   <SubMenuList>
                     {item.children.map(subitem => {
-                      return <li key={subitem.id}><A data={subitem}>{subitem.title}</A></li>
+                      return <li key={subitem.id}><A color="#4c4d4f" hovercolor="#065589" data={subitem}>{subitem.title}</A></li>
                     })}
                   </SubMenuList>
                 </li>
               )
             }
 
-            return <li key={item.id}><A data={item}>{item.title}</A></li>
+            return <li key={item.id}><A color="#4c4d4f" data={item}>{item.title}</A></li>
           })}
         </SubMenu>
       </StyledContainer>
@@ -52,37 +52,43 @@ const SubMenuWrapper = styled.div`
 `;
 
 const StyledContainer = styled(Container)`
-  columns: 5;
+  columns: 1;
   column-gap: 2rem;
+  @media (min-width: 500px) {
+    columns: 2;
+  }
+  @media (min-width: 600px) {
+    columns: 3;
+  }
+  @media (min-width: 900px) {
+    columns: 5;
+  }
 `;
 
 const SubMenu = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
-
-  a {
-    padding: 0 !important;
-    color: #153b53 !important;
-    text-transform: none !important;
-  }
 `;
 
 const ListHeading = styled.div`
-  color: #153b53;
+  // color: #153b53;
+  color: #4c4d4f;
   font-weight: 700;
   margin-bottom: 1rem;
   text-transform: uppercase;
+  line-height: 1.3rem;
 `;
 
 const SubMenuList = styled.ul`
   padding: 0;
-  margin: 0 0 2rem 0 !important;
+  margin: 0 0 3rem 0 !important;
   list-style: none;
 
   li {
     margin-bottom: 1rem;
     position: relative;
+    line-height: 1.3rem;
 
     &:before {
       content: '•';
@@ -92,9 +98,5 @@ const SubMenuList = styled.ul`
       top: -1px;
       color: #153b53;
     }
-  }
-
-  a {
-    
   }
 `;
