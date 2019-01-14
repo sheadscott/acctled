@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Container, Row, Column } from "../Grid/Grid";
 
 import CalendarGrid from "../CalendarGrid/CalendarGrid";
-import { HR } from "../Elements/Elements";
+import { Heading } from "../Elements/Elements";
 
 export default function CalendarPage() {
   return (
@@ -11,8 +11,9 @@ export default function CalendarPage() {
       <Container>
         <Row>
           <Column width={1}>
-            <h1>Calendar</h1>
-            <HR />
+            <Heading as="h1" caps={true} underline={true}>
+              Calendar
+            </Heading>
             <CalendarGrid />
           </Column>
         </Row>

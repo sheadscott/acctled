@@ -58,15 +58,22 @@ export default class EventList extends Component {
 const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  // &::after {
+  //   content: "#";
+  // }
 `;
 const Event = styled.div`
-  flex-grow: 1;
-  width: 25%;
-  margin-right: 1rem;
-  margin-bottom: 1rem;
-  justify-content: space-between;
-  &:nth-child(3n + 3) {
-    margin-right: 0;
+  flex: 1 1 200px;
+  min-width: 200px;
+  margin: 1rem;
+  &:last-child {
+    @media (max-width: 619px) {
+      max-width: 100%;
+    }
+    max-width: 280px;
   }
 
   h1 {
