@@ -32,7 +32,7 @@ export default class Footer extends Component {
       <li key={child.id}>
         <a href={child.url}>
           {child.title}
-         </a>
+        </a>
       </li>
     );
   };
