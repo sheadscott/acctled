@@ -1,8 +1,8 @@
-import Section from './Section';
-import Heading from './Heading';
-import A from './A';
-import Img from './Img';
-import HR from './HR';
+import Section from "./Section";
+import Heading from "./Heading";
+import A from "./A";
+import Img from "./Img";
+import HR from "./HR";
 
 /*
  * The Elements component is a collection of components for spitting out styled markup
@@ -12,10 +12,4 @@ import HR from './HR';
  * and so on
  */
 
-export {
-  Section,
-  Heading,
-  A,
-  Img,
-  HR,
-}
+export { Section, Heading, A, Img, HR };

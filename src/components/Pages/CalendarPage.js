@@ -1,9 +1,28 @@
-import React from 'react'
+import React from "react";
+import styled from "styled-components";
+import { Container, Row, Column } from "../Grid/Grid";
+
+import CalendarGrid from "../CalendarGrid/CalendarGrid";
+import { Heading } from "../Elements/Elements";
 
 export default function CalendarPage() {
   return (
-    <div>
-      This is the calendar page.
-    </div>
-  )
+    <Wrapper>
+      <Container mt={'1.5rem'}>
+        <Row>
+          <Column width={1}>
+            <Heading as="h1" caps={true} underline={true}>
+              Calendar
+            </Heading>
+            <CalendarGrid />
+          </Column>
+        </Row>
+      </Container>
+    </Wrapper>
+  );
 }
+
+const Wrapper = styled.div`
+  width: 80%;
+  margin: 0 auto;
+`;
