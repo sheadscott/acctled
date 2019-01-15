@@ -29,9 +29,11 @@ export default class Footer extends Component {
     }
     // external links
     return (
-      <a key={child.id} href={child.url}>
-        {child.title}
-      </a>
+      <li key={child.id}>
+        <a href={child.url}>
+          {child.title}
+         </a>
+      </li>
     );
   };
 
