@@ -64,7 +64,7 @@ export default class Search extends Component {
               <Column width={[1, 1 / 2]} pr={[0, '1rem']}>
                 <fieldset>
                   <legend>Search TLED</legend>
-                  <label for="searchTLEDField" className="show-for-sr">TLED</label>
+                  <label htmlFor="searchTLEDField" className="show-for-sr">TLED</label>
                   <div className="input-group">
                     <input id="searchTLEDField" className="input-group-field" onFocus={() => this.setFocus('tled')} ref={el => this.searchTLEDField = el} />
                     <div className="input-group-button">
@@ -77,7 +77,7 @@ export default class Search extends Component {
               <Column width={[1, 1 / 2]} pl={[0, '1rem']}>
                 <fieldset>
                   <legend>Search ACC</legend>
-                  <label for="searchACCField" className="show-for-sr">ACC</label>
+                  <label htmlFor="searchACCField" className="show-for-sr">ACC</label>
                   <div className="input-group">
                     <input id="searchACCField" className="input-group-field" onFocus={() => this.setFocus('acc')} ref={el => this.searchACCField = el} />
                     <div className="input-group-button">

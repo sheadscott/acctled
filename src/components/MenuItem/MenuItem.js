@@ -22,7 +22,7 @@ export default class MenuItem extends Component {
   render() {
     return (
       <React.Fragment>
-        <button onClick={this.handleClick}>{this.props.children}</button>
+        <button className="parentLink" onClick={this.handleClick}>{this.props.children}</button>
 
         <SubMenu items={this.props.submenuItems} expanded={this.props.expanded} />
       </React.Fragment>
