@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-// import { kebabToCamelCase, spacesToBreak } from "../../helpers";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -60,11 +59,22 @@ export default class TitleBar extends Component {
         </TitleBarNav>
 
         <TitleBarControls>
-          <Link to="/calendar" title="Link to Calendar Page" style={{ marginRight: '15px' }}>
+          <Link
+            to="/calendar"
+            title="Link to Calendar Page"
+            style={{ marginRight: "15px" }}
+          >
             <CalendarIcon />
           </Link>
 
-          <a role="button" style={{ marginRight: '15px' }} href="/#searchForm" onClick={e => this.props.toggleSearch(e)} aria-controls="searchForm" aria-expanded={this.props.searchExpanded} >
+          <a
+            role="button"
+            style={{ marginRight: "15px" }}
+            href="/#searchForm"
+            onClick={e => this.props.toggleSearch(e)}
+            aria-controls="searchForm"
+            aria-expanded={this.props.searchExpanded}
+          >
             <SearchIcon />
           </a>
 
