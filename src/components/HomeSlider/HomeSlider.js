@@ -29,8 +29,7 @@ export default class HomeSlider extends Component {
           info.description = slide.image_description;
           slideData.push(info);
         });
-        console.log(slideData);
-        // console.log("Slideshow data", slideShowItems);
+
         this.setState({ slideData });
       });
   }
@@ -47,10 +46,11 @@ export default class HomeSlider extends Component {
           showStatus={false}
           showIndicators={false}
           selectedItem={this.state.currentSlide}
+          onChange={(slide) => { this.changeCarousel(slide) }}
         >
           {this.state.slideData.map((slide, index) => {
             return (
-              <div key={index} className="slide">
+              <Slide key={index} className="slide" id={slide.title}>
 
 
                 <MediaContainer ratio="41.4%" className="slide__wrapper">
@@ -65,7 +65,7 @@ export default class HomeSlider extends Component {
                     </Row>
                   </Container>
                 </div>
-              </div>
+              </Slide>
             );
           })}
         </Carousel>
@@ -74,7 +74,7 @@ export default class HomeSlider extends Component {
         <CarouselControls>
           {this.state.slideData.map((item, index) => (
             <li key={`thumbnail-${item.url}`}>
-              <CarouselControl onClick={() => { this.changeCarousel(index) }} bg={item.url} title={item.title}>
+              <CarouselControl onClick={() => { this.changeCarousel(index) }} className={this.state.currentSlide === index ? 'active' : null} bg={item.url} title={item.title}>
                 <div style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden' }}>Skip to Slide {index + 1}</div>
                 <div>{item.title}</div>
               </CarouselControl>
@@ -85,6 +85,22 @@ export default class HomeSlider extends Component {
     );
   }
 }
+
+const colors = {
+  'On Campus Assistance': '#295b82',
+  'Library Help': '#7d484c',
+  'Blackboard': '#ad8d6e',
+  'Technology': '#20a2b1',
+  'Learning Depot': '#9977a7'
+};
+
+const Slide = styled.div`
+  h2 {
+    border-bottom: 4px solid white;
+
+    border-bottom-color: ${props => colors[props.id]};
+  }
+`;
 
 const SlideText = styled(Column)`
   h2 {
@@ -123,7 +139,7 @@ const SlideText = styled(Column)`
 const CarouselControls = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   list-style: none;
   width: 100%;
@@ -137,18 +153,10 @@ const CarouselControls = styled.ul`
     border-left-width: 8px;
   }
 
-  li:last-child button {
-    border-right-width: 8px;
-  }
+  // li:last-child button {
+  //   border-right-width: 8px;
+  // }
 `;
-
-const colors = {
-  'On Campus Assistance': '#295b82',
-  'Library Help': '#7d484c',
-  'Blackboard': '#ad8d6e',
-  'Technology': '#20a2b1',
-  'Learning Depot': '#9977a7'
-};
 
 const CarouselControl = styled.button`
   display: flex;
@@ -161,6 +169,8 @@ const CarouselControl = styled.button`
   height: 100px;
   border: 4px solid white;
   border-top-width: 8px;
+  border-left-width: 0;
+  border-right-width: 8px;
   text-transform: uppercase;
   color: white;
   font-weight: 700;
@@ -168,6 +178,7 @@ const CarouselControl = styled.button`
   font-family: Montserrat;
   text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
   outline: none;
+  margin-bottom: 0.75rem;
 
   &:before {
     content: '';
@@ -175,20 +186,27 @@ const CarouselControl = styled.button`
     background: ${props => colors[props.title]};
     height: 100%;
     width: 100%;
-    opacity: 0;
+    opacity: 1;
     position: absolute;
     bottom: 0;
-    z-index:1;
-    transition: opacity 0.3s;
+    z-index:-1;
+    transition: transform 0.3s;
   }
 
   div {
     position: relative;
     z-index: 2;
+    transition: transform 0.3s;
   }
 
-  &:focus:before {
-    opacity: 1;
+  &:focus,
+  &.active {
+    div {
+      transform: translate3d(0, -0.5rem, 0);
+    }
+    &:before {
+      transform: translate3d(0, 0.75rem, 0);
+    }
   }
   
   background-color: #7fb7e3;

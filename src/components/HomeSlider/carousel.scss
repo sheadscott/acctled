@@ -33,8 +33,8 @@
 .carousel .control-arrow:before,
 .carousel.carousel-slider .control-arrow:before {
   background: white url("../../img/arrow-left.svg") center no-repeat;
-  /* border-radius: 50%; */
-  height: 60px;
+  border-radius: 50%;
+  height: 40px;
   width: 40px;
   display: flex;
   align-items: center;

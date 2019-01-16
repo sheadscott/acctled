@@ -70,11 +70,11 @@ export default class SecondaryNav extends Component {
 
               // Internal links using React Router
               if (item.type === "post_type") {
-                return <ListItem key={item.id} onClick={() => this.toggleMenu(index)}><Link to={`/${item.object_slug}`}>{item.title}</Link></ListItem>;
+                return <ListItem key={item.id} onClick={() => this.toggleMenu(index)}><Link className="parentLink" to={`/${item.object_slug}`}>{item.title}</Link></ListItem>;
               }
 
               // external links
-              return <ListItem key={item.id} onClick={() => this.toggleMenu(index)}><a href={item.url}>{item.title}</a></ListItem>
+              return <ListItem key={item.id} onClick={() => this.toggleMenu(index)}><a className="parentLink" href={item.url}>{item.title}</a></ListItem>
             })}
           </NavList>
         </Container>
@@ -85,6 +85,7 @@ export default class SecondaryNav extends Component {
 
 const Wrapper = styled.div`
   background: #133952;
+  position: relative;
 
   &.expanded:before {
     content: '';
@@ -116,7 +117,7 @@ const NavList = styled.ul`
 const ListItem = styled.li`
   margin: 0 0.5rem;
 
-  a,button {
+  .parentLink {
     background: transparent;
     border: none;
     font-size: 1rem;
@@ -133,10 +134,8 @@ const ListItem = styled.li`
     }
   }
 
-  a:hover,
-  a:focus,
-  button:focus,
-  button:active {
+  .parentLink:hover,
+  .parentLink:focus {
     color: white;
     background: #698da4;
   }
