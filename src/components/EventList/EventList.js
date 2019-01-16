@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { Heading } from '../Elements/Elements';
 import Axios from "axios";
 
 export default class EventList extends Component {
@@ -29,9 +30,8 @@ export default class EventList extends Component {
     const listLength = this.props.length;
     return (
       <MainWrapper>
-        <h2>Events & Important Dates</h2>
+        <Heading as="h2" caps={true} mb={'1.5rem'} fontSize={"1.3rem"}>Events & Important Dates</Heading>
 
-        <h3>This Week</h3>
         <EventWrapper>
           {this.state.events.slice(0, listLength - 1).map((event, i) => {
             return (
@@ -50,14 +50,12 @@ export default class EventList extends Component {
 }
 
 const MainWrapper = styled.div`
-  background: #ccc;
-  padding: 1rem;
-  padding-left: 2rem;
+  background: #f1f1f1;
+  padding: 2rem;
   height: 100%;
 `;
 const EventWrapper = styled.ul`
   margin: 0;
-  margin-left: 1.5rem;
   padding: 0;
   list-style: none;
 
@@ -67,8 +65,6 @@ const EventWrapper = styled.ul`
   }
 
   span {
-    color: blue;
-    display: inline-block;
     margin-left: 1rem;
     font-weight: normal;
     text-decoration: none;
