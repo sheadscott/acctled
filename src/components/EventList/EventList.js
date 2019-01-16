@@ -43,7 +43,7 @@ export default class EventList extends Component {
           })}
         </EventWrapper>
 
-        <a href="#0">More Events ></a>
+        <a href="https://sites.austincc.edu/tledupdates/events-digest/">More Events ></a>
       </MainWrapper>
     );
   }
