@@ -1,38 +1,39 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import styled from 'styled-components';
+import styled from "styled-components";
 
-import Search from '../Search/Search';
+import Search from "../Search/Search";
 import TitleBar from "../TitleBar/TitleBar";
 import SecondaryNav from "../SecondaryNav/SecondaryNav";
 import Footer from "../Footer/Footer";
 
-import WPPage from '../Pages/WPPage';
-import HomePage from '../Pages/HomePage';
-import CalendarPage from '../Pages/CalendarPage';
-import SearchPage from '../Pages/SearchPage';
+import WPPage from "../Pages/WPPage";
+import HomePage from "../Pages/HomePage";
+import CalendarPage from "../Pages/CalendarPage";
+import ReportsPage from "../Pages/ReportsPage";
+import SearchPage from "../Pages/SearchPage";
 
-import './App.css';
+import "./App.css";
 class App extends Component {
   state = {
     searchExpanded: false
-  }
+  };
 
-  toggleSearch = (event) => {
+  toggleSearch = event => {
     this.setState(prevState => {
       return {
         searchExpanded: !prevState.searchExpanded
-      }
+      };
     });
 
     if (event) {
       event.preventDefault();
     }
-  }
+  };
 
   searchSubmitted = () => {
     this.setState({ searchExpanded: false });
-  }
+  };
 
   // componentWillReceiveProps() {
   //   console.log('match', this.props.match);
@@ -43,8 +44,14 @@ class App extends Component {
       <Router>
         <div className="App">
           <Header className="App-header">
-            <Search searchExpanded={this.state.searchExpanded} searchSubmitted={this.searchSubmitted} />
-            <TitleBar searchExpanded={this.state.searchExpanded} toggleSearch={this.toggleSearch} />
+            <Search
+              searchExpanded={this.state.searchExpanded}
+              searchSubmitted={this.searchSubmitted}
+            />
+            <TitleBar
+              searchExpanded={this.state.searchExpanded}
+              toggleSearch={this.toggleSearch}
+            />
             <SecondaryNav />
           </Header>
 
@@ -53,6 +60,7 @@ class App extends Component {
               <Route path="/" exact component={HomePage} />
               <Route path="/search" exact component={SearchPage} />
               <Route path="/calendar" component={CalendarPage} />
+              <Route path="/reports" component={ReportsPage} />
               <Route path="/:slug" component={WPPage} />
             </Switch>
           </Main>
