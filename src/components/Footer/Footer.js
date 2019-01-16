@@ -104,6 +104,9 @@ const WpLinks = styled(Column)`
   }
   h4>a{
     color: rgb(244, 239, 172);
+    :hover {
+      text-decoration: underline;
+    }
   }
 
   ul {
