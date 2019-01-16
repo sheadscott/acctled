@@ -73,6 +73,7 @@ export default class HomePage extends Component {
             </React.Fragment>
           )}
 
+          {/* Featured */}
           {pageSections && pageSections.featured && (
             <Row>
               <HR my={"4rem"} />
@@ -97,6 +98,8 @@ export default class HomePage extends Component {
 
           <Row>
             <Column width={[1, 1 / 2]}>
+
+              {/* Culturally Responsive Teaching */}
               <Row as="section">
                 {pageSections && pageSections.culturallyResponsiveTeaching && (
                   <React.Fragment>
@@ -106,6 +109,7 @@ export default class HomePage extends Component {
                         fontSize={"1.3rem"}
                         underline={false}
                         caps={true}
+                        mb={'1.5rem'}
                         dangerouslySetInnerHTML={{
                           __html: this.state.pageSections
                             .culturallyResponsiveTeaching.heading
@@ -115,7 +119,7 @@ export default class HomePage extends Component {
                         <Column
                           width={[1, 1, 1 / 2]}
                           px={0}
-                          style={{ paddingRight: "1rem" }}
+                          style={{ paddingRight: "2rem" }}
                         >
                           <div
                             dangerouslySetInnerHTML={{
@@ -138,6 +142,7 @@ export default class HomePage extends Component {
                   </React.Fragment>
                 )}
 
+                {/* In The Spotlight */}
                 {pageSections && pageSections.spotlight && (
                   <Column as="section" width={1} px={0}>
                     <Heading
@@ -145,6 +150,7 @@ export default class HomePage extends Component {
                       fontSize={"1.3rem"}
                       underline={false}
                       caps={true}
+                      mb={'1.5rem'}
                       dangerouslySetInnerHTML={{
                         __html: this.state.pageSections.spotlight.heading
                       }}
@@ -153,7 +159,7 @@ export default class HomePage extends Component {
                       <Column
                         width={[1, 1, 1 / 2]}
                         px={0}
-                        style={{ paddingRight: "1rem" }}
+                        style={{ paddingRight: "2rem" }}
                       >
                         <div
                           dangerouslySetInnerHTML={{
@@ -174,11 +180,13 @@ export default class HomePage extends Component {
               </Row>
             </Column>
 
-            <Column width={[1, 1 / 2]} as="section" p={"2rem"}>
+            {/* Events and Important Dates */}
+            <Column width={[1, 1 / 2]} as="section" pl={[0, "4rem"]}>
               <EventList length="10" />
             </Column>
           </Row>
 
+          {/* Stay Updated */}
           <Row py="4rem">
             <Column width={1}>
               <StayUpdated>
