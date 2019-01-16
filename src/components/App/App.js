@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import styled from 'styled-components';
+import styled from "styled-components";
 
 import Drawer from '../Drawer/Drawer';
 import Search from '../Search/Search';
@@ -8,33 +8,34 @@ import TitleBar from "../TitleBar/TitleBar";
 import SecondaryNav from "../SecondaryNav/SecondaryNav";
 import Footer from "../Footer/Footer";
 
-import WPPage from '../Pages/WPPage';
-import HomePage from '../Pages/HomePage';
-import CalendarPage from '../Pages/CalendarPage';
-import SearchPage from '../Pages/SearchPage';
+import WPPage from "../Pages/WPPage";
+import HomePage from "../Pages/HomePage";
+import CalendarPage from "../Pages/CalendarPage";
+import ReportsPage from "../Pages/ReportsPage";
+import SearchPage from "../Pages/SearchPage";
 
-import './App.css';
+import "./App.css";
 class App extends Component {
   state = {
     searchExpanded: false,
     drawerExpanded: false,
   }
 
-  toggleSearch = (event) => {
+  toggleSearch = event => {
     this.setState(prevState => {
       return {
         searchExpanded: !prevState.searchExpanded
-      }
+      };
     });
 
     if (event) {
       event.preventDefault();
     }
-  }
+  };
 
   searchSubmitted = () => {
     this.setState({ searchExpanded: false });
-  }
+  };
 
   toggleDrawer = () => {
     this.setState((prevState) => {
@@ -62,6 +63,7 @@ class App extends Component {
               <Route path="/" exact component={HomePage} />
               <Route path="/search" exact component={SearchPage} />
               <Route path="/calendar" component={CalendarPage} />
+              <Route path="/reports" component={ReportsPage} />
               <Route path="/:slug" component={WPPage} />
             </Switch>
           </Main>
