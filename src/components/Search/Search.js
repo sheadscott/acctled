@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import styled from 'styled-components';
 import { Container, Row, Column } from '../Grid/Grid';
-import { Heading } from '../Elements/Elements';
 
 /*
   based on https://www.mtu.edu/
@@ -102,10 +101,10 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   transition: height 0.2s linear;
-  height: ${props => props.searchExpanded ? '175px' : '0px'}
+  height: ${props => props.searchExpanded ? '180px' : '0px'}
 
   @media (min-width: 640px) {
-    height: ${props => props.searchExpanded ? '100px' : '0px'}
+    height: ${props => props.searchExpanded ? '120px' : '0px'}
   }
 `;
 
@@ -114,5 +113,12 @@ const Form = styled.form`
   display: flex;
   justify-content: space-between;
   color: white;
-`;
 
+  &:focus button {
+    background: red;
+  }
+
+  button {
+    padding: 10px;
+  }
+`;

@@ -73,11 +73,14 @@ const SubMenu = styled.ul`
 
 const ListHeading = styled.div`
   // color: #153b53;
-  color: #4c4d4f;
+  // color: #4c4d4f;
+  color: #1d1d1d;
   font-weight: 700;
   margin-bottom: 1rem;
   text-transform: uppercase;
   line-height: 1.3rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #1d1d1d;
 `;
 
 const SubMenuList = styled.ul`

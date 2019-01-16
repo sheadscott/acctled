@@ -69,7 +69,7 @@ export default class TitleBar extends Component {
           </a>
 
           <Button>
-            <HamburgerMenu />
+            <HamburgerMenu onClick={this.props.toggleDrawer} />
           </Button>
         </TitleBarControls>
       </Nav>
