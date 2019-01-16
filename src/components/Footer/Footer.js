@@ -47,7 +47,9 @@ export default class Footer extends Component {
               {this.state.footerItems.map(item => {
                 return (
                   <ul key={item.id + "ul"}>
-                    <h4>{item.title}</h4>
+                    {item.url != '#' && <h4><a href={item.url}>{item.title}</a></h4>}
+                    {item.url ==='#' && <h4>{item.title}</h4>}
+
                     {item.children && item.children.map(this.renderChildren)}
                   </ul>
                 );
@@ -101,6 +103,13 @@ const WpLinks = styled(Column)`
     text-transform: uppercase;
     font-weight: 700;
     color: rgb(244, 239, 172);
+  }
+  h4>a{
+    color: rgb(244, 239, 172);
+    text-transform: capitalize;
+    :hover {
+      text-decoration: underline;
+    }
   }
 
   ul {
