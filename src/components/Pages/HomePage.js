@@ -186,27 +186,27 @@ export default class HomePage extends Component {
               </StayUpdated>
               <SocialMediaList>
                 <li>
-                  <a href="#0" className="button">
+                  <a href="https://sites.austincc.edu/tledupdates/newsletter/" className="button">
                     TLED NEWSLETTER
                   </a>
                 </li>
                 <li>
-                  <a href="#0" title="youtube">
+                  <a href="https://www.youtube.com/channel/UChxBfVNHbWUc5qfcl8XgL9g" title="youtube">
                     <YouTube />
                   </a>
                 </li>
                 <li>
-                  <a href="#0" title="facebook">
+                  <a href="https://www.facebook.com/accTLED/" title="facebook">
                     <Facebook />
                   </a>
                 </li>
                 <li>
-                  <a href="#0" title="twitter">
+                  <a href="https://twitter.com/accTLED" title="twitter">
                     <Twitter />
                   </a>
                 </li>
                 <li>
-                  <a href="#0" title="instagram">
+                  <a href="https://www.instagram.com/acctled/" title="instagram">
                     <Instagram />
                   </a>
                 </li>
