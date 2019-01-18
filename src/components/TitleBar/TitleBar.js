@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -11,20 +10,6 @@ import { ReactComponent as SearchIcon } from "../../img/searchIcon.svg";
 import { ReactComponent as HamburgerMenu } from "../../img/hamburgerMenu.svg";
 
 export default class TitleBar extends Component {
-  state = {
-    titleBarItems: []
-  };
-  componentDidMount() {
-    axios
-      .get(
-        "https://instruction.austincc.edu/tled/wp-json/wp-api-menus/v2/menus/3"
-      )
-      .then(response => {
-        const titleBarItems = response.data.items;
-        // console.log("titlebar items", titleBarItems);
-        this.setState({ titleBarItems });
-      });
-  }
   render() {
     return (
       <Nav>
@@ -39,7 +24,7 @@ export default class TitleBar extends Component {
         </SiteIdentity>
 
         <TitleBarNav>
-          {this.state.titleBarItems.map(item => {
+          {this.props.titleBarItems.map(item => {
             // Internal links using React Router
             if (item.type === "post_type") {
               return (

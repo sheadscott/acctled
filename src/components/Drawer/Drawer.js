@@ -1,34 +1,13 @@
-import React from 'react';
-import axios from 'axios';
-import styled from 'styled-components';
-import { A } from '../Elements/Elements';
-import MenuItem from '../MenuItem/MenuItem';
-
+import React from "react";
+import axios from "axios";
+import styled from "styled-components";
+import { A } from "../Elements/Elements";
+import MenuItem from "../MenuItem/MenuItem";
 
 class Drawer extends React.Component {
   state = {
-    drawer: 'closed',
-    titleBarItems: [],
-    secondaryNavItems: []
-  }
-
-  componentDidMount() {
-    axios
-      .get(
-        "https://instruction.austincc.edu/tled/wp-json/wp-api-menus/v2/menus/3"
-      )
-      .then(response => {
-        const titleBarItems = response.data.items;
-        // console.log("titlebar items", titleBarItems);
-        this.setState({ titleBarItems });
-      });
-
-    axios.get('https://instruction.austincc.edu/tled/wp-json/wp-api-menus/v2/menus/4').then(response => {
-      this.setState({
-        secondaryNavItems: response.data.items,
-      })
-    });
-  }
+    drawer: "closed"
+  };
 
   componentWillReceiveProps(newProps) {
     if (newProps.drawerState !== this.props.drawerState) {
@@ -55,18 +34,20 @@ class Drawer extends React.Component {
       <React.Fragment>
         <Aside className={this.state.drawer}>
           <nav>
-            <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+            <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
               <li>
                 <A href="/">TLED Home</A>
               </li>
 
-              {this.state.titleBarItems.map(item => {
+              {this.props.titleBarItems.map(item => {
                 // Internal links using React Router
                 if (item.type === "post_type") {
                   return (
-                    <li><A key={item.id} data={item}>
-                      {item.title}
-                    </A></li>
+                    <li>
+                      <A key={item.id} data={item}>
+                        {item.title}
+                      </A>
+                    </li>
                   );
                 }
 
@@ -80,36 +61,62 @@ class Drawer extends React.Component {
                 );
               })}
 
-              {this.state.secondaryNavItems.map((item, index, arr) => {
-
+              {this.props.secondaryNavItems.map((item, index, arr) => {
                 if (item.children) {
                   return (
                     <li key={item.id}>
                       {item.title}
                       <ul>
-                        {item.children.map(child => <li key={child.id}><A data={child}>{child.title}</A></li>)}
+                        {item.children.map(child => (
+                          <li key={child.id}>
+                            <A data={child}>{child.title}</A>
+                          </li>
+                        ))}
                       </ul>
                     </li>
-                  )
+                  );
                 }
 
                 // Internal links using React Router
                 if (item.type === "post_type") {
-                  return <li key={item.id}><A className="parentLink" data={item}>{item.title}</A></li>
+                  return (
+                    <li key={item.id}>
+                      <A className="parentLink" data={item}>
+                        {item.title}
+                      </A>
+                    </li>
+                  );
                 }
 
                 // external links
-                return <li key={item.id}><A className="parentLink" href={item.url}>{item.title}</A></li>
+                return (
+                  <li key={item.id}>
+                    <A className="parentLink" href={item.url}>
+                      {item.title}
+                    </A>
+                  </li>
+                );
               })}
-
             </ul>
           </nav>
         </Aside>
-        <CloseDrawer className={this.state.drawer} onClick={this.props.toggleDrawer}>
-          <span style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden' }}>{this.props.drawerState ? 'Open' : 'Close'} Menu</span>
+        <CloseDrawer
+          className={this.state.drawer}
+          onClick={this.props.toggleDrawer}
+        >
+          <span
+            style={{
+              position: "absolute",
+              width: 1,
+              height: 1,
+              overflow: "hidden"
+            }}
+          >
+            {this.props.drawerState ? "Open" : "Close"} Menu
+          </span>
         </CloseDrawer>
       </React.Fragment>
-    )
+    );
   }
 }
 
@@ -120,9 +127,7 @@ class Drawer extends React.Component {
 //   }
 // });
 
-export {
-  Drawer as default
-}
+export { Drawer as default };
 
 const Aside = styled.aside`
   right: 0;
@@ -134,7 +139,7 @@ const Aside = styled.aside`
   flex-shrink: 0;
   height: 100%;
   transition: transform;
-  transition-timing-function: cubic-bezier(.4,0,.2,1);
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 999;
   padding: 1rem;
   box-sizing: border-box;
@@ -150,13 +155,13 @@ const Aside = styled.aside`
   &.open {
     display: flex;
     transform: translateX(0);
-    transition-duration: .25s;
+    transition-duration: 0.25s;
   }
 
   &.closing {
     display: flex;
     transform: translateX(100%);
-    transition-duration: .25s
+    transition-duration: 0.25s;
   }
 `;
 
@@ -181,13 +186,13 @@ const CloseDrawer = styled.button`
   &.open {
     display: flex;
     opacity: 0.5;
-    transition-duration: .25s;
+    transition-duration: 0.25s;
   }
 
   &.closing {
     display: flex;
     opacity: 0;
-    transition-duration: .25s
+    transition-duration: 0.25s;
   }
 `;
 
@@ -207,7 +212,7 @@ const ListItem = styled.li`
     height: 100%;
     font-family: Montserrat;
     @media (min-width: 800px) {
-      padding: 1rem
+      padding: 1rem;
     }
   }
 
