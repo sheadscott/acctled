@@ -14,43 +14,11 @@ import MenuItem from "../MenuItem/MenuItem";
 */
 
 export default class SecondaryNav extends Component {
-  state = {
-    data: [],
-    expanded: []
-  };
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({ expanded: nextProps.subMenuState });
-  }
-
-  // toggle a menu item open or closed
-  toggleMenu = (event, num) => {
-    const expandedState = this.state.expanded.map((item, index, arr) => {
-      if (index === num) {
-        return !item;
-      }
-
-      return false;
-    });
-
-    this.setState({ expanded: expandedState });
-
-    if (event) {
-      event.stopPropagation();
-    }
-  };
-
-  // close all menu items
-  cancelMenuState = () => {
-    const expandedState = this.state.expanded.map((item, index, arr) => false);
-    this.setState({ expanded: expandedState });
-  };
-
   render() {
     return (
       <Wrapper
-        onClick={this.cancelMenuState}
-        className={this.state.expanded.includes(true) ? "expanded" : null}
+        onClick={this.props.cancelSubMenuState}
+        className={this.props.subMenuState.includes(true) ? "expanded" : null}
       >
         <Container as="nav">
           <NavList>
@@ -59,10 +27,10 @@ export default class SecondaryNav extends Component {
                 return (
                   <ListItem
                     key={item.id}
-                    onClick={e => this.toggleMenu(e, index)}
+                    onClick={e => this.props.toggleSubMenu(e, index)}
                   >
                     <MenuItem
-                      expanded={this.state.expanded[index]}
+                      expanded={this.props.subMenuState[index]}
                       submenuItems={item.children}
                     >
                       {item.title}
@@ -76,7 +44,7 @@ export default class SecondaryNav extends Component {
                 return (
                   <ListItem
                     key={item.id}
-                    onClick={() => this.toggleMenu(index)}
+                    onClick={() => this.props.toggleSubMenu(index)}
                   >
                     <Link className="parentLink" to={`/${item.object_slug}`}>
                       {item.title}
@@ -87,7 +55,10 @@ export default class SecondaryNav extends Component {
 
               // external links
               return (
-                <ListItem key={item.id} onClick={() => this.toggleMenu(index)}>
+                <ListItem
+                  key={item.id}
+                  onClick={() => this.props.toggleSubMenu(index)}
+                >
                   <a className="parentLink" href={item.url}>
                     {item.title}
                   </a>

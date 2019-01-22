@@ -50,16 +50,10 @@ class App extends Component {
         console.log("SecondaryNav: ", error);
       })
       .then(response => {
-        this.setState(
-          {
-            secondaryNavItems: response.data.items
-          },
-          () => {
-            this.setState({
-              subMenuState: this.state.secondaryNavItems.map(item => false)
-            });
-          }
-        );
+        this.setState({
+          secondaryNavItems: response.data.items,
+          subMenuState: response.data.items.map(item => false)
+        });
       });
   }
 
@@ -85,9 +79,27 @@ class App extends Component {
     });
   };
 
-  // componentWillReceiveProps() {
-  //   console.log('match', this.props.match);
-  // }
+  // toggle a menu item open or closed
+  toggleSubMenu = (event, num) => {
+    const expandedState = this.state.subMenuState.map((item, index, arr) => {
+      if (index === num) {
+        return !item;
+      }
+      return false;
+    });
+    this.setState({ subMenuState: expandedState });
+    if (event) {
+      event.stopPropagation();
+    }
+  };
+
+  // close all menu items
+  cancelSubMenuState = () => {
+    const expandedState = this.state.subMenuState.map(
+      (item, index, arr) => false
+    );
+    this.setState({ subMenuState: expandedState });
+  };
 
   render() {
     return (
@@ -113,6 +125,8 @@ class App extends Component {
             <SecondaryNav
               secondaryNavItems={this.state.secondaryNavItems}
               subMenuState={this.state.subMenuState}
+              toggleSubMenu={this.toggleSubMenu}
+              cancelSubMenuState={this.cancelSubMenuState}
             />
           </Header>
 
