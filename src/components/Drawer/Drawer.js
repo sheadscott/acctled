@@ -1,8 +1,9 @@
 import React from "react";
-import axios from "axios";
 import styled from "styled-components";
 import { A } from "../Elements/Elements";
-import MenuItem from "../MenuItem/MenuItem";
+
+// Import arrow
+import { ReactComponent as DownArrowIcon } from "../../img/arrowDown.svg";
 
 class Drawer extends React.Component {
   state = {
@@ -39,23 +40,8 @@ class Drawer extends React.Component {
     } else {
       subMenu.style.display = "block";
     }
-    e.target.parentElement.classList.toggle("expanded");
+    e.target.querySelector("svg").classList.toggle("expanded");
     console.log(window.location.pathname);
-  }
-
-  handleSecondaryClick(e) {
-    console.log("secondary clicked");
-    e.preventDefault();
-    e.stopPropagation();
-    const subMenu = e.target.nextSibling;
-    const parent = e.target.parentElement.parentElement;
-    const subMenuVisible = subMenu.style.maxHeight ? true : false;
-    if (subMenuVisible) {
-      subMenu.style.maxHeight = null;
-    } else {
-      subMenu.style.maxHeight = subMenu.scrollHeight + "px";
-    }
-    parent.style.maxHeight = parent.scrollHeight + "px";
   }
 
   render() {
@@ -72,7 +58,7 @@ class Drawer extends React.Component {
                 // Internal links using React Router
                 if (item.type === "post_type") {
                   return (
-                    <Tertiary>
+                    <Tertiary className="home-links">
                       <A key={item.id} data={item}>
                         {item.title}
                       </A>
@@ -96,12 +82,14 @@ class Drawer extends React.Component {
                     <Primary key={item.id}>
                       <A onClick={this.handleClick} data={item}>
                         {item.title}
+                        <ArrowIcon />
                       </A>
                       <ul>
                         {item.children.map(child => (
                           <Secondary key={child.id}>
                             <A onClick={this.handleClick} href={child}>
                               {child.title}
+                              <ArrowIcon className="secondary" />
                             </A>
                             {child.children && (
                               <ul>
@@ -178,6 +166,7 @@ const Nav = styled.nav`
 
   a:hover {
     color: #ccc;
+    fill: #ccc;
   }
 `;
 
@@ -193,38 +182,12 @@ const Primary = styled.li`
 
   & > a {
     display: inline-block;
-    width: calc(100% + 2em);
-    padding: 0.2rem 1rem;
-    margin-left: -1.1em;
+    width: calc(100% + 1.1em);
+    padding-left: 0.4em;
+
     &:hover {
-      border-color: #333;
       background-color: #efefef;
     }
-  }
-
-  &.no-children::after {
-    height: 0;
-    width: 0;
-    border: none;
-  }
-
-  &::after {
-    content: "";
-    position: absolute;
-    border-color: #666;
-    border-style: solid;
-    border-width: 0 0.15em 0.15em 0;
-    height: 0.75em;
-    width: 0.75em;
-    top: 0.4em;
-    right: 0;
-    transform: rotate(45deg);
-    transition: all 0.25s ease-out;
-  }
-
-  &.expanded::after {
-    transform: scaleY(-1) rotate(45deg);
-    top: 0.8em;
   }
 
   .active {
@@ -237,24 +200,6 @@ const Secondary = styled.li`
   font-weight: normal;
   padding-left: 1em;
   position: relative;
-
-  &::after {
-    content: "";
-    position: absolute;
-    border-color: #666;
-    border-style: solid;
-    border-width: 0 0.1em 0.1em 0;
-    height: 0.65em;
-    width: 0.65em;
-    top: 0.3em;
-    right: 0.075em;
-    transform: rotate(45deg);
-    transition: all 0.25s ease-out;
-  }
-  &.expanded::after {
-    transform: scaleY(-1) rotate(45deg);
-    top: 0.6em;
-  }
 `;
 
 const Tertiary = styled.li`
@@ -264,6 +209,27 @@ const Tertiary = styled.li`
 
   .active {
     color: blue;
+  }
+
+  &.home-links {
+    padding-left: 1em;
+  }
+`;
+
+const ArrowIcon = styled(DownArrowIcon)`
+  position: absolute;
+  top: 0;
+  right: -1em;
+  width: 2em;
+  transition: transform 0.3s ease-out;
+
+  &.secondary {
+    width: 1.3em;
+    right: -0.7em;
+  }
+
+  &.expanded {
+    transform: scaleY(-1);
   }
 `;
 
