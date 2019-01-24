@@ -3,7 +3,9 @@ import Axios from 'axios';
 
 import { Container, Row, Column } from '../Grid/Grid';
 import ACF from '../ACF/ACF';
-import { Section, Img, Heading } from '../Elements/Elements';
+// import { Section, Img, Heading } from '../Elements/Elements';
+import styled from 'styled-components';
+import { Section, Img, Heading } from 'iw-react-elements';
 import MediaContainer from '../MediaContainer/MediaContainer';
 
 // import 'bootstrap/dist/css/bootstrap.css';
@@ -146,7 +148,7 @@ export default class WPPage extends Component {
             <Section>
               <Row>
                 <Column width={[1, 1 / 4]} order={[2, 1]} pr={[0, '2rem']}>
-                  <aside dangerouslySetInnerHTML={{ __html: ACFData.sidebar_left }} />
+                  <Aside dangerouslySetInnerHTML={{ __html: ACFData.sidebar_left }} />
                 </Column>
 
                 <Column width={[1, 1 / 2]} order={[1, 2]}>
@@ -157,7 +159,7 @@ export default class WPPage extends Component {
                 </Column>
 
                 <Column width={[1, 1 / 4]} order={[3, 3]} pl={[0, '2rem']}>
-                  <aside dangerouslySetInnerHTML={{ __html: ACFData.sidebar_right }} />
+                  <Aside dangerouslySetInnerHTML={{ __html: ACFData.sidebar_right }} />
                 </Column>
               </Row>
             </Section>
@@ -172,7 +174,9 @@ export default class WPPage extends Component {
                   {pageContent && <section dangerouslySetInnerHTML={{ __html: pageContent.content.rendered }} />}
                 </Column>
 
-                <Column width={[1, 1 / 4]} pl={[0, '2rem']}> <section dangerouslySetInnerHTML={{ __html: ACFData.sidebar_right }} /></Column>
+                <Column width={[1, 1 / 4]} pl={[0, '2rem']}>
+                  <Aside dangerouslySetInnerHTML={{ __html: ACFData.sidebar_right }} />
+                </Column>
               </Row>
             </Section>
           )}
@@ -181,7 +185,9 @@ export default class WPPage extends Component {
           {ACFData && ACFData.sidebar_left && !ACFData.sidebar_right && (
             <Section>
               <Row>
-                <Column width={[1, 1 / 4]} pr={[0, '2rem']} order={[2, 1]}><section dangerouslySetInnerHTML={{ __html: ACFData.sidebar_left }} /></Column>
+                <Column width={[1, 1 / 4]} pr={[0, '2rem']} order={[2, 1]}>
+                  <Aside dangerouslySetInnerHTML={{ __html: ACFData.sidebar_left }} />
+                </Column>
 
                 <Column width={[1, 3 / 4]} order={[1, 2]}>
                   <Heading as="h1" underline={true} caps={true}>{pageContent && pageContent.title.rendered}</Heading>
@@ -210,3 +216,7 @@ export default class WPPage extends Component {
     )
   }
 }
+
+const Aside = styled.aside`
+  margin-top: 2rem;
+`;

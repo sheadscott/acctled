@@ -47,8 +47,8 @@ export default class Footer extends Component {
               {this.state.footerItems.map(item => {
                 return (
                   <ul key={item.id + "ul"}>
-                    {item.url != '#' && <li class="stand-alone"><a href={item.url}>{item.title}</a></li>}
-                    {item.url ==='#' && <h4>{item.title}</h4>}
+                    {item.url != '#' && <li className="stand-alone"><a href={item.url}>{item.title}</a></li>}
+                    {item.url === '#' && <h4>{item.title}</h4>}
 
                     {item.children && item.children.map(this.renderChildren)}
                   </ul>

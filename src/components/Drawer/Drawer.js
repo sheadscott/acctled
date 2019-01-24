@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { A } from '../Elements/Elements';
-import MenuItem from '../MenuItem/MenuItem';
 
 
 class Drawer extends React.Component {
@@ -64,7 +63,7 @@ class Drawer extends React.Component {
                 // Internal links using React Router
                 if (item.type === "post_type") {
                   return (
-                    <li><A key={item.id} data={item}>
+                    <li key={item.id}><A data={item}>
                       {item.title}
                     </A></li>
                   );
@@ -72,8 +71,8 @@ class Drawer extends React.Component {
 
                 // external links
                 return (
-                  <li>
-                    <A key={item.id} href={item.url}>
+                  <li key={item.id}>
+                    <A href={item.url}>
                       {item.title}
                     </A>
                   </li>
@@ -86,7 +85,7 @@ class Drawer extends React.Component {
                   return (
                     <li key={item.id}>
                       {item.title}
-                      <ul>
+                      <ul style={{ marginBottom: '1.5rem' }}>
                         {item.children.map(child => <li key={child.id}><A data={child}>{child.title}</A></li>)}
                       </ul>
                     </li>
@@ -129,14 +128,14 @@ const Aside = styled.aside`
   display: none;
   position: fixed;
   background-color: #fff;
-  width: 256px;
+  width: 275px;
   flex-direction: column;
   flex-shrink: 0;
   height: 100%;
   transition: transform;
   transition-timing-function: cubic-bezier(.4,0,.2,1);
   z-index: 999;
-  padding: 1rem;
+  padding: 2rem;
   box-sizing: border-box;
   transform: translateX(100%);
   will-change: transform;
