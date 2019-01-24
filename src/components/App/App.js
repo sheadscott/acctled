@@ -50,6 +50,7 @@ class App extends Component {
         console.log("SecondaryNav: ", error);
       })
       .then(response => {
+        console.log(response.data.items);
         this.setState({
           secondaryNavItems: response.data.items,
           subMenuState: response.data.items.map(item => false)

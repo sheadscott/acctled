@@ -29,25 +29,54 @@ class Drawer extends React.Component {
     }
   }
 
+  handleClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const subMenu = e.target.nextSibling; // querySelector("ul");
+    const subMenuVisible = subMenu.style.display !== "block" ? false : true;
+    if (subMenuVisible) {
+      subMenu.style.display = "none";
+    } else {
+      subMenu.style.display = "block";
+    }
+    e.target.parentElement.classList.toggle("expanded");
+    console.log(window.location.pathname);
+  }
+
+  handleSecondaryClick(e) {
+    console.log("secondary clicked");
+    e.preventDefault();
+    e.stopPropagation();
+    const subMenu = e.target.nextSibling;
+    const parent = e.target.parentElement.parentElement;
+    const subMenuVisible = subMenu.style.maxHeight ? true : false;
+    if (subMenuVisible) {
+      subMenu.style.maxHeight = null;
+    } else {
+      subMenu.style.maxHeight = subMenu.scrollHeight + "px";
+    }
+    parent.style.maxHeight = parent.scrollHeight + "px";
+  }
+
   render() {
     return (
       <React.Fragment>
         <Aside className={this.state.drawer}>
-          <nav>
-            <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
-              <li>
+          <Nav>
+            <ul>
+              <Primary>
                 <A href="/">TLED Home</A>
-              </li>
+              </Primary>
 
               {this.props.titleBarItems.map(item => {
                 // Internal links using React Router
                 if (item.type === "post_type") {
                   return (
-                    <li>
+                    <Tertiary>
                       <A key={item.id} data={item}>
                         {item.title}
                       </A>
-                    </li>
+                    </Tertiary>
                   );
                 }
 
@@ -64,27 +93,38 @@ class Drawer extends React.Component {
               {this.props.secondaryNavItems.map((item, index, arr) => {
                 if (item.children) {
                   return (
-                    <li key={item.id}>
-                      {item.title}
+                    <Primary key={item.id}>
+                      <A onClick={this.handleClick} data={item}>
+                        {item.title}
+                      </A>
                       <ul>
                         {item.children.map(child => (
-                          <li key={child.id}>
-                            <A data={child}>{child.title}</A>
-                          </li>
+                          <Secondary key={child.id}>
+                            <A onClick={this.handleClick} href={child}>
+                              {child.title}
+                            </A>
+                            {child.children && (
+                              <ul>
+                                {child.children.map(grandchild => (
+                                  <Tertiary key={grandchild.id}>
+                                    <A data={grandchild}>{grandchild.title}</A>
+                                  </Tertiary>
+                                ))}
+                              </ul>
+                            )}
+                          </Secondary>
                         ))}
                       </ul>
-                    </li>
+                    </Primary>
                   );
                 }
 
                 // Internal links using React Router
                 if (item.type === "post_type") {
                   return (
-                    <li key={item.id}>
-                      <A className="parentLink" data={item}>
-                        {item.title}
-                      </A>
-                    </li>
+                    <Primary key={item.id} className="no-children">
+                      <A data={item}>{item.title}</A>
+                    </Primary>
                   );
                 }
 
@@ -98,7 +138,7 @@ class Drawer extends React.Component {
                 );
               })}
             </ul>
-          </nav>
+          </Nav>
         </Aside>
         <CloseDrawer
           className={this.state.drawer}
@@ -129,6 +169,104 @@ class Drawer extends React.Component {
 
 export { Drawer as default };
 
+const Nav = styled.nav`
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  a:hover {
+    color: #ccc;
+  }
+`;
+
+const Primary = styled.li`
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.9rem;
+  position: relative;
+
+  ul {
+    display: none;
+  }
+
+  & > a {
+    display: inline-block;
+    width: calc(100% + 2em);
+    padding: 0.2rem 1rem;
+    margin-left: -1.1em;
+    &:hover {
+      border-color: #333;
+      background-color: #efefef;
+    }
+  }
+
+  &.no-children::after {
+    height: 0;
+    width: 0;
+    border: none;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    border-color: #666;
+    border-style: solid;
+    border-width: 0 0.15em 0.15em 0;
+    height: 0.75em;
+    width: 0.75em;
+    top: 0.4em;
+    right: 0;
+    transform: rotate(45deg);
+    transition: all 0.25s ease-out;
+  }
+
+  &.expanded::after {
+    transform: scaleY(-1) rotate(45deg);
+    top: 0.8em;
+  }
+
+  .active {
+    color: blue;
+  }
+`;
+
+const Secondary = styled.li`
+  font-size: 0.9rem;
+  font-weight: normal;
+  padding-left: 1em;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    border-color: #666;
+    border-style: solid;
+    border-width: 0 0.1em 0.1em 0;
+    height: 0.65em;
+    width: 0.65em;
+    top: 0.3em;
+    right: 0.075em;
+    transform: rotate(45deg);
+    transition: all 0.25s ease-out;
+  }
+  &.expanded::after {
+    transform: scaleY(-1) rotate(45deg);
+    top: 0.6em;
+  }
+`;
+
+const Tertiary = styled.li`
+  text-transform: none;
+  font-size: 0.85rem;
+  padding-left: 1em;
+
+  .active {
+    color: blue;
+  }
+`;
+
 const Aside = styled.aside`
   right: 0;
   display: none;
@@ -141,7 +279,7 @@ const Aside = styled.aside`
   transition: transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 999;
-  padding: 1rem;
+  padding: 1em;
   box-sizing: border-box;
   transform: translateX(100%);
   will-change: transform;

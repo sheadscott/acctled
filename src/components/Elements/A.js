@@ -1,15 +1,44 @@
-import React from 'react';
+import React from "react";
 import { Link } from "react-router-dom";
-import styled from 'styled-components';
-import { fontSize, color, bgColor } from 'styled-system';
+import styled from "styled-components";
+import { fontSize, color, bgColor } from "styled-system";
 
-const A = (props) => {
-  if (props.href) { return <StyledAnchor href={props.href} {...props}>{props.children}</StyledAnchor> };
+const A = props => {
+  const url = window.location.pathname;
+  const lastSlash = url.lastIndexOf("/");
+  const pageName = url.substring(lastSlash);
+
+  if (props.href) {
+    return (
+      <StyledAnchor href={props.href} {...props}>
+        {props.children}
+      </StyledAnchor>
+    );
+  }
+
+  if (pageName === "/" + props.data.object_slug) {
+    console.log("About: ", props.data.object_slug);
+  }
+
+  if ("/" + props.data.object_slug == pageName) {
+    console.log("ABOUT", props.data.object_slug);
+    return (
+      <StyledLink
+        to={`/${props.data.object_slug}`}
+        className="active"
+        {...props}
+      >
+        {props.children}
+      </StyledLink>
+    );
+  }
 
   return (
-    <StyledLink to={`/${props.data.object_slug}`} {...props}>{props.children}</StyledLink>
-  )
-}
+    <StyledLink to={`/${props.data.object_slug}`} {...props}>
+      {props.children}
+    </StyledLink>
+  );
+};
 
 export default A;
 
