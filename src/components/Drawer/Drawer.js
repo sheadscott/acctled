@@ -68,8 +68,8 @@ class Drawer extends React.Component {
 
                 // external links
                 return (
-                  <li>
-                    <A key={item.id} href={item.url}>
+                  <li key={item.id}>
+                    <A href={item.url}>
                       {item.title}
                     </A>
                   </li>
@@ -238,7 +238,7 @@ const Aside = styled.aside`
   display: none;
   position: fixed;
   background-color: #fff;
-  width: 256px;
+  width: 275px;
   flex-direction: column;
   flex-shrink: 0;
   height: 100%;
