@@ -41,7 +41,6 @@ class Drawer extends React.Component {
       subMenu.style.display = "block";
     }
     e.target.querySelector("svg").classList.toggle("expanded");
-    console.log(window.location.pathname);
   }
 
   render() {
