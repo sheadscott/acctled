@@ -8,7 +8,7 @@ import FlickityCarousel from '../Flickity/Flickity';
 export default (props) => {
   console.log('layouts', props.layouts);
   return (
-    <div>
+    <React.Fragment>
       {props.layouts && props.layouts.map((layout, index) => {
         if (layout.acf_fc_layout === 'one_column') {
           return <OneColumn mode={'compact'} key={`acf_layout_${index}`} layout={layout} />
@@ -29,6 +29,6 @@ export default (props) => {
         return null
       })
       }
-    </div>
+    </React.Fragment>
   )
 }
