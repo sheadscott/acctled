@@ -95,7 +95,7 @@ export default class WPPage extends Component {
   }
 
   getData(slug) {
-    // console.log('component received new props', slug);
+    console.log('component received new props', slug);
 
     Axios.get(`https://instruction.austincc.edu/tled/wp-json/wp/v2/pages?slug=${slug}`).then(response => {
       this.setState({
@@ -104,16 +104,24 @@ export default class WPPage extends Component {
       })
     });
   }
+
   componentDidMount() {
     if (this.props.match.params.slug) {
       this.getData(this.props.match.params.slug);
     }
   }
 
-  componentWillReceiveProps(newProps) {
-    const slug = newProps.match.params.slug;
-    if (slug !== this.state.slug) {
-      this.getData(slug);
+  static getDerivedStateFromProps(nextProps, prevState){
+    const nextSlug = nextProps.match.params.slug;
+    if(nextSlug!==prevState.slug){
+      return { slug: nextSlug};
+    }
+    else return null;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.slug!==this.state.slug){
+        this.getData(this.state.slug);
     }
   }
 

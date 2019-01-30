@@ -134,7 +134,7 @@ class App extends Component {
           <Main>
             <Switch>
               <Route path="/" exact component={HomePage} />
-              <Route path="/search" exact component={SearchPage} />
+              <Route path="/search/:query" component={SearchPage} />
               <Route path="/calendar" component={CalendarPage} />
               <Route path="/reports" component={ReportsPage} />
               <Route path="/:slug" component={WPPage} />
