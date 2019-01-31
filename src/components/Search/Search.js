@@ -8,17 +8,23 @@ import { Container, Row, Column } from '../Grid/Grid';
 */
 
 export default class Search extends Component {
+  constructor(props) {
+    super(props);
+    this.searchTLEDField = React.createRef();
+    this.searchACCField = React.createRef();
+  }
+
   state = {
     redirect: '',
   }
 
   fieldFocus = '';
 
-  componentDidUpdate(prevProps) {
-    console.log('search expanded', prevProps.searchExpanded, this.props.searchExpanded);
-
+  componentDidUpdate() {
     if (this.props.searchExpanded) {
-      this.searchTLEDField.focus();
+      this.searchTLEDField.current.focus();
+    } else {
+      this.fieldFocus = '';
     }
   }
 
@@ -26,14 +32,11 @@ export default class Search extends Component {
     this.props.searchSubmitted();
 
     if (this.fieldFocus === 'tled') {
-      console.log('search tled', this.searchTLEDField.value);
-      this.setState({ redirect: `/search?q=${this.searchTLEDField.value}` });
+      this.setState({ redirect: `/search/${this.searchTLEDField.current.value}` });
     }
 
     if (this.fieldFocus === 'acc') {
-      console.log('search acc', this.searchACCField.value);
-      this.setState({ redirect: `http://www.austincc.edu/search?search=${this.searchACCField.value}` });
-      // window.location.replace('http://www.austincc.edu/search');
+      this.setState({ redirect: `http://www.austincc.edu/search?search=${this.searchACCField.current.value}` });
     }
 
     /* http://www.austincc.edu/search?search=education */
@@ -48,10 +51,12 @@ export default class Search extends Component {
   render() {
     if (this.fieldFocus === 'acc') {
       window.location = this.state.redirect
-      console.log('the acc redirect should be happening now');
     }
 
-    if (this.fieldFocus === 'tled' && window.location.pathname !== '/search') {
+    if (this.fieldFocus === 'tled' 
+      && this.state.redirect
+      && this.state.redirect != '/search/'
+      && this.state.redirect !== window.location.pathname) {
       return <Redirect to={this.state.redirect} />
     }
 
@@ -65,7 +70,7 @@ export default class Search extends Component {
                   <legend>Search TLED</legend>
                   <label htmlFor="searchTLEDField" className="show-for-sr">TLED</label>
                   <div className="input-group">
-                    <input id="searchTLEDField" className="input-group-field" onFocus={() => this.setFocus('tled')} ref={el => this.searchTLEDField = el} />
+                    <input id="searchTLEDField" className="input-group-field" onFocus={() => this.setFocus('tled')} ref={this.searchTLEDField} />
                     <div className="input-group-button">
                       <button type="submit" className="button">Search TLED</button>
                     </div>
@@ -78,7 +83,7 @@ export default class Search extends Component {
                   <legend>Search ACC</legend>
                   <label htmlFor="searchACCField" className="show-for-sr">ACC</label>
                   <div className="input-group">
-                    <input id="searchACCField" className="input-group-field" onFocus={() => this.setFocus('acc')} ref={el => this.searchACCField = el} />
+                    <input id="searchACCField" className="input-group-field" onFocus={() => this.setFocus('acc')} ref={this.searchACCField} />
                     <div className="input-group-button">
                       <button type="submit" className="button">Search ACC</button>
                     </div>
@@ -114,6 +119,9 @@ const Form = styled.form`
   justify-content: space-between;
   color: white;
 
+  input {
+    padding-left: 0.5rem;
+  }
   &:focus button {
     background: red;
   }
