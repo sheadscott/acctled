@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import styled from 'styled-components';
+import Parser from 'html-react-parser';
 import { Container } from '../Grid/Grid';
 import { A, Section, Heading } from '../Elements/Elements';
-import styled from 'styled-components';
 
 class SearchPage extends Component {
 
@@ -66,7 +67,7 @@ class SearchPage extends Component {
               <Heading as="h2">
                 <A href={result.link} hovercolor="purple">{result.title}</A> 
               </Heading>
-              <p dangerouslySetInnerHTML={{ __html: result.htmlSnippet }} />
+              { Parser(result.htmlSnippet) }
             </SearchResult>
           )
         )
