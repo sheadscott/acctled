@@ -21,9 +21,11 @@ export default class Search extends Component {
   fieldFocus = '';
 
   componentDidUpdate() {
-    if (this.props.searchExpanded) {
+    if (this.props.searchExpanded && this.searchTLEDField.current) {
       this.searchTLEDField.current.focus();
     } else {
+      // set this.fieldFocus to '' so that a redirect 
+      // won't be triggered in render() after a search has been performed 
       this.fieldFocus = '';
     }
   }
@@ -49,14 +51,19 @@ export default class Search extends Component {
   }
 
   render() {
-    if (this.fieldFocus === 'acc') {
+    if (
+      this.fieldFocus === 'acc'
+      && this.state.redirect
+    ) {
       window.location = this.state.redirect
     }
 
-    if (this.fieldFocus === 'tled' 
+    if (
+      this.fieldFocus === 'tled' 
       && this.state.redirect
       && this.state.redirect != '/search/'
-      && this.state.redirect !== window.location.pathname) {
+      && this.state.redirect !== window.location.pathname
+    ) {
       return <Redirect to={this.state.redirect} />
     }
 

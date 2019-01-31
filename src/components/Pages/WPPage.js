@@ -115,10 +115,7 @@ export default class WPPage extends Component {
 
   static getDerivedStateFromProps(nextProps, prevState){
     const nextSlug = nextProps.match.params.slug;
-    if(nextSlug!==prevState.slug){
-      return { slug: nextSlug};
-    }
-    else return null;
+    return nextSlug!==prevState.slug ? { slug: nextSlug} : null; 
   }
 
   componentDidUpdate(prevProps, prevState) {
