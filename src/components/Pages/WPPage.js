@@ -7,7 +7,7 @@ import ACF from '../ACF/ACF';
 import styled from 'styled-components';
 import { Section, Img, Heading } from 'iw-react-elements';
 import MediaContainer from '../MediaContainer/MediaContainer';
-
+import { Redirect } from 'react-router';
 // import 'bootstrap/dist/css/bootstrap.css';
 
 const HeroImage = ({ data }) => {
@@ -93,7 +93,7 @@ const HeroCarousel = ({ data }) => {
 export default class WPPage extends Component {
   state = {
     slug: '',
-    pageContent: null
+    pageContent: 'some value'
   }
 
   getData(slug) {
@@ -105,8 +105,8 @@ export default class WPPage extends Component {
       console.error("*** ERROR *** WPPage.js: ", error);
     })
     .then(response => {
+      console.log("Response: ", response);
       this.setState({
-        console.log(response);
         pageContent: response.data[0],
         slug: slug
       })
@@ -133,6 +133,10 @@ export default class WPPage extends Component {
   render() {
     const pageContent = this.state.pageContent;
     const ACFData = pageContent ? this.state.pageContent.acf : null;
+
+    if(!pageContent) {
+      return <Redirect to='/404' />
+    }
 
     return (
       <React.Fragment>

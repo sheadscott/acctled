@@ -14,6 +14,7 @@ import HomePage from "../Pages/HomePage";
 import CalendarPage from "../Pages/CalendarPage";
 import ReportsPage from "../Pages/ReportsPage";
 import SearchPage from "../Pages/SearchPage";
+import NotFoundPage from "../Pages/NotFoundPage";
 
 import "./App.css";
 class App extends Component {
@@ -137,6 +138,7 @@ class App extends Component {
               <Route path="/search/:query" component={SearchPage} />
               <Route path="/calendar" component={CalendarPage} />
               <Route path="/reports" component={ReportsPage} />
+              <Route path="/404" component={NotFoundPage} />
               <Route path="/:slug" component={WPPage} />
             </Switch>
           </Main>
