@@ -99,8 +99,14 @@ export default class WPPage extends Component {
   getData(slug) {
     console.log('component received new props', slug);
 
-    Axios.get(`https://instruction.austincc.edu/tled/wp-json/wp/v2/pages?slug=${slug}`).then(response => {
+    Axios.get(`https://instruction.austincc.edu/tled/wp-json/wp/v2/pages?slug=${slug}`)
+    .catch(function(error) {
+      // handle error
+      console.error("*** ERROR *** WPPage.js: ", error);
+    })
+    .then(response => {
       this.setState({
+        console.log(response);
         pageContent: response.data[0],
         slug: slug
       })

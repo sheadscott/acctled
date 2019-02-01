@@ -32,7 +32,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "proxy": "browser-sync start --https --proxy 'localhost:3000' --files 'src/**/*.js'"
+    "proxy": "browser-sync start --https --proxy 'localhost:3000' --files 'src/**/*.js'",
+    "devdeploy": "aws s3 --region 'us-west-2' sync build/ s3://tled.react --delete",
+    "devcomments": "### The url for the dev bucket is http://tled.react.s3-website-us-west-2.amazonaws.com/"
   },
   "eslintConfig": {
     "extends": "react-app"

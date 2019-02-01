@@ -16,12 +16,7 @@ const A = props => {
     );
   }
 
-  if (pageName === "/" + props.data.object_slug) {
-    console.log("About: ", props.data.object_slug);
-  }
-
   if ("/" + props.data.object_slug == pageName) {
-    console.log("ABOUT", props.data.object_slug);
     return (
       <StyledLink
         to={`/${props.data.object_slug}`}

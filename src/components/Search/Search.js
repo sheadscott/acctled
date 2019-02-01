@@ -61,7 +61,7 @@ export default class Search extends Component {
     if (
       this.fieldFocus === 'tled' 
       && this.state.redirect
-      && this.state.redirect != '/search/'
+      && this.state.redirect !== '/search/'
       && this.state.redirect !== window.location.pathname
     ) {
       return <Redirect to={this.state.redirect} />

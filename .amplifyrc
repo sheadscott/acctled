@@ -1,0 +1,14 @@
+{
+    "providers": {
+        "awscloudformation": {
+            "AuthRoleName": "tledreact-20190131165959-authRole",
+            "UnauthRoleArn": "arn:aws:iam::266149052412:role/tledreact-20190131165959-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::266149052412:role/tledreact-20190131165959-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "tledreact-20190131165959-deployment",
+            "UnauthRoleName": "tledreact-20190131165959-unauthRole",
+            "StackName": "tledreact-20190131165959",
+            "StackId": "arn:aws:cloudformation:us-west-2:266149052412:stack/tledreact-20190131165959/ef68aa00-25ab-11e9-b418-06ecc4f423c6"
+        }
+    }
+}

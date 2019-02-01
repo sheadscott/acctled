@@ -57,7 +57,7 @@ class Drawer extends React.Component {
                 // Internal links using React Router
                 if (item.type === "post_type") {
                   return (
-                    <Tertiary className="home-links">
+                    <Tertiary className="home-links" key={item.id}>
                       <A key={item.id} data={item}>
                         {item.title}
                       </A>

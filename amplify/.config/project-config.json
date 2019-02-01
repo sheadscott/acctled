@@ -1,0 +1,20 @@
+{
+    "projectName": "tledreact",
+    "projectPath": "/Users/Shea/Sites/ACC-Sites/tled-react",
+    "defaultEditor": "code",
+    "frontendHandler": {
+        "javascript": "/Users/Shea/.config/yarn/global/node_modules/amplify-frontend-javascript"
+    },
+    "javascript": {
+        "framework": "react",
+        "config": {
+            "SourceDir": "src",
+            "DistributionDir": "build",
+            "BuildCommand": "yarn build",
+            "StartCommand": "yarn start"
+        }
+    },
+    "providers": {
+        "awscloudformation": "/Users/Shea/.config/yarn/global/node_modules/amplify-provider-awscloudformation"
+    }
+}
