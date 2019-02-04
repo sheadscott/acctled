@@ -104,12 +104,7 @@ const WpLinks = styled(Column)`
     font-weight: 700;
     color: rgb(244, 239, 172);
   }
-  .stand-alone > a{
-    color: rgb(244, 239, 172);
-    :hover {
-      text-decoration: underline;
-    }
-  }
+
 
   ul {
     list-style: none inside none;
@@ -122,6 +117,17 @@ const WpLinks = styled(Column)`
 
     li {
       padding: 3px 0;
+      a:hover {
+        text-decoration: underline;
+        color: white;
+      }
+    }
+  }
+  .stand-alone > a{
+    color: rgb(244, 239, 172);
+    :hover {
+      color: rgb(244, 239, 172);
+      text-decoration: underline;
     }
   }
 `;
