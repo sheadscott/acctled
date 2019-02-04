@@ -3,9 +3,9 @@ import Axios from 'axios';
 
 import { Container, Row, Column } from '../Grid/Grid';
 import ACF from '../ACF/ACF';
-// import { Section, Img, Heading } from '../Elements/Elements';
+import { Img } from '../Elements/Elements';
 import styled from 'styled-components';
-import { Section, Img, Heading } from 'iw-react-elements';
+import { Section, Heading } from 'iw-react-elements';
 import MediaContainer from '../MediaContainer/MediaContainer';
 import { Redirect } from 'react-router';
 // import 'bootstrap/dist/css/bootstrap.css';
@@ -100,17 +100,17 @@ export default class WPPage extends Component {
     console.log('component received new props', slug);
 
     Axios.get(`https://instruction.austincc.edu/tled/wp-json/wp/v2/pages?slug=${slug}`)
-    .catch(function(error) {
-      // handle error
-      console.error("*** ERROR *** WPPage.js: ", error);
-    })
-    .then(response => {
-      console.log("Response: ", response);
-      this.setState({
-        pageContent: response.data[0],
-        slug: slug
+      .catch(function (error) {
+        // handle error
+        console.error("*** ERROR *** WPPage.js: ", error);
       })
-    });
+      .then(response => {
+        console.log("Response: ", response);
+        this.setState({
+          pageContent: response.data[0],
+          slug: slug
+        })
+      });
   }
 
   componentDidMount() {
@@ -119,14 +119,14 @@ export default class WPPage extends Component {
     }
   }
 
-  static getDerivedStateFromProps(nextProps, prevState){
+  static getDerivedStateFromProps(nextProps, prevState) {
     const nextSlug = nextProps.match.params.slug;
-    return nextSlug!==prevState.slug ? { slug: nextSlug} : null; 
+    return nextSlug !== prevState.slug ? { slug: nextSlug } : null;
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if(prevState.slug!==this.state.slug){
-        this.getData(this.state.slug);
+    if (prevState.slug !== this.state.slug) {
+      this.getData(this.state.slug);
     }
   }
 
@@ -134,7 +134,7 @@ export default class WPPage extends Component {
     const pageContent = this.state.pageContent;
     const ACFData = pageContent ? this.state.pageContent.acf : null;
 
-    if(!pageContent) {
+    if (!pageContent) {
       return <Redirect to='/404' />
     }
 
