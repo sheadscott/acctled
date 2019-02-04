@@ -16,7 +16,7 @@ const A = props => {
     );
   }
 
-  if ("/" + props.data.object_slug == pageName) {
+  if ("/" + props.data.object_slug === pageName) {
     return (
       <StyledLink
         to={`/${props.data.object_slug}`}

@@ -37,7 +37,7 @@ class App extends Component {
         console.log("Primary Nav: ", error);
       })
       .then(response => {
-        const titleBarItems = this.setState({
+        this.setState({
           titleBarItems: response.data.items
         });
       });

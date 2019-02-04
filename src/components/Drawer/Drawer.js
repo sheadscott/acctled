@@ -298,30 +298,3 @@ const CloseDrawer = styled.button`
     transition-duration: 0.25s;
   }
 `;
-
-const ListItem = styled.li`
-  margin: 0 0.5rem;
-
-  .parentLink {
-    background: transparent;
-    border: none;
-    font-size: 1rem;
-    display: block;
-    color: #f1ebab;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    text-transform: uppercase;
-    box-sizing: border-box;
-    height: 100%;
-    font-family: Montserrat;
-    @media (min-width: 800px) {
-      padding: 1rem;
-    }
-  }
-
-  .parentLink:hover,
-  .parentLink:focus {
-    color: white;
-    background: #698da4;
-  }
-`;

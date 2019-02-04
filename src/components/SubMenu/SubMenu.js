@@ -24,7 +24,21 @@ export default (props) => {
 
                   <SubMenuList>
                     {item.children.map(subitem => {
-                      return <li key={subitem.id}><A color="#4c4d4f" hovercolor="#065589" data={subitem}>{subitem.title}</A></li>
+                      // Internal links using React Router
+                      if (subitem.type === "custom") {
+                        return (
+                          <li key={subitem.id}>
+                            <A color="#4c4d4f" hovercolor="#065589" data={subitem} href={subitem.url}>{subitem.title}</A>
+                          </li>
+                        );
+                      }
+
+                      // external links
+                      return (
+                        <li key={subitem.id}>
+                          <A color="#4c4d4f" hovercolor="#065589" data={subitem}>{subitem.title}</A>
+                        </li>
+                      );
                     })}
                   </SubMenuList>
                 </li>
