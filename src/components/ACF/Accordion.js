@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
-import 'foundation-sites';
+import styled from 'styled-components';
 import uuidv1 from 'uuid/v1';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemTitle,
+  AccordionItemBody,
+} from 'react-accessible-accordion';
 
+// Import arrow
+import { ReactComponent as DownArrowIcon } from "../../img/arrowDown.svg";
 
 import Parser from 'html-react-parser';
 import { Container, Row, Column as Col } from '../Grid/Grid';
-import styled from 'styled-components';
 import { Section, Heading } from '../Elements/Elements';
 
 export default class AccordionComponent extends Component {
@@ -22,7 +28,7 @@ export default class AccordionComponent extends Component {
   }
   componentDidMount() {
     // const $dropdown = new Accordion('.accordion');
-    $(this.myRef.current).foundation();
+    // $(this.myRef.current).foundation();
   }
   shouldComponentUpdate() {
     return false;
@@ -40,18 +46,23 @@ export default class AccordionComponent extends Component {
               </Col>
             )}
 
-            <AccordionContent width={1}>
-              <ul className="accordion" data-accordion data-multi-expand="true" data-allow-all-closed="true" ref={this.myRef}>
+                      <Col width={1}>
+              <Accordion accordion={false}>
                 {this.props.layout.accordion.map((item, index) => (
-                  <li key={`${this.state.id}-${index}`} className="accordion-item" data-accordion-item>
-                    <a href="#0" className="accordion-title">{Parser(item.title)}</a>
-                    <div className="accordion-content" data-tab-content>
-                      {Parser(item.description)}
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </AccordionContent>
+                  <AccordionItem>
+                      <StyledAccordionItemTitle>
+                          {Parser(item.title)}
+                          <ArrowIcon role="presentation"/>
+                      </StyledAccordionItemTitle>
+                      <StyledAccordionItemBody>
+                          <div key={index}>
+                            {Parser(item.description)}
+                          </div>
+                      </StyledAccordionItemBody>
+                  </AccordionItem>
+                      ))}
+              </Accordion>
+                      </Col>
           </Row>
         </Container>
       </Section>
@@ -59,24 +70,59 @@ export default class AccordionComponent extends Component {
   }
 }
 
-const AccordionContent = styled(Col)`
-.accordion {
-  padding: 0;
-  margin: 0;
-  
-  .accordion-title {
-    font-size: 1rem;
-    border: none;
-    border-bottom: 1px solid #e6e6e6;
+const StyledAccordionItemTitle = styled(AccordionItemTitle)`
+  color: ${ props => props.theme.colors.blue };
+  font-size: 1rem;
+  border: none;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 1.25rem 1rem;
+  position: relative;
 
-    &:before {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-top: -0.55rem;
-    }
+  &:hover {
+    background-color: #e6e6e6;
   }
-  .accordion-content {
-    border: none;
+
+  &:focus {
+    outline: none;
+    background-color: #e6e6e6;
   }
-}
+
+  &:before {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-top: -0.55rem;
+  }
+
+  &[aria-expanded="true"] > svg {
+    transform: scaleY(-1);
+  }
+
+`;
+
+const StyledAccordionItemBody = styled(AccordionItemBody)`
+  padding: 1rem;
+
+  &.accordion__body {
+    padding: 20px;
+    display: block;
+    animation: fadein 0.35s ease-in;
+  }
+
+  &.accordion__body--hidden {
+      display: none;
+      opacity: 0;
+      animation: fadein 0.35s ease-in;
+  }
+`;
+
+const ArrowIcon = styled(DownArrowIcon)`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2rem;
+  transition: transform 0.3s ease-out;
+  
+  path:first-child {
+    fill: ${ props => props.theme.colors.blue };
+  }
 `;

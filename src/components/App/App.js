@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 
 import Drawer from "../Drawer/Drawer";
 import Search from "../Search/Search";
@@ -16,7 +16,9 @@ import ReportsPage from "../Pages/ReportsPage";
 import SearchPage from "../Pages/SearchPage";
 import NotFoundPage from "../Pages/NotFoundPage";
 
+import theme from './theme';
 import "./App.css";
+
 class App extends Component {
   state = {
     searchExpanded: false,
@@ -105,47 +107,50 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
-        <div className="App">
-          <Header className="App-header">
-            <Drawer
-              drawerState={this.state.drawerExpanded}
-              toggleDrawer={this.toggleDrawer}
-              titleBarItems={this.state.titleBarItems}
-              secondaryNavItems={this.state.secondaryNavItems}
-            />
-            <Search
-              searchExpanded={this.state.searchExpanded}
-              searchSubmitted={this.searchSubmitted}
-            />
-            <TitleBar
-              titleBarItems={this.state.titleBarItems}
-              searchExpanded={this.state.searchExpanded}
-              toggleSearch={this.toggleSearch}
-              toggleDrawer={this.toggleDrawer}
-            />
-            <SecondaryNav
-              secondaryNavItems={this.state.secondaryNavItems}
-              subMenuState={this.state.subMenuState}
-              toggleSubMenu={this.toggleSubMenu}
-              cancelSubMenuState={this.cancelSubMenuState}
-            />
-          </Header>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <div className="App">
+            <Header className="App-header">
+              <Drawer
+                drawerState={this.state.drawerExpanded}
+                toggleDrawer={this.toggleDrawer}
+                titleBarItems={this.state.titleBarItems}
+                secondaryNavItems={this.state.secondaryNavItems}
+              />
+              <Search
+                searchExpanded={this.state.searchExpanded}
+                searchSubmitted={this.searchSubmitted}
+              />
+              <TitleBar
+                titleBarItems={this.state.titleBarItems}
+                searchExpanded={this.state.searchExpanded}
+                toggleSearch={this.toggleSearch}
+                toggleDrawer={this.toggleDrawer}
+              />
+              <SecondaryNav
+                secondaryNavItems={this.state.secondaryNavItems}
+                subMenuState={this.state.subMenuState}
+                toggleSubMenu={this.toggleSubMenu}
+                cancelSubMenuState={this.cancelSubMenuState}
+              />
+            </Header>
 
-          <Main>
-            <Switch>
-              <Route path="/" exact component={HomePage} />
-              <Route path="/search/:query" component={SearchPage} />
-              <Route path="/calendar" component={CalendarPage} />
-              <Route path="/reports" component={ReportsPage} />
-              <Route path="/404" component={NotFoundPage} />
-              <Route path="/:slug" component={WPPage} />
-            </Switch>
-          </Main>
+            <Main>
+              <Switch>
+                <Route path="/" exact component={HomePage} />
+                <Route path="/search/:query" component={SearchPage} />
+                <Route path="/calendar" component={CalendarPage} />
+                <Route path="/reports" component={ReportsPage} />
+                <Route path="/404" component={NotFoundPage} />
+                <Route path="/:slug" component={WPPage} />
+              </Switch>
+            </Main>
 
-          <Footer />
-        </div>
-      </Router>
+            <Footer />
+          </div>
+          
+        </Router>
+      </ThemeProvider>
     );
   }
 }

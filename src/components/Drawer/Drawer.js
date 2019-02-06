@@ -159,6 +159,7 @@ export { Drawer as default };
 const Nav = styled.nav`
   ul {
     margin: 0;
+    margin-left: -0.4rem;
     padding: 0;
     list-style: none;
   }
@@ -182,7 +183,7 @@ const Primary = styled.li`
   & > a {
     display: inline-block;
     width: calc(100% + 1.1em);
-    padding-left: 0.4em;
+    padding-left: 0em;
 
     &:hover {
       background-color: #efefef;
@@ -217,14 +218,16 @@ const Tertiary = styled.li`
 
 const ArrowIcon = styled(DownArrowIcon)`
   position: absolute;
-  top: 0;
-  right: -1em;
-  width: 2em;
+  top: -0.25rem;
+  right: -1.4rem;
+  width: 2rem;
   transition: transform 0.3s ease-out;
+  pointer-events: none;
 
   &.secondary {
     width: 1.3em;
-    right: -0.7em;
+    right: -1.06em;
+    top: 0.1rem;
   }
 
   &.expanded {

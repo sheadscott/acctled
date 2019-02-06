@@ -30,6 +30,7 @@ function printUnderline(color, underline) {
 // caps => boolean
 const Heading = styled(Box)`
   font-weight: 700;
+  position: relative;
   
   &:after {
     content: '';

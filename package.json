@@ -17,6 +17,7 @@
     "node-sass": "^4.10.0",
     "object-fit-images": "^3.2.4",
     "react": "^16.6.3",
+    "react-accessible-accordion": "^2.4.5",
     "react-app-polyfill": "^0.1.3",
     "react-dom": "^16.6.3",
     "react-masonry-component": "^6.2.1",
