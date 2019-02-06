@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
 import styled from 'styled-components';
-=======
-// import $ from 'jquery';
-// import 'foundation-sites';
->>>>>>> c821d0a098a9d72c78904678452031a239820334
 import uuidv1 from 'uuid/v1';
 import {
   Accordion,
