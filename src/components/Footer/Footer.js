@@ -121,6 +121,12 @@ const WpLinks = styled(Column)`
         text-decoration: underline;
         color: white;
       }
+      a:active {
+        color: white;
+      }
+      a:focus{
+        color: white;
+      }
     }
   }
   .stand-alone > a{
