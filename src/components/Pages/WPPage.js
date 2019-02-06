@@ -216,7 +216,7 @@ export default class WPPage extends Component {
           {ACFData && !ACFData.sidebar_left && !ACFData.sidebar_right && pageContent.content.rendered && (
             <Section>
               <Row flexWrap="nowrap">
-                <Column>
+                <Column width={1}>
                   <Heading as="h1" underline={true} caps={true}>{pageContent && pageContent.title.rendered}</Heading>
                   {pageContent && <section dangerouslySetInnerHTML={{ __html: pageContent.content.rendered }} />}
                 </Column>
