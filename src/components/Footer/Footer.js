@@ -65,8 +65,8 @@ export default class Footer extends Component {
                   <div className="street-address">5930 Middle Fiskville Rd.</div>
                   <div>
                     <span className="locality">Austin</span>,
-                    <span className="region">Texas</span>
-                    <span className="postal-code">78752</span>
+                    <span className="region"> Texas</span>
+                    <span className="postal-code"> 78752</span>
                   </div>
                   <div className="country-name">U.S.A.</div>
                 </div>
