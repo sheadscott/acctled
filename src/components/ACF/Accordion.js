@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import styled from 'styled-components';
+=======
+// import $ from 'jquery';
+// import 'foundation-sites';
+>>>>>>> c821d0a098a9d72c78904678452031a239820334
 import uuidv1 from 'uuid/v1';
 import {
   Accordion,
@@ -15,6 +20,7 @@ import Parser from 'html-react-parser';
 import { Container, Row, Column as Col } from '../Grid/Grid';
 import { Section, Heading } from '../Elements/Elements';
 
+const $ = window.$;
 export default class AccordionComponent extends Component {
   constructor(props) {
     super(props);
