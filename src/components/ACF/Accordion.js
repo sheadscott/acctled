@@ -15,7 +15,6 @@ import Parser from 'html-react-parser';
 import { Container, Row, Column as Col } from '../Grid/Grid';
 import { Section, Heading } from '../Elements/Elements';
 
-const $ = window.$;
 export default class AccordionComponent extends Component {
   constructor(props) {
     super(props);
@@ -41,29 +40,29 @@ export default class AccordionComponent extends Component {
           <Row>
             {this.props.layout.heading && (
               <Col width={1}>
-                <Heading as="h1" caps={true} underline={true} color={this.props.layout.text_mode}>
+                <Heading as="h2" caps={false} underline={false} color={this.props.layout.text_mode}>
                   {Parser(this.props.layout.heading)}
                 </Heading>
               </Col>
             )}
 
-                      <Col width={1}>
+            <Col width={1}>
               <Accordion accordion={false}>
                 {this.props.layout.accordion.map((item, index) => (
                   <AccordionItem>
-                      <StyledAccordionItemTitle>
-                          {Parser(item.title)}
-                          <ArrowIcon role="presentation"/>
-                      </StyledAccordionItemTitle>
-                      <StyledAccordionItemBody>
-                          <div key={index}>
-                            {Parser(item.description)}
-                          </div>
-                      </StyledAccordionItemBody>
+                    <StyledAccordionItemTitle>
+                      {Parser(item.title)}
+                      <ArrowIcon role="presentation" />
+                    </StyledAccordionItemTitle>
+                    <StyledAccordionItemBody>
+                      <div key={index}>
+                        {Parser(item.description)}
+                      </div>
+                    </StyledAccordionItemBody>
                   </AccordionItem>
-                      ))}
+                ))}
               </Accordion>
-                      </Col>
+            </Col>
           </Row>
         </Container>
       </Section>
@@ -72,7 +71,7 @@ export default class AccordionComponent extends Component {
 }
 
 const StyledAccordionItemTitle = styled(AccordionItemTitle)`
-  color: ${ props => props.theme.colors.blue };
+  color: ${ props => props.theme.colors.blue};
   font-size: 1rem;
   border: none;
   border-bottom: 1px solid #e6e6e6;
@@ -124,6 +123,6 @@ const ArrowIcon = styled(DownArrowIcon)`
   transition: transform 0.3s ease-out;
   
   path:first-child {
-    fill: ${ props => props.theme.colors.blue };
+    fill: ${ props => props.theme.colors.blue};
   }
 `;

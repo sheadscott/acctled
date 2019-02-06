@@ -168,7 +168,7 @@ export default class WPPage extends Component {
 
                 <Column width={[1, 1 / 2]} order={[1, 2]}>
                   {pageContent && (<Section>
-                    <Heading as="h1" underline={true} caps={true}>{pageContent && pageContent.title.rendered}</Heading>
+                    <Heading as="h1" underline={true} caps={true}>{pageContent.title.rendered}</Heading>
                     <div dangerouslySetInnerHTML={{ __html: pageContent.content.rendered }} />
                   </Section>)}
                 </Column>
@@ -185,7 +185,7 @@ export default class WPPage extends Component {
             <Section>
               <Row>
                 <Column width={[1, 3 / 4]}>
-                  <Heading as="h1" underline={true} caps={true}>{pageContent && pageContent.title.rendered}</Heading>
+                  <Heading as="h1" underline={true} caps={true}>{pageContent.title.rendered}</Heading>
                   {pageContent && <section dangerouslySetInnerHTML={{ __html: pageContent.content.rendered }} />}
                 </Column>
 
@@ -205,7 +205,7 @@ export default class WPPage extends Component {
                 </Column>
 
                 <Column width={[1, 3 / 4]} order={[1, 2]}>
-                  <Heading as="h1" underline={true} caps={true}>{pageContent && pageContent.title.rendered}</Heading>
+                  <Heading as="h1" underline={true} caps={true}>{pageContent.title.rendered}</Heading>
                   {pageContent && <section dangerouslySetInnerHTML={{ __html: pageContent.content.rendered }} />}
                 </Column>
               </Row>
@@ -217,7 +217,7 @@ export default class WPPage extends Component {
             <Section>
               <Row flexWrap="nowrap">
                 <Column width={1}>
-                  <Heading as="h1" underline={true} caps={true}>{pageContent && pageContent.title.rendered}</Heading>
+                  <Heading as="h1" underline={true} caps={true}>{pageContent.title.rendered}</Heading>
                   {pageContent && <section dangerouslySetInnerHTML={{ __html: pageContent.content.rendered }} />}
                 </Column>
               </Row>

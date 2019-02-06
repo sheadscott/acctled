@@ -11,7 +11,7 @@ export default (props) => {
         {props.layout.heading && (
           <Row>
             <Col width={1}>
-              <Heading as="h1" caps={true} underline={true} color={props.layout.text_mode}>
+              <Heading as="h2" caps={false} underline={false} color={props.layout.text_mode}>
                 {Parser(props.layout.heading)}
               </Heading>
             </Col>

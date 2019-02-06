@@ -11,7 +11,7 @@ export default (props) => {
         {props.layout.heading && (
           <Row>
             <Col width={1}>
-              <Heading as="h1" caps={true} underline={true} color={props.layout.text_mode}>
+              <Heading as="h2" caps={false} underline={false} color={props.layout.text_mode}>
                 {props.layout.heading}
               </Heading>
             </Col>
@@ -46,8 +46,8 @@ const Section = styled.section`
 
   padding: 2rem 0;
 
-  h2 {
-    margin-bottom: 1.5rem;
-    font-size: 1.75rem;
-  }
+  // h2 {
+  //   margin-bottom: 1.5rem;
+  //   font-size: 1.75rem;
+  // }
 `;
