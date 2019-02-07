@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Container } from '../Grid/Grid';
 import { A } from '../Elements/Elements';
+import decode from "unescape";
 
 /*
   Dropdown menu for secondary nav
@@ -28,7 +29,7 @@ export default (props) => {
                       if (subitem.type === "custom") {
                         return (
                           <li key={subitem.id}>
-                            <A color="#4c4d4f" hovercolor="#065589" data={subitem} href={subitem.url}>{subitem.title}</A>
+                            <A color="#4c4d4f" hovercolor="#065589" data={subitem} href={subitem.url}>{decode(subitem.title)}</A>
                           </li>
                         );
                       }
@@ -36,7 +37,7 @@ export default (props) => {
                       // external links
                       return (
                         <li key={subitem.id}>
-                          <A color="#4c4d4f" hovercolor="#065589" data={subitem}>{subitem.title}</A>
+                          <A color="#4c4d4f" hovercolor="#065589" data={subitem}>{decode(subitem.title)}</A>
                         </li>
                       );
                     })}
@@ -45,7 +46,7 @@ export default (props) => {
               )
             }
 
-            return <li key={item.id}><A color="#4c4d4f" data={item}>{item.title}</A></li>
+            return <li key={item.id}><A color="#4c4d4f" data={item}>{decode(item.title)}</A></li>
           })}
         </SubMenu>
       </StyledContainer>
