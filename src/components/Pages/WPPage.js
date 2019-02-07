@@ -6,6 +6,7 @@ import ACF from '../ACF/ACF';
 import { Img } from '../Elements/Elements';
 import styled from 'styled-components';
 import { Section, Heading } from 'iw-react-elements';
+import Parser from 'html-react-parser';
 import OldSection from '../Elements/Section';
 import MediaContainer from '../MediaContainer/MediaContainer';
 import { Redirect } from 'react-router';
