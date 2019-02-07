@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Axios from "axios";
+import decode from "unescape";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Container, Row, Column } from "../Grid/Grid";
@@ -23,7 +24,7 @@ export default class Footer extends Component {
     if (child.type === "post_type") {
       return (
         <li key={child.id}>
-          <Link to={`/${child.object_slug}`}>{child.title}</Link>
+          <Link to={`/${child.object_slug}`}>{decode(child.title)}</Link>
         </li>
       );
     }
@@ -31,7 +32,7 @@ export default class Footer extends Component {
     return (
       <li key={child.id}>
         <a href={child.url}>
-          {child.title}
+          {decode(child.title)}
         </a>
       </li>
     );
