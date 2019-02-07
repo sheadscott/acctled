@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
+import Parser from 'html-react-parser';
 
 import { Container, Row, Column } from '../Grid/Grid';
 import ACF from '../ACF/ACF';
 import { Img } from '../Elements/Elements';
 import styled from 'styled-components';
 import { Section, Heading } from 'iw-react-elements';
+import OldSection from '../Elements/Section';
 import MediaContainer from '../MediaContainer/MediaContainer';
 import { Redirect } from 'react-router';
+import { relative } from 'upath';
 // import 'bootstrap/dist/css/bootstrap.css';
 
 const HeroImage = ({ data }) => {
@@ -38,13 +41,44 @@ const HeroImage = ({ data }) => {
   )
 }
 
-const HeroHTML = ({ data }) => (
-  <div className="container">';
-    <div className="hero-content">
-      <div dangerouslySetInnerHTML={{ __html: data.html_markup }} />
+const HeroHTML = ({ data }) => {
+  console.log('hero data', data, data.html_content, data.background_image.sizes);
+  return (
+    <div className="container" style={{
+      position: 'relative',
+      overflow: 'hidden',
+      display: 'flex',
+      flexDirection: 'column',
+      alignContent: 'center'
+    }}>
+
+      <HTMLContentBox>{Parser(data.html_content)}</HTMLContentBox>
+      <div style={{
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        right: 0,
+        bottom: 0,
+        height: '100%',
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <MediaContainer ratio="100%">
+          {mediaLoaded => <Img src={data.background_image.url} sizes={data.background_image.sizes} alt={data.background_image.alt} onLoad={mediaLoaded} />}
+        </MediaContainer>
+      </div>
     </div>
-  </div>
-);
+  );
+}
+
+const HTMLContentBox = styled.div`
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  padding: 1.5rem;
+`;
 
 const HeroCarousel = ({ data }) => {
   return <div>Hero Carousel</div>
