@@ -173,9 +173,9 @@ export default class WPPage extends Component {
 
     const parseContent = (content) => {
       return Parser(content, {
-        replace: function({name, attribs, children}) {
+        replace: function ({ name, attribs, children }) {
           if (name === "a") {
-            const url = attribs.href.replace("https://instruction.austincc.edu/tled/", "");
+            const url = attribs.href.replace("https://instruction.austincc.edu/tled", "");
             return (
               <A href={url}>{domToReact(children)}</A>
             );
@@ -247,7 +247,7 @@ export default class WPPage extends Component {
                       {parseContent(pageContent.content.rendered)}
                     </section>
                   )}
-                  
+
                 </Column>
 
                 <Column width={[1, 1 / 4]} pl={[0, '2rem']}>
@@ -287,8 +287,8 @@ export default class WPPage extends Component {
               <Row flexWrap="nowrap">
                 <Column width={1}>
                   <Heading as="h1" underline={true} caps={true}>{decode(pageContent.title.rendered)}</Heading>
-                  { pageContent && parseContent(pageContent.content.rendered) }
-                  
+                  {pageContent && parseContent(pageContent.content.rendered)}
+
                 </Column>
               </Row>
             </Section>
