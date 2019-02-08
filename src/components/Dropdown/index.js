@@ -67,6 +67,7 @@ class DropdownMenu extends React.Component {
                   setActiveItem={this.setActiveItem}
                   activeItem={this.state.activeItem}
                   renderChildren={this.props.renderChildren}
+                  resetMenu={this.resetMenu}
                 />
               ) :
                 this.props.renderLink(item)

@@ -48,7 +48,7 @@ class Submenu extends React.Component {
         className={`iw-dropdown__submenuWrapper ${resolvedState}`}
         {...this.props}
       >
-        <ul className="iw-dropdown__submenu">
+        <ul className="iw-dropdown__submenu" onClick={this.props.resetMenu}>
           {this.props.render(this.focusElement, this.blurElement)}
         </ul>
       </SubmenuWrapper>

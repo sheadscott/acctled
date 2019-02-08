@@ -83,6 +83,7 @@ class Dropdown extends React.Component {
           aria-hidden={!menuIsOpen}
           isOpen={menuIsOpen}
           onFocus={el => console.log("list focus", el.target)}
+          resetMenu={this.props.resetMenu}
           render={(focusElement, blurElement) => (
             <React.Fragment>
               {this.props.renderChildren(
