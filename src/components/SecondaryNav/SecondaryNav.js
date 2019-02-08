@@ -5,6 +5,7 @@ import { Container } from "../Grid/Grid";
 import MenuItem from "../MenuItem/MenuItem";
 import { A } from '../Elements/Elements';
 import uuid from 'uuid/v4';
+import decode from "unescape";
 
 import Dropdown from '../Dropdown/index';
 
@@ -27,6 +28,13 @@ export default class SecondaryNav extends Component {
         <Container as="div">
           <DropdownMenu
             data={this.props.secondaryNavItems}
+            renderLink={(data) => <A
+              data={data.type === 'post_type' ? data : null}
+              href={data.type === 'custom' ? data.url : null}
+              className="iw-dropdown__menuLink"
+            >
+              {data.title}
+            </A>}
             renderChildren={(items, toggleMenu, focusElement, blurElement) =>
               items.map(child => {
                 // menu item has children
@@ -70,8 +78,9 @@ export default class SecondaryNav extends Component {
                 // menu item is a single link
                 return (
                   <li key={child.id} className="iw-dropdown__subItem">
-                    <a
-                      href={child.url}
+                    <A
+                      data={child.type === 'post_type' ? child : null}
+                      href={child.type === 'custom' ? child.url : null}
                       className="iw-dropdown__subLink"
                       onFocus={() => focusElement()}
                       onBlur={async () => {
@@ -82,7 +91,7 @@ export default class SecondaryNav extends Component {
                       }}
                     >
                       {child.title}
-                    </a>
+                    </A>
                   </li>
                 );
               })}

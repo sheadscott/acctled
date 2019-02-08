@@ -68,11 +68,9 @@ class DropdownMenu extends React.Component {
                   activeItem={this.state.activeItem}
                   renderChildren={this.props.renderChildren}
                 />
-              ) : (
-                  <a className="iw-dropdown__menuLink" href={item.url}>
-                    {item.title}
-                  </a>
-                )}
+              ) :
+                this.props.renderLink(item)
+              }
             </li>
           ))}
         </List>
