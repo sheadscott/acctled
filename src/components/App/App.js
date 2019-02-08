@@ -34,7 +34,7 @@ class App extends Component {
       .get(
         "https://instruction.austincc.edu/tled/wp-json/wp-api-menus/v2/menus/3"
       )
-      .catch(function(error) {
+      .catch(function (error) {
         // handle error
         console.log("Primary Nav: ", error);
       })
@@ -48,7 +48,7 @@ class App extends Component {
       .get(
         "https://instruction.austincc.edu/tled/wp-json/wp-api-menus/v2/menus/4"
       )
-      .catch(function(error) {
+      .catch(function (error) {
         // handle error
         console.log("SecondaryNav: ", error);
       })
@@ -148,7 +148,7 @@ class App extends Component {
 
             <Footer />
           </div>
-          
+
         </Router>
       </ThemeProvider>
     );
@@ -168,4 +168,13 @@ const Main = styled.main`
   background: white;
   width: 100%;
   box-sizing: border-box;
+
+  a {
+    font-weight: 700;
+    color: rgb(26, 82, 118);
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
 `;
