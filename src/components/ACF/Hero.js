@@ -68,7 +68,6 @@ export default function Hero(props) {
           <MediaContainer>
             {mediaLoaded => <Img src={props.data.image_content.url} sizes={props.data.image_content.sizes} alt={props.data.image_content.alt} onLoad={mediaLoaded} />}
           </MediaContainer>
-          Hello World!
         </div>
       </div>
     )
