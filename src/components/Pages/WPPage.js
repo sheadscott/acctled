@@ -8,10 +8,11 @@ import styled from 'styled-components';
 import { Section, Heading } from 'iw-react-elements';
 import Parser from 'html-react-parser';
 import domToReact from "html-react-parser/lib/dom-to-react";
-import OldSection from '../Elements/Section';
+// import OldSection from '../Elements/Section';
 import MediaContainer from '../MediaContainer/MediaContainer';
 import { Redirect } from 'react-router';
-import { relative } from 'upath';
+import Hero from '../ACF/Hero';
+// import { relative } from 'upath';
 // import 'bootstrap/dist/css/bootstrap.css';
 
 const HeroImage = ({ data }) => {
@@ -193,12 +194,7 @@ export default class WPPage extends Component {
         <Container>
           {ACFData && ACFData.hero_content && (
             <div className="hero" style={{ marginTop: '1.5rem' }}>
-              {/* check for type of hero content */}
-              {ACFData.hero_content[0].acf_fc_layout === 'image' ? <HeroImage data={ACFData.hero_content[0]} /> : null}
-
-              {ACFData.hero_content[0].acf_fc_layout === 'html' ? <HeroHTML data={ACFData.hero_content[0]} /> : null}
-
-              {ACFData.hero_content[0].acf_fc_layout === "carousel" ? <HeroCarousel data={ACFData.hero_content[0]} /> : null}
+              {ACFData.hero_content[0].acf_fc_layout && <Hero data={ACFData.hero_content[0]} />}
             </div>
           )}
 
