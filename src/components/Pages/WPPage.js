@@ -64,10 +64,10 @@ export default class WPPage extends Component {
     const parseContent = (content) => {
       return Parser(content, {
         replace: function ({ name, attribs, children }) {
-          if (name === "a") {
+          if (name === "a" && attribs.href) {
             const url = attribs.href.replace("https://instruction.austincc.edu/tled", "");
             return (
-              <A href={url}>{domToReact(children)}</A>
+              <A href={url} className={attribs.class}>{domToReact(children)}</A>
             );
           }
         }

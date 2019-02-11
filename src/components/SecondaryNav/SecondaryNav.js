@@ -5,7 +5,7 @@ import { Container } from "../Grid/Grid";
 // import MenuItem from "../MenuItem/MenuItem";
 import { A } from '../Elements/Elements';
 // import uuid from 'uuid/v4';
-// import decode from "unescape";
+import decode from "unescape";
 
 import Dropdown from '../Dropdown/index';
 
@@ -33,7 +33,7 @@ export default class SecondaryNav extends Component {
               href={data.type === 'custom' ? data.url : null}
               className="iw-dropdown__menuLink"
             >
-              {data.title}
+              {decode(data.title)}
             </A>}
             renderChildren={(items, toggleMenu, focusElement, blurElement) =>
               items.map(child => {
@@ -65,7 +65,7 @@ export default class SecondaryNav extends Component {
                                   }
                                 }}
                               >
-                                {childLink.title}
+                                {decode(childLink.title)}
                               </A>
                             </li>
                           ))}
@@ -90,7 +90,7 @@ export default class SecondaryNav extends Component {
                         }
                       }}
                     >
-                      {child.title}
+                      {decode(child.title)}
                     </A>
                   </li>
                 );
