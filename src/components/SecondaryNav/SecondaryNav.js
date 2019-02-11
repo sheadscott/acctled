@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Container } from "../Grid/Grid";
-import MenuItem from "../MenuItem/MenuItem";
+// import MenuItem from "../MenuItem/MenuItem";
 import { A } from '../Elements/Elements';
-import uuid from 'uuid/v4';
-import decode from "unescape";
+// import uuid from 'uuid/v4';
+// import decode from "unescape";
 
 import Dropdown from '../Dropdown/index';
 
