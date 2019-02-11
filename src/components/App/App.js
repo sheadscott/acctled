@@ -169,7 +169,7 @@ const Main = styled.main`
   width: 100%;
   box-sizing: border-box;
 
-  a {
+  a:not(.button) {
     font-weight: 700;
     color: rgb(26, 82, 118);;
 
@@ -179,9 +179,13 @@ const Main = styled.main`
     }
   }
 
+  main:not(.carousel) {
+
+  }
   h1,h2,h3,h4,h5,h6 {
     color: rgb(26, 82, 118);
   }
+}
 
   h1,h2,h3 {
     font-weight: 700;
