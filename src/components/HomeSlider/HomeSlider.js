@@ -50,7 +50,7 @@ export default class HomeSlider extends Component {
         >
           {this.state.slideData.map((slide, index) => {
             return (
-              <Slide key={index} className="slide" id={slide.title}>
+              <Slide key={index} className="slide" id={slide.title} index={index}>
 
 
                 <MediaContainer ratio="41.4%" className="slide__wrapper">
@@ -74,7 +74,7 @@ export default class HomeSlider extends Component {
         <CarouselControls>
           {this.state.slideData.map((item, index) => (
             <li key={`thumbnail-${item.url}`}>
-              <CarouselControl onClick={() => { this.changeCarousel(index) }} className={this.state.currentSlide === index ? 'active' : null} bg={item.url} title={item.title}>
+              <CarouselControl onClick={() => { this.changeCarousel(index) }} className={this.state.currentSlide === index ? 'active' : null} bg={item.url} title={item.title} index={index}>
                 <div style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden' }}>Skip to Slide {index + 1}</div>
                 <div>{item.title}</div>
               </CarouselControl>
@@ -86,19 +86,19 @@ export default class HomeSlider extends Component {
   }
 }
 
-const colors = {
-  'On Campus Assistance': '#295b82',
-  'Library Help': '#7d484c',
-  'Blackboard': '#ad8d6e',
-  'Technology': '#20a2b1',
-  'Learning Depot': '#9977a7'
-};
+const colors = [
+  '#295b82',
+  '#7d484c',
+  '#ad8d6e',
+  '#20a2b1',
+  '#9977a7'
+];
 
 const Slide = styled.div`
   h2 {
     border-bottom: 4px solid white;
 
-    border-bottom-color: ${props => colors[props.id]};
+    border-bottom-color: ${props => colors[props.index]};
   }
 `;
 
@@ -183,7 +183,7 @@ const CarouselControl = styled.button`
   &:before {
     content: '';
     display: block;
-    background: ${props => colors[props.title]};
+    background: ${props => colors[props.index]};
     height: 100%;
     width: 100%;
     opacity: 1;
@@ -210,7 +210,7 @@ const CarouselControl = styled.button`
   }
   
   background-color: #7fb7e3;
-  background-color: ${props => colors[props.title]};
+  background-color: ${props => colors[props.index]};
 
   background-image: url(${props => props.bg});
   background-position: center center;

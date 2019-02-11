@@ -3,128 +3,17 @@ import Axios from 'axios';
 import decode from "unescape";
 import { Container, Row, Column } from '../Grid/Grid';
 import ACF from '../ACF/ACF';
-import { A, Img } from '../Elements/Elements';
+import { A } from '../Elements/Elements';
 import styled from 'styled-components';
 import { Section, Heading } from 'iw-react-elements';
 import Parser from 'html-react-parser';
 import domToReact from "html-react-parser/lib/dom-to-react";
 // import OldSection from '../Elements/Section';
-import MediaContainer from '../MediaContainer/MediaContainer';
+// import MediaContainer from '../MediaContainer/MediaContainer';
 import { Redirect } from 'react-router';
 import Hero from '../ACF/Hero';
 // import { relative } from 'upath';
 // import 'bootstrap/dist/css/bootstrap.css';
-
-const HeroImage = ({ data }) => {
-  // check if hero image has a description
-  if (data.image_description) {
-    return (
-      <div className="container">
-        <figure className="hero-content" style={{ margin: 0 }}>
-          <MediaContainer>
-            {mediaLoaded => <Img src={data.image_content.url} sizes={data.image_content.sizes} alt={data.image_content.alt} onLoad={mediaLoaded} />}
-          </MediaContainer>
-          <figcaption style={{ textAlign: 'right', opacity: 0.5, fontStyle: 'italic' }}>
-            {data.image_description}
-          </figcaption>
-        </figure>
-      </div>
-    )
-  }
-
-  return (
-    <div className="container">
-      <div className="hero-content">
-        <MediaContainer>
-          {mediaLoaded => <Img src={data.image_content.url} sizes={data.image_content.sizes} alt={data.image_content.alt} onLoad={mediaLoaded} />}
-        </MediaContainer>
-      </div>
-    </div>
-  )
-}
-
-const HeroHTML = ({ data }) => {
-  console.log('hero data', data, data.html_content, data.background_image.sizes);
-  return (
-    <div className="container" style={{
-      position: 'relative',
-      overflow: 'hidden',
-      display: 'flex',
-      flexDirection: 'column',
-      alignContent: 'center'
-    }}>
-
-      <HTMLContentBox>{Parser(data.html_content)}</HTMLContentBox>
-      <div style={{
-        position: 'absolute',
-        left: 0,
-        top: 0,
-        right: 0,
-        bottom: 0,
-        height: '100%',
-        width: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
-        <MediaContainer ratio="100%">
-          {mediaLoaded => <Img src={data.background_image.url} sizes={data.background_image.sizes} alt={data.background_image.alt} onLoad={mediaLoaded} />}
-        </MediaContainer>
-      </div>
-    </div>
-  );
-}
-
-const HTMLContentBox = styled.div`
-  position: relative;
-  z-index: 10;
-  width: 100%;
-  padding: 1.5rem;
-`;
-
-const HeroCarousel = ({ data }) => {
-  return <div>Hero Carousel</div>
-  // <div className="container"><div className="hero main-carousel"></div></div>
-  //   const $carouselContainer = $('.main-carousel');
-
-  //   const carouselLength = ACFData.hero[0].carousel_content.length;
-
-  //   let innerCarousel = '';
-
-  //   for (let i = 0; i < carouselLength; i++) {
-  //     var img = getImage(ACFData.hero[0].carousel_content[i].image_content, ACFData.hero[0].image_alt_text, true);
-  //     let imgHTML = '<div className="carousel-cell">' + img + '</div>';
-
-  //     addToCarousel(imgHTML);
-  //     if (i === carouselLength - 1) {
-  //       $carouselContainer.append(innerCarousel);
-  //       createCarousel();
-  //     }
-  //   };
-
-  //   function addToCarousel(imgHTML) {
-  //     innerCarousel += imgHTML;
-  //   }
-
-  //   function createCarousel() {
-  //     $carouselContainer.flickity({
-  //       // options
-  //       contain: true,
-  //       cellAlign: 'left',
-  //       lazyLoad: true,
-  //       draggable: true,
-  //       wrapAround: true,
-  //       accessibility: true,
-  //       prevNextButtons: true,
-  //       autoPlay: 4000,
-  //       pageDots: true,
-  //       imagesLoaded: true,
-  //       // fullscreen: true,
-  //     });
-  //   }
-  // }
-}
-
 
 export default class WPPage extends Component {
   state = {
