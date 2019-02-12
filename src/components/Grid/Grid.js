@@ -23,6 +23,11 @@ Row.defaultProps = {
 
 const Column = styled(Box)`
   // border: 1px dotted red;
+  .aligncenter{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
 `;
 
 Column.defaultProps = {
