@@ -142,7 +142,7 @@ class App extends Component {
                 <Route path="/calendar" component={CalendarPage} />
                 <Route path="/reports" component={ReportsPage} />
                 <Route path="/404" component={NotFoundPage} />
-                <Route path="/:slug" component={WPPage} />
+                <Route path="/:param1?/:param2?/:param3?/:param4?/:param5?" component={WPPage} />
               </Switch>
             </Main>
 

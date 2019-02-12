@@ -40,9 +40,10 @@ export default class WPPage extends Component {
   }
 
   componentDidMount() {
-    if (this.props.match.params.slug) {
-      this.getData(this.props.match.params.slug);
+    const getSlug = params => {
+      return params.param5 || params.param4 || params.param3 || params.param2 || params.param1;
     }
+    this.getData(getSlug(this.props.match.params));
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -65,6 +66,7 @@ export default class WPPage extends Component {
       return Parser(content, {
         replace: function ({ name, attribs, children }) {
           if (name === "a" && attribs.href) {
+            console.log(attribs.href);
             const url = attribs.href.replace("https://instruction.austincc.edu/tled", "");
             return (
               <A href={url} className={attribs.class}>{domToReact(children)}</A>
