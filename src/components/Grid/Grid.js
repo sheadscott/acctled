@@ -28,6 +28,11 @@ const Column = styled(Box)`
     margin-left: auto;
     margin-right: auto;
   }
+  .alignright{
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+  }
 `;
 
 Column.defaultProps = {
