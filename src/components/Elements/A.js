@@ -46,6 +46,7 @@ const StyledAnchor = styled.a`
   &:focus {
     color: ${props => props.hovercolor};
   }
+
 `;
 
 const StyledLink = styled(Link)`
@@ -57,4 +58,5 @@ const StyledLink = styled(Link)`
   &:focus {
     color: ${props => props.hoverColor};
   }
+
 `;

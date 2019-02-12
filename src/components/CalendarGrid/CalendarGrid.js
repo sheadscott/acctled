@@ -69,11 +69,18 @@ const Event = styled.div`
   flex: 1 1 200px;
   min-width: 200px;
   margin: 1rem;
+  cursor: pointer;
+  transition: all 0.1s;
+
   &:last-child {
     @media (max-width: 619px) {
       max-width: 100%;
     }
     max-width: 280px;
+  }
+
+  &:hover {
+    transform: scale(0.99);
   }
 
   h1 {
