@@ -1,9 +1,9 @@
 import React from 'react';
-import Parser from 'html-react-parser';
 import { Container, Row, Column as Col } from '../Grid/Grid';
 // import styled, { css } from 'styled-components';
 // import { Heading } from '../Elements/Elements';
 import { Section, Heading } from 'iw-react-elements';
+import Parser from '../Parser/Parser';
 
 export default (props) => {
   return (
@@ -13,12 +13,12 @@ export default (props) => {
           {props.layout.heading && (
             <Col width={1}>
               <Heading as="h2" caps={false} underline={false} color={props.layout.text_mode}>
-                {Parser(props.layout.heading)}
+                <Parser>{props.layout.heading}</Parser>
               </Heading>
             </Col>
           )}
           <Col sm={12}>
-            {Parser(props.layout.column_1)}
+            <Parser>{props.layout.column_1}</Parser>
           </Col>
         </Row>
       </Container>

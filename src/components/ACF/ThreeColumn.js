@@ -1,8 +1,8 @@
 import React from 'react';
-import Parser from 'html-react-parser';
 import { Container, Row, Column as Col } from '../Grid/Grid';
 import styled, { css } from 'styled-components';
 import { Heading } from '../Elements/Elements';
+import Parser from '../Parser/Parser';
 
 export default (props) => {
   return (
@@ -19,13 +19,13 @@ export default (props) => {
         )}
         <Row mx={[0, '-1rem']}>
           <Col width={[1, 1 / 3]} px={[0, '1rem']}>
-            {Parser(props.layout.column_1)}
+            <Parser>{props.layout.column_1}</Parser>
           </Col>
           <Col width={[1, 1 / 3]} px={[0, '1rem']}>
-            {Parser(props.layout.column_2)}
+            <Parser>{props.layout.column_2}</Parser>
           </Col>
           <Col width={[1, 1 / 3]} px={[0, '1rem']}>
-            {Parser(props.layout.column_3)}
+            <Parser>{props.layout.column_3}</Parser>
           </Col>
         </Row>
       </Container>

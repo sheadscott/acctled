@@ -1,8 +1,8 @@
 import React from 'react';
-import Parser from 'html-react-parser';
 import { Container, Row, Column as Col } from '../Grid/Grid';
 import styled, { css } from 'styled-components';
 import { Heading } from '../Elements/Elements';
+import Parser from '../Parser/Parser';
 
 export default (props) => {
   return (
@@ -12,17 +12,17 @@ export default (props) => {
           <Row>
             <Col width={1}>
               <Heading as="h2" caps={false} underline={false} color={props.layout.text_mode}>
-                {Parser(props.layout.heading)}
+                <Parser>{props.layout.heading}</Parser>
               </Heading>
             </Col>
           </Row>
         )}
         <Row>
           <Col width={[1, 1 / 2]} pr={[0, '1rem']}>
-            {Parser(props.layout.column_1)}
+            <Parser>{props.layout.column_1}</Parser>
           </Col>
           <Col width={[1, 1 / 2]} pl={[0, '1rem']}>
-            {Parser(props.layout.column_2)}
+            <Parser>{props.layout.column_2}</Parser>
           </Col>
         </Row>
       </Container>

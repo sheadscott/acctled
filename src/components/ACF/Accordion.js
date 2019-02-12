@@ -11,9 +11,9 @@ import {
 // Import arrow
 import { ReactComponent as DownArrowIcon } from "../../img/arrowDown.svg";
 
-import Parser from 'html-react-parser';
 import { Container, Row, Column as Col } from '../Grid/Grid';
 import { Section, Heading } from '../Elements/Elements';
+import Parser from '../Parser/Parser';
 
 export default class AccordionComponent extends Component {
   constructor(props) {
@@ -41,7 +41,7 @@ export default class AccordionComponent extends Component {
             {this.props.layout.heading && (
               <Col width={1}>
                 <Heading as="h2" caps={false} underline={false} color={this.props.layout.text_mode}>
-                  {Parser(this.props.layout.heading)}
+                  <Parser>{this.props.layout.heading}</Parser>
                 </Heading>
               </Col>
             )}
@@ -51,12 +51,12 @@ export default class AccordionComponent extends Component {
                 {this.props.layout.accordion.map((item, index) => (
                   <AccordionItem>
                     <StyledAccordionItemTitle>
-                      {Parser(item.title)}
+                      <Parser>{item.title}</Parser>
                       <ArrowIcon role="presentation" />
                     </StyledAccordionItemTitle>
                     <StyledAccordionItemBody>
                       <div key={index}>
-                        {Parser(item.description)}
+                        <Parser>{item.description}</Parser>
                       </div>
                     </StyledAccordionItemBody>
                   </AccordionItem>

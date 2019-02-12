@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 import decode from "unescape";
-import { Container, Row, Column } from '../Grid/Grid';
-import ACF from '../ACF/ACF';
-import { A } from '../Elements/Elements';
 import styled from 'styled-components';
 import { Section, Heading } from 'iw-react-elements';
-import Parser from 'html-react-parser';
-import domToReact from "html-react-parser/lib/dom-to-react";
-// import OldSection from '../Elements/Section';
-// import MediaContainer from '../MediaContainer/MediaContainer';
 import { Redirect } from 'react-router';
+
+import { Container, Row, Column } from '../Grid/Grid';
+import ACF from '../ACF/ACF';
 import Hero from '../ACF/Hero';
-// import { relative } from 'upath';
-// import 'bootstrap/dist/css/bootstrap.css';
+import Parser from '../Parser/Parser';
 
 export default class WPPage extends Component {
   state = {
@@ -67,20 +62,6 @@ export default class WPPage extends Component {
 
     const ACFData = pageContent ? this.state.pageContent.acf : null;
 
-    const parseContent = (content) => {
-      return Parser(content, {
-        replace: function ({ name, attribs, children }) {
-          if (name === "a" && attribs.href) {
-            console.log(attribs.href);
-            const url = attribs.href.replace("https://instruction.austincc.edu/tled", "");
-            return (
-              <A href={url} className={attribs.class}>{domToReact(children)}</A>
-            );
-          }
-        }
-      })
-    };
-
     if (!pageContent) {
       return <Redirect to='/404' />
     }
@@ -106,7 +87,7 @@ export default class WPPage extends Component {
               <Row>
                 <Column width={[1, 1 / 4]} order={[2, 1]} pr={[0, '2rem']}>
                   <Aside>
-                    {parseContent(ACFData.sidebar_left)}
+                    <Parser>{ACFData.sidebar_left}</Parser>
                   </Aside>
                 </Column>
 
@@ -114,14 +95,14 @@ export default class WPPage extends Component {
                   {pageContent && (<Section>
                     <Heading as="h1" underline={true} caps={true}>{decode(pageContent.title.rendered)}</Heading>
                     <div>
-                      {parseContent(pageContent.content.rendered)}
+                    <Parser>{pageContent.content.rendered}</Parser>
                     </div>
                   </Section>)}
                 </Column>
 
                 <Column width={[1, 1 / 4]} order={[3, 3]} pl={[0, '2rem']}>
                   <Aside>
-                    {parseContent(ACFData.sidebar_right)}
+                    <Parser>{ACFData.sidebar_right}</Parser>
                   </Aside>
                 </Column>
               </Row>
@@ -136,7 +117,7 @@ export default class WPPage extends Component {
                   <Heading as="h1" underline={true} caps={true}>{decode(pageContent.title.rendered)}</Heading>
                   {pageContent && (
                     <section>
-                      {parseContent(pageContent.content.rendered)}
+                      <Parser>{pageContent.content.rendered}</Parser>
                     </section>
                   )}
 
@@ -144,7 +125,7 @@ export default class WPPage extends Component {
 
                 <Column width={[1, 1 / 4]} pl={[0, '2rem']}>
                   <Aside>
-                    {parseContent(ACFData.sidebar_right)}
+                    <Parser>{ACFData.sidebar_right}</Parser>
                   </Aside>
                 </Column>
               </Row>
@@ -157,7 +138,7 @@ export default class WPPage extends Component {
               <Row>
                 <Column width={[1, 1 / 4]} pr={[0, '2rem']} order={[2, 1]}>
                   <Aside>
-                    {parseContent(ACFData.sidebar_left)}
+                    <Parser>{ACFData.sidebar_left}</Parser>
                   </Aside>
                 </Column>
 
@@ -165,7 +146,7 @@ export default class WPPage extends Component {
                   <Heading as="h1" underline={true} caps={true}>{decode(pageContent.title.rendered)}</Heading>
                   {pageContent && (
                     <section>
-                      {parseContent(pageContent.content.rendered)}
+                      <Parser>{pageContent.content.rendered}</Parser>
                     </section>
                   )}
                 </Column>
@@ -179,8 +160,7 @@ export default class WPPage extends Component {
               <Row flexWrap="nowrap">
                 <Column width={1}>
                   <Heading as="h1" underline={true} caps={true}>{decode(pageContent.title.rendered)}</Heading>
-                  {pageContent && parseContent(pageContent.content.rendered)}
-
+                  {pageContent && <Parser>{pageContent.content.rendered}</Parser>}
                 </Column>
               </Row>
             </Section>
