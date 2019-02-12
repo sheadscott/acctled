@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Heading } from '../Elements/Elements';
+import { A, Heading } from '../Elements/Elements';
 import Axios from "axios";
 
 export default class EventList extends Component {
@@ -14,15 +14,18 @@ export default class EventList extends Component {
       `https://spreadsheets.google.com/feeds/list/${sheetId}/1/public/values?alt=json`
     ).then(response => {
       const events = response.data.feed.entry;
-      events.sort((a, b) => {
+      const filteredEvents = events.filter(event => {
+        return new Date(event.gsx$dateforautocheck.$t.replace(/.*?,\s/, "")).valueOf() > Date.now();
+      })
+      .sort((a, b) => {
         // Take the day of the week off the front of the string and convert to Date # value
         // Probably unnecessary since the events are returned in the order in sheet
         a = new Date(a.gsx$dateforautocheck.$t.replace(/.*?,\s/, "")).valueOf();
         b = new Date(b.gsx$dateforautocheck.$t.replace(/.*?,\s/, "")).valueOf();
         return a - b;
       });
-      console.log(events);
-      this.setState({ events });
+      // console.log("Events: ", filteredEvents);
+      this.setState({ events: filteredEvents });
     });
   }
 
@@ -37,7 +40,7 @@ export default class EventList extends Component {
             return (
               <Event key={i}>
                 {event.gsx$webdisplaydate.$t}
-                <span>{event.gsx$eventtitle.$t}</span>
+                <A href={event.gsx$linktoregister.$t}>{event.gsx$eventtitle.$t}</A>
               </Event>
             );
           })}
@@ -64,10 +67,9 @@ const EventWrapper = styled.ul`
     font-weight: bold;
   }
 
-  span {
+  a {
     margin-left: 1rem;
     font-weight: normal;
-    text-decoration: none;
   }
 `;
 
