@@ -38,16 +38,21 @@ export default class WPPage extends Component {
         })
       });
   }
+  
+  getSlug = params => {
+      return params.param5 || params.param4 || params.param3 || params.param2 || params.param1;
+  }
 
   componentDidMount() {
-    const getSlug = params => {
-      return params.param5 || params.param4 || params.param3 || params.param2 || params.param1;
-    }
-    this.getData(getSlug(this.props.match.params));
+    
+    this.getData(this.getSlug(this.props.match.params));
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const nextSlug = nextProps.match.params.slug;
+    const getSlug = params => {
+        return params.param5 || params.param4 || params.param3 || params.param2 || params.param1;
+    }
+    const nextSlug = getSlug(nextProps.match.params);
     return nextSlug !== prevState.slug ? { slug: nextSlug } : null;
   }
 
