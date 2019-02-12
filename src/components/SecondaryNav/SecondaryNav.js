@@ -105,6 +105,7 @@ export default class SecondaryNav extends Component {
 const Wrapper = styled.div`
   background: #133952;
   position: relative;
+  display: none;
 
   &.expanded:before {
     content: "";
@@ -115,6 +116,10 @@ const Wrapper = styled.div`
     right: 0;
     bottom: 0;
     // background: pink;
+  }
+
+  @media(min-width: 640px) {
+    display: block;
   }
 `;
 

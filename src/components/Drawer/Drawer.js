@@ -4,6 +4,7 @@ import { A } from "../Elements/Elements";
 
 // Import arrow
 import { ReactComponent as DownArrowIcon } from "../../img/arrowDown.svg";
+import { ReactComponent as CloseIcon } from "../../img/close.svg";
 
 class Drawer extends React.Component {
   state = {
@@ -47,8 +48,11 @@ class Drawer extends React.Component {
     return (
       <React.Fragment>
         <Aside className={this.state.drawer}>
+          <CloseButton onClick={this.props.toggleDrawer}>
+            <CloseIcon aria-label="Close Navigation" />
+          </CloseButton>
           <Nav>
-            <ul>
+            <PrimaryList>
               <Primary>
                 <A href="/">TLED Home</A>
               </Primary>
@@ -78,30 +82,30 @@ class Drawer extends React.Component {
               {this.props.secondaryNavItems.map((item, index, arr) => {
                 if (item.children) {
                   return (
-                    <Primary key={item.id}>
+                    <Primary key={item.id} className="hasChildren">
                       <A onClick={this.handleClick} data={item}>
                         {item.title}
                         <ArrowIcon />
                       </A>
-                      <ul>
+                      <SecondaryList>
                         {item.children.map(child => (
                           <Secondary key={child.id}>
                             <A onClick={this.handleClick} href={child}>
-                              {child.title}
                               <ArrowIcon className="secondary" />
+                              {child.title}
                             </A>
                             {child.children && (
-                              <ul>
+                              <TertiaryList>
                                 {child.children.map(grandchild => (
                                   <Tertiary key={grandchild.id}>
                                     <A data={grandchild}>{grandchild.title}</A>
                                   </Tertiary>
                                 ))}
-                              </ul>
+                              </TertiaryList>
                             )}
                           </Secondary>
                         ))}
-                      </ul>
+                      </SecondaryList>
                     </Primary>
                   );
                 }
@@ -124,7 +128,7 @@ class Drawer extends React.Component {
                   </li>
                 );
               })}
-            </ul>
+            </PrimaryList>
           </Nav>
         </Aside>
         <CloseDrawer
@@ -157,72 +161,144 @@ class Drawer extends React.Component {
 export { Drawer as default };
 
 const Nav = styled.nav`
+  position: relative;
+  margin-top: 1rem;
+
   ul {
     margin: 0;
-    margin-left: -0.4rem;
-    padding: 0;
+    // padding: 0;
     list-style: none;
   }
 
   a:hover {
-    color: #ccc;
+    color: rgb(26, 82, 118);
     fill: #ccc;
   }
+
+  li.children {
+
+  }
 `;
+
+const CloseButton = styled.button`
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+`
+
+const PrimaryList = styled.ul``;
+
 
 const Primary = styled.li`
   text-transform: uppercase;
   font-weight: bold;
   font-size: 0.9rem;
   position: relative;
+  margin-bottom: 0.5rem;
+
+  // &:before {
+  //   width: 2rem;
+  // }
 
   ul {
     display: none;
   }
 
   & > a {
-    display: inline-block;
-    width: calc(100% + 1.1em);
-    padding-left: 0em;
+    display: flex;
+    text-indent: 2rem;
+    padding: 0.5rem 1rem 0.5rem 0.5rem;
+    margin-bottom: 0.5rem;
+    
+    &:before {
+      content: '';
+      display: block;
+      width: 2rem;
+    }
 
-    &:hover {
+  }
+
+  &.hasChildren {
+    & > a {
       background-color: #efefef;
     }
   }
 
   .active {
-    color: blue;
+    color: #2286ea;
   }
+
+  &:first-child {
+    margin-bottom: 0;
+    a {
+      margin: 0;
+      padding-bottom: 0.5rem;
+    }
+  }
+`;
+
+const SecondaryList = styled.ul`
+  padding-left: 2.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 `;
 
 const Secondary = styled.li`
   font-size: 0.9rem;
   font-weight: normal;
-  padding-left: 1em;
   position: relative;
+
+  a {
+    display: flex;
+    margin-bottom: 1rem;
+    &:before {
+      content: '';
+      display: block;
+      width: 1.5rem;
+    }
+  }
+
+  svg {
+    left: 0;
+  }
+`;
+
+const TertiaryList = styled.ul`
+  padding-left: 2.5rem;
 `;
 
 const Tertiary = styled.li`
   text-transform: none;
   font-size: 0.85rem;
-  padding-left: 1em;
+
+  a {
+    display: block;
+    &:before {
+      width: 0;
+    }
+  }
 
   .active {
-    color: blue;
+    color: #2286ea;
   }
 
   &.home-links {
-    padding-left: 1em;
+    padding: 0.5rem 1rem 0.5rem 3.5rem;
   }
 `;
 
 const ArrowIcon = styled(DownArrowIcon)`
   position: absolute;
-  top: -0.25rem;
-  right: -1.4rem;
-  width: 2rem;
+  top: 0.5rem;
+  left: 0.5rem;
+  width: 1.5rem;
   transition: transform 0.3s ease-out;
   pointer-events: none;
+  fill: rgb(26, 82, 118);
 
   &.secondary {
     width: 1.3em;
@@ -240,14 +316,14 @@ const Aside = styled.aside`
   display: none;
   position: fixed;
   background-color: #fff;
-  width: 275px;
+  width: 350px;
   flex-direction: column;
   flex-shrink: 0;
   height: 100%;
   transition: transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 999;
-  padding: 1em;
+  padding: 1rem;
   box-sizing: border-box;
   transform: translateX(100%);
   will-change: transform;

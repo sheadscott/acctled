@@ -43,7 +43,6 @@ function renderWithRouter(
 it("renders an anchor tag", () => {
   const { getByText } = render(<A href={'/test'}>Testing</A>);
 
-  // the library wants you to test for what you see, which is how must users interact with the UI
   expect(getByText("Testing")).toBeInTheDocument();
   expect(getByText("Testing")).toHaveAttribute('href', '/test');
 
