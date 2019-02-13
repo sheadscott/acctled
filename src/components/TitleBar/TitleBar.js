@@ -85,7 +85,6 @@ const Nav = styled.nav`
 `;
 
 const SiteIdentity = styled.div`
-  margin-right: 2rem;
   flex-wrap: nowrap;
   display: flex;
   align-items: center;
@@ -121,7 +120,6 @@ const TitleBarNav = styled.div`
 `;
 
 const TitleBarControls = styled.div`
-  margin-left: 50px;
   display: flex;
   flex-wrap: nowrap;
 `;
