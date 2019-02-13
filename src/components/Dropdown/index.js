@@ -70,7 +70,7 @@ class DropdownMenu extends React.Component {
                   resetMenu={this.resetMenu}
                 />
               ) :
-                this.props.renderLink(item)
+                React.cloneElement(this.props.renderLink(item), { onClick: this.resetMenu })
               }
             </li>
           ))}
