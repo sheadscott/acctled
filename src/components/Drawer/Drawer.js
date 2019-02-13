@@ -95,7 +95,11 @@ class Drawer extends React.Component {
                       <SecondaryList>
                         {item.children.map(child => (
                           <Secondary key={child.id}>
-                            <A onClick={this.handleClick} href={child}>
+                            <A
+                              onClick={this.handleClick}
+                              data={child.type === 'post_type' ? child : null}
+                              href={child.type === 'custom' ? child.url : null}
+                            >
                               <ArrowIcon className="secondary" />
                               <Parser>
                                 {child.title}
@@ -105,7 +109,14 @@ class Drawer extends React.Component {
                               <TertiaryList>
                                 {child.children.map(grandchild => (
                                   <Tertiary key={grandchild.id}>
-                                    <A data={grandchild}>{grandchild.title}</A>
+                                    <A
+                                      data={grandchild.type === 'post_type' ? grandchild : null}
+                                      href={grandchild.type === 'custom' ? grandchild.url : null}
+                                    >
+                                      <Parser>
+                                        {grandchild.title}
+                                      </Parser>
+                                    </A>
                                   </Tertiary>
                                 ))}
                               </TertiaryList>
