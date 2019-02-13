@@ -1,6 +1,7 @@
 import React from 'react';
 import HTMLParser from 'html-react-parser';
 import domToReact from "html-react-parser/lib/dom-to-react";
+import MediaContainer from '../MediaContainer/MediaContainer';
 import { A } from '../Elements/Elements';
 
 const parseContent = content => {
@@ -15,6 +16,10 @@ const parseContent = content => {
           <A href={url} className={attribs.class}>{domToReact(children)}</A>
         );
       }
+
+      if (name === 'iframe') {
+        return (<MediaContainer ratio="56%">{mediaLoaded => <iframe title="iframe content" onLoad={mediaLoaded} {...attribs} />}</MediaContainer>);
+      }
     }
   })
 };
@@ -22,7 +27,7 @@ const parseContent = content => {
 const Parser = props => {
   return (
     <React.Fragment>
-      {parseContent(props.children)}  
+      {parseContent(props.children)}
     </React.Fragment>
   );
 };
