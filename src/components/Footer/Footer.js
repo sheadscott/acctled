@@ -69,7 +69,6 @@ export default class Footer extends Component {
                     <span className="region"> Texas</span>
                     <span className="postal-code"> 78752</span>
                   </div>
-                  <div className="country-name">U.S.A.</div>
                 </div>
                 <div className="tel">512-223-4ACC (4222)</div>
               </div>
@@ -142,8 +141,12 @@ const WpLinks = styled(Column)`
 const Contact = styled(Column)`
   // margin-top: 34px;
 
+  .vcard {
+    font-size: 0.8rem;
+  }
+
   svg {
-    max-width: 175px;
+    max-width: 240px;
     margin-bottom: 2rem;
   }
 `;
