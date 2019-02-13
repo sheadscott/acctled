@@ -334,7 +334,6 @@ const Aside = styled.aside`
   display: none;
   position: fixed;
   background-color: #fff;
-  width: 350px;
   flex-direction: column;
   flex-shrink: 0;
   height: 100%;
@@ -346,6 +345,10 @@ const Aside = styled.aside`
   transform: translateX(100%);
   will-change: transform;
   overflow-y: scroll;
+  width: 350px;
+  @media (max-width: 374px) {
+    width: 300px;
+  }
 
   &.opening {
     display: flex;
