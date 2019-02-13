@@ -24,8 +24,8 @@ export default class Search extends Component {
     if (this.props.searchExpanded && this.searchTLEDField.current) {
       this.searchTLEDField.current.focus();
     } else {
-      // set this.fieldFocus to '' so that a redirect 
-      // won't be triggered in render() after a search has been performed 
+      // set this.fieldFocus to '' so that a redirect
+      // won't be triggered in render() after a search has been performed
       this.fieldFocus = '';
     }
   }
@@ -59,7 +59,7 @@ export default class Search extends Component {
     }
 
     if (
-      this.fieldFocus === 'tled' 
+      this.fieldFocus === 'tled'
       && this.state.redirect
       && this.state.redirect !== '/search/'
       && this.state.redirect !== window.location.pathname
@@ -128,6 +128,9 @@ const Form = styled.form`
 
   input {
     padding-left: 0.5rem;
+    @media (max-width: 400px) {
+      width:25%;
+    }
   }
   &:focus button {
     background: red;
