@@ -86,6 +86,9 @@ const Nav = styled.nav`
 
 const SiteIdentity = styled.div`
   margin-right: 2rem;
+  @media (max-width: 400px) {
+    margin-right: 0rem;
+  }
   flex-wrap: nowrap;
   display: flex;
   align-items: center;
