@@ -5,6 +5,10 @@ import { Container, Row, Column as Col } from '../Grid/Grid';
 import { Section, Heading } from 'iw-react-elements';
 import Parser from '../Parser/Parser';
 
+const Spacer = {
+  padding:"50px"
+}
+
 export default (props) => {
   return (
     <Section layout={props.layout}>
@@ -18,7 +22,8 @@ export default (props) => {
             </Col>
           )}
           <Col sm={12}>
-            <Parser>{props.layout.column_1}</Parser>
+            {props.layout.background=="Color" && <br />}
+          <Parser>{props.layout.column_1}</Parser>
           </Col>
         </Row>
       </Container>
