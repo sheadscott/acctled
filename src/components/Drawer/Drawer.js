@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { A } from "../Elements/Elements";
+import Parser from '../Parser/Parser';
 
 // Import arrow
 import { ReactComponent as DownArrowIcon } from "../../img/arrowDown.svg";
@@ -63,7 +64,7 @@ class Drawer extends React.Component {
                   return (
                     <Tertiary className="home-links" key={item.id}>
                       <A key={item.id} data={item}>
-                        {item.title}
+                        <Parser>{item.title}</Parser>
                       </A>
                     </Tertiary>
                   );
@@ -73,7 +74,9 @@ class Drawer extends React.Component {
                 return (
                   <li key={item.id}>
                     <A href={item.url}>
-                      {item.title}
+                      <Parser>
+                        {item.title}
+                      </Parser>
                     </A>
                   </li>
                 );
@@ -84,7 +87,9 @@ class Drawer extends React.Component {
                   return (
                     <Primary key={item.id} className="hasChildren">
                       <A onClick={this.handleClick} data={item}>
-                        {item.title}
+                        <Parser>
+                          {item.title}
+                        </Parser>
                         <ArrowIcon />
                       </A>
                       <SecondaryList>
@@ -92,7 +97,9 @@ class Drawer extends React.Component {
                           <Secondary key={child.id}>
                             <A onClick={this.handleClick} href={child}>
                               <ArrowIcon className="secondary" />
-                              {child.title}
+                              <Parser>
+                                {child.title}
+                              </Parser>
                             </A>
                             {child.children && (
                               <TertiaryList>
