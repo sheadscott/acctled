@@ -54,7 +54,7 @@ export default class HomePage extends Component {
                     style={{ textAlign: "center" }}
                   />
                 </Column>
-
+                {/* Empowering Segement */}
                 <Column
                   width={[1, "65%"]}
                   pl={[0, "1rem"]}
@@ -234,6 +234,9 @@ const Intro = styled(Row)`
   }
   a.button {
     margin: 0 1rem;
+    @media (max-width: 400px) {
+      margin: .5rem 1rem;
+    }
   }
 `;
 
