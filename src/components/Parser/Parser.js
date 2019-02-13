@@ -18,7 +18,8 @@ const parseContent = content => {
       }
 
       if (name === 'iframe') {
-        return (<MediaContainer ratio="56%">{mediaLoaded => <iframe title="iframe content" onLoad={mediaLoaded} {...attribs} />}</MediaContainer>);
+        attribs.style = {};
+        return (<MediaContainer ratio="53%">{mediaLoaded => <iframe title="iframe content" onLoad={mediaLoaded} {...attribs} />}</MediaContainer>);
       }
     }
   })
