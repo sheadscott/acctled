@@ -49,7 +49,7 @@ export default class AccordionComponent extends Component {
             <Col width={1}>
               <Accordion accordion={false}>
                 {this.props.layout.accordion.map((item, index) => (
-                  <AccordionItem>
+                  <AccordionItem key={index}>
                     <StyledAccordionItemTitle>
                       <Parser>{item.title}</Parser>
                       <ArrowIcon role="presentation" />
