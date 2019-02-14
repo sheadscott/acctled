@@ -18,7 +18,17 @@ const parseContent = content => {
       }
 
       if (name === 'iframe') {
-        attribs.style = {};
+        attribs.style = { border: 'none' };
+
+        if (attribs.hasOwnProperty('allowfullscreen')) {
+          attribs.allowFullScreen = attribs.allowfullscreen;
+          delete attribs.allowfullscreen;
+        }
+
+        if (attribs.hasOwnProperty('frameborder')) {
+          attribs.frameBorder = attribs.frameborder;
+          delete attribs.frameborder;
+        }
         return (<MediaContainer ratio="53%">{mediaLoaded => <iframe title="iframe content" onLoad={mediaLoaded} {...attribs} />}</MediaContainer>);
       }
     }
