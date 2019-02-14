@@ -118,7 +118,7 @@ const Wrapper = styled.div`
     // background: pink;
   }
 
-  @media(min-width: 640px) {
+  @media(min-width: 800px) {
     display: block;
   }
 `;

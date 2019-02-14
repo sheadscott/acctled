@@ -145,4 +145,9 @@ const TLED = styled(Link)`
 const Button = styled.button`
   background: transparent;
   border: none;
+  display: block;
+
+  @media (min-width: 800px) {
+    display: none;
+  }
 `;
