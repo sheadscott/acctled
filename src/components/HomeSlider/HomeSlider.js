@@ -49,7 +49,7 @@ export default class HomeSlider extends Component {
           selectedItem={this.state.currentSlide}
           onChange={(slide) => { this.changeCarousel(slide) }}
         >
-          {this.state.slideData.map((slide, index) => {
+          {this.state.slideData.length && this.state.slideData.map((slide, index) => {
             return (
               <Slide key={index} className="slide" id={slide.title} index={index}>
 
@@ -63,7 +63,7 @@ export default class HomeSlider extends Component {
                   <Container>
                     <Row>
                       <SlideText>
-                      <Parser>{slide.description}</Parser>
+                        <Parser>{slide.description}</Parser>
                       </SlideText>
                     </Row>
                   </Container>
