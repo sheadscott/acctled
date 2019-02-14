@@ -11,3 +11,8 @@ it('renders without crashing', () => {
   ReactDOM.render(<App />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
+
+test('toggleSearch works', () => { });
+test('searchSubmitted works', () => { });
+test('toggleSubMenu works', () => { });
+test('cancelSubMenuState works', () => { });

@@ -206,6 +206,7 @@ const CloseButton = styled.button`
   right: 1rem;
   background: transparent;
   border: none;
+  cursor: pointer;
 `
 
 const PrimaryList = styled.ul``;
@@ -315,7 +316,7 @@ const ArrowIcon = styled(DownArrowIcon)`
   left: 0.5rem;
   width: 1.5rem;
   transition: transform 0.3s ease-out;
-  pointer-events: none;
+  // pointer-events: none;
   fill: rgb(26, 82, 118);
 
   &.secondary {
