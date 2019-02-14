@@ -5,6 +5,7 @@ import { Container, Row, Column as Col } from '../Grid/Grid';
 import { Section, Heading } from 'iw-react-elements';
 import Parser from '../Parser/Parser';
 
+
 export default (props) => {
   return (
     <Section layout={props.layout}>
@@ -17,7 +18,7 @@ export default (props) => {
               </Heading>
             </Col>
           )}
-          <Col sm={12}>
+          <Col sm={12} style={{paddingTop: props.layout.background=="Color"&& !props.layout.heading ? "1rem" : '0rem'}}>
             <Parser>{props.layout.column_1}</Parser>
           </Col>
         </Row>
