@@ -191,7 +191,9 @@ const CarouselControl = styled.button`
     width: 100%;
     opacity: 1;
     position: absolute;
-    bottom: 0;
+    // bottom: 0;
+    left: 0;
+    top: 0;
     z-index:-1;
     transition: transform 0.3s;
   }
