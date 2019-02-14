@@ -110,7 +110,6 @@ const WpLinks = styled(Column)`
     list-style: none inside none;
     page-break-inside: avoid;
     break-inside: avoid;
-    display: inline-block;
     font-size: 0.9em;
     margin: 0 0 1rem 0;
     padding: 0;
