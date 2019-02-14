@@ -181,20 +181,16 @@ const DropdownMenu = styled(Dropdown)`
     }
   }
   .iw-dropdown__submenu {
-    columns: 1;
-    column-gap: 2rem;
+    // column-gap: 2rem;
+    // columns: 5
     margin: 0 auto;
     max-width: 60em;
     padding: 0 1rem;
-    @media (min-width: 500px) {
-      columns: 2;
-    }
-    @media (min-width: 600px) {
-      columns: 3;
-    }
-    @media (min-width: 900px) {
-      columns: 5;
-    }
+
+      display: flex;
+      & ul:not(:last-child) {
+        margin-right: 2rem !important;
+      }
   }
   .iw-dropdown__subItem {
     margin-bottom: 1rem;
