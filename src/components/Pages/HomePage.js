@@ -6,6 +6,7 @@ import { Container, Row, Column } from "../Grid/Grid";
 
 import HomeSlider from "../HomeSlider/HomeSlider";
 import EventList from "../EventList/EventList";
+import Parser from "../Parser/Parser"
 
 import { ReactComponent as YouTube } from "../../img/youtube.svg";
 import { ReactComponent as Twitter } from "../../img/twitter.svg";
@@ -49,10 +50,10 @@ export default class HomePage extends Component {
             <React.Fragment>
               <Intro>
                 <Column width={[1, "35%"]} pr={[0, "1rem"]} order={[2, 1]}>
-                  <section
-                    dangerouslySetInnerHTML={{ __html: ACFData.sidebar_left }}
-                    style={{ textAlign: "center" }}
-                  />
+                  <section style={{ textAlign: "center" }}>
+                    <Parser>{ACFData.sidebar_left}</Parser>
+                  </section>
+                  
                 </Column>
                 {/* Empowering Segement */}
                 <Column
@@ -62,11 +63,7 @@ export default class HomePage extends Component {
                   order={[1, 2]}
                 >
                   {pageContent && (
-                    <section
-                      dangerouslySetInnerHTML={{
-                        __html: pageContent.content.rendered
-                      }}
-                    />
+                    <section><Parser>{pageContent.content.rendered}</Parser></section>
                   )}
                 </Column>
               </Intro>
@@ -78,19 +75,11 @@ export default class HomePage extends Component {
             <Row>
               <HR my={"4rem"} />
               <Column width={[1, 1 / 2]}>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: this.state.pageSections.featured.column_1
-                  }}
-                />
+                <div><Parser>{this.state.pageSections.featured.column_1}</Parser></div>
               </Column>
 
               <Column width={[1, 1 / 2]} pl={[0, "4rem"]}>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: this.state.pageSections.featured.column_2
-                  }}
-                />
+                <div><Parser>{this.state.pageSections.featured.column_2}</Parser></div>
               </Column>
               <HR mt={"3rem"} mb={"2rem"} />
             </Row>
@@ -110,31 +99,19 @@ export default class HomePage extends Component {
                         underline={false}
                         caps={true}
                         mb={'1.5rem'}
-                        dangerouslySetInnerHTML={{
-                          __html: this.state.pageSections
-                            .culturallyResponsiveTeaching.heading
-                        }}
-                      />
+                      >
+                        <Parser>{this.state.pageSections.culturallyResponsiveTeaching.heading}</Parser>
+                      </Heading>
                       <Row>
                         <Column
                           width={[1, 1, 1 / 2]}
                           px={0}
                           style={{ paddingRight: "2rem" }}
                         >
-                          <div
-                            dangerouslySetInnerHTML={{
-                              __html: this.state.pageSections
-                                .culturallyResponsiveTeaching.column_1
-                            }}
-                          />
+                          <div><Parser>{this.state.pageSections.culturallyResponsiveTeaching.column_1}</Parser></div>
                         </Column>
                         <Column width={[1, 1, 1 / 2]}>
-                          <div
-                            dangerouslySetInnerHTML={{
-                              __html: this.state.pageSections
-                                .culturallyResponsiveTeaching.column_2
-                            }}
-                          />
+                          <div><Parser>{this.state.pageSections.culturallyResponsiveTeaching.column_2}</Parser></div>
                         </Column>
                       </Row>
                     </Column>
@@ -151,28 +128,19 @@ export default class HomePage extends Component {
                       underline={false}
                       caps={true}
                       mb={'1.5rem'}
-                      dangerouslySetInnerHTML={{
-                        __html: this.state.pageSections.spotlight.heading
-                      }}
-                    />
+                    >
+                      <Parser>{this.state.pageSections.spotlight.heading}</Parser>
+                    </Heading>
                     <Row>
                       <Column
                         width={[1, 1, 1 / 2]}
                         px={0}
                         style={{ paddingRight: "2rem" }}
                       >
-                        <div
-                          dangerouslySetInnerHTML={{
-                            __html: this.state.pageSections.spotlight.column_1
-                          }}
-                        />
+                        <div><Parser>{this.state.pageSections.spotlight.column_1}</Parser></div>
                       </Column>
                       <Column width={[1, 1, 1 / 2]}>
-                        <div
-                          dangerouslySetInnerHTML={{
-                            __html: this.state.pageSections.spotlight.column_2
-                          }}
-                        />
+                        <div><Parser>{this.state.pageSections.spotlight.column_2}</Parser></div>
                       </Column>
                     </Row>
                   </Column>

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Container } from '../Grid/Grid';
 import MediaContainer from '../MediaContainer/MediaContainer';
 import { Img } from '../Elements/Elements';
+import Parser from '../Parser/Parser';
 import uuidv1 from 'uuid/v1';
 
 import 'flickity/css/flickity.css';
@@ -43,7 +44,11 @@ class FlickityCarousel extends React.Component {
                 </Cell>
               )
             }
-            return <Cell key={`carousel-${this.state.id}-${index}`} height={this.props.height} dangerouslySetInnerHTML={{ __html: item.html_markup }} />
+            return (
+              <Cell key={`carousel-${this.state.id}-${index}`} height={this.props.height}>
+                <Parser>{item.html_markup}</Parser>
+              </Cell>
+            )
           })}
         </Carousel>
       </Container>

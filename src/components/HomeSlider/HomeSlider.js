@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { Img } from '../Elements/Elements';
 import MediaContainer from '../MediaContainer/MediaContainer';
 import { Container, Row, Column } from '../Grid/Grid';
+import Parser from '../Parser/Parser';
 
 export default class HomeSlider extends Component {
   state = {
@@ -61,7 +62,9 @@ export default class HomeSlider extends Component {
                 <div className="legend">
                   <Container>
                     <Row>
-                      <SlideText dangerouslySetInnerHTML={{ __html: slide.description }} />
+                      <SlideText>
+                      <Parser>{slide.description}</Parser>
+                      </SlideText>
                     </Row>
                   </Container>
                 </div>
