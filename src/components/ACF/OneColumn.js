@@ -5,9 +5,6 @@ import { Container, Row, Column as Col } from '../Grid/Grid';
 import { Section, Heading } from 'iw-react-elements';
 import Parser from '../Parser/Parser';
 
-const Spacer = {
-  paddingTop:"100px"
-}
 
 export default (props) => {
   return (
