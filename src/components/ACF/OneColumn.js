@@ -6,7 +6,7 @@ import { Section, Heading } from 'iw-react-elements';
 import Parser from '../Parser/Parser';
 
 const Spacer = {
-  padding:"50px"
+  paddingTop:"100px"
 }
 
 export default (props) => {
@@ -21,9 +21,8 @@ export default (props) => {
               </Heading>
             </Col>
           )}
-          <Col sm={12}>
-            {props.layout.background=="Color" && <br />}
-          <Parser>{props.layout.column_1}</Parser>
+          <Col sm={12} style={{paddingTop: props.layout.background=="Color"&& !props.layout.heading ? "1rem" : '0rem'}}>
+            <Parser>{props.layout.column_1}</Parser>
           </Col>
         </Row>
       </Container>
