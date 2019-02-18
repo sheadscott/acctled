@@ -14,7 +14,10 @@ export default class EventList extends Component {
       `https://spreadsheets.google.com/feeds/list/${sheetId}/1/public/values?alt=json`
     ).then(response => {
       const events = response.data.feed.entry;
-      events.sort((a, b) => {
+      const filteredEvents = events.filter(event => {
+        return new Date(event.gsx$dateforautocheck.$t.replace(/.*?,\s/, "")).valueOf() > Date.now();
+      })
+      .sort((a, b) => {
         // Take the day of the week off the front of the string and convert to Date # value
         // Probably unnecessary since the events are returned in the order in sheet
         a = new Date(a.gsx$dateforautocheck.$t.replace(/.*?,\s/, "")).valueOf();
@@ -22,7 +25,7 @@ export default class EventList extends Component {
         return a - b;
       });
       console.log(events);
-      this.setState({ events });
+      this.setState({ events: filteredEvents });
     });
   }
 
