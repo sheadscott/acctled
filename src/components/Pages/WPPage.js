@@ -4,6 +4,7 @@ import decode from "unescape";
 import styled from 'styled-components';
 import { Section, Heading } from 'iw-react-elements';
 import { Redirect } from 'react-router';
+import {Helmet} from 'react-helmet';
 
 import { Container, Row, Column } from '../Grid/Grid';
 import ACF from '../ACF/ACF';
@@ -13,7 +14,8 @@ import Parser from '../Parser/Parser';
 export default class WPPage extends Component {
   state = {
     slug: '',
-    pageContent: 'some value'
+    pageContent: 'some value',
+    pageTitle: 'TLED Site'
   }
 
   getData(slug) {
@@ -27,19 +29,26 @@ export default class WPPage extends Component {
       .then(response => {
         console.log("Response: ", response);
         const html = response.data[0];
+        let pageTitle = '';
+        try{
+          pageTitle = html.title.rendered;
+        }catch(e){
+          console.log(e)
+        }
         this.setState({
           pageContent: html,
-          slug: slug
+          slug: slug,
+          pageTitle: pageTitle
         })
       });
   }
-  
+
   getSlug = params => {
       return params.param5 || params.param4 || params.param3 || params.param2 || params.param1;
   }
 
   componentDidMount() {
-    
+
     this.getData(this.getSlug(this.props.match.params));
   }
 
@@ -59,7 +68,7 @@ export default class WPPage extends Component {
 
   render() {
     const pageContent = this.state.pageContent;
-
+    const pageTitle = this.state.pageTitle;
     const ACFData = pageContent ? this.state.pageContent.acf : null;
 
     if (!pageContent) {
@@ -69,6 +78,9 @@ export default class WPPage extends Component {
     return (
       <React.Fragment>
         <Container>
+        <Helmet>
+            <title>{pageTitle}</title>
+        </Helmet>
           {ACFData && ACFData.hero_content && (
             <div className="hero" style={{ marginTop: '1.5rem' }}>
               {ACFData.hero_content[0].acf_fc_layout && <Hero data={ACFData.hero_content[0]} />}

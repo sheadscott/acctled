@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import axios from "axios";
 import styled from 'styled-components';
 import Parser from 'html-react-parser';
+import {Helmet} from 'react-helmet';
 import { Container } from '../Grid/Grid';
 import { A, Section, Heading } from '../Elements/Elements';
+
 
 class SearchPage extends Component {
 
@@ -28,7 +30,7 @@ class SearchPage extends Component {
       }
     });
   }
-  // This method updates state with the returned object 
+  // This method updates state with the returned object
   // static getDerivedStateFromProps(nextProps, prevState){
   //   if(nextProps.query!==prevState.query){
   //     return { query: nextProps.query};
@@ -37,14 +39,14 @@ class SearchPage extends Component {
   // }
 
   // static getDerivedStateFromProps(nextProps, prevState){
-  //   const changedProps = nextProps.match.params.query!==prevState.query ?  
-  //     { query: nextProps.match.params.query } 
+  //   const changedProps = nextProps.match.params.query!==prevState.query ?
+  //     { query: nextProps.match.params.query }
   //     : null;
   //   return changedProps;
   // }
 
   componentDidUpdate(prevProps, prevState) {
-    
+
     // this.setState({query: this.props.match.params.query}, this.getSearchResults);
 
     if(prevProps.match.params.query!==this.props.match.params.query){
@@ -59,13 +61,16 @@ class SearchPage extends Component {
   render() {
   return (
     <Container>
+      <Helmet>
+            <title>Search Page</title>
+      </Helmet>
       <Section>
         <Heading as="h1" caps={true} underline={true}>Search Results</Heading>
         { this.state.searchResults && (
           this.state.searchResults.map(result => (
             <SearchResult key={result.cacheId}>
               <Heading as="h2">
-                <A href={result.link} hovercolor="purple">{result.title}</A> 
+                <A href={result.link} hovercolor="purple">{result.title}</A>
               </Heading>
               { Parser(result.htmlSnippet) }
             </SearchResult>
@@ -83,7 +88,7 @@ class SearchPage extends Component {
 export default SearchPage;
 
 const SearchResult = styled.div`
-  padding: 1rem 0;  
+  padding: 1rem 0;
 
   a {
     text-decoration: underline;
