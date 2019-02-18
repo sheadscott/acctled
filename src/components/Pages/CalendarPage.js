@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Container, Row, Column } from "../Grid/Grid";
+import {Helmet} from 'react-helmet';
 
 import CalendarGrid from "../CalendarGrid/CalendarGrid";
 import { A, Heading } from "../Elements/Elements";
@@ -9,6 +10,9 @@ export default function CalendarPage() {
   return (
     <Wrapper>
       <Container mt={'1.5rem'}>
+      <Helmet>
+        <title>TLED Calendar</title>
+      </Helmet>
         <Row>
           <Column width={1}>
             <Heading as="h1" caps={true} underline={true}>

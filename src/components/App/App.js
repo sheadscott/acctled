@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
+import {Helmet} from "react-helmet";
 
 import Drawer from "../Drawer/Drawer";
 import Search from "../Search/Search";
@@ -110,6 +111,11 @@ class App extends Component {
       <ThemeProvider theme={theme}>
         <Router>
           <div className="App">
+            <Helmet>
+              <meta charSet="utf-8" />
+              <title>TLED</title>
+              link rel="canonical" href="https://tled.austincc.edu" />
+            </Helmet>
             <Header className="App-header">
               <Drawer
                 drawerState={this.state.drawerExpanded}
