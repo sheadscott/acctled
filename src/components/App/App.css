@@ -11,3 +11,11 @@ img.alignright {
   float: right;
   margin: 0 0 1rem 1.5rem;
 }
+
+.wp-caption-text {
+  font-size: 0.75rem;
+  text-align: right;
+  color: #696969;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
