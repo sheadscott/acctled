@@ -1,26 +1,38 @@
 import React from "react";
 import styled from "styled-components";
 import { Container, Row, Column } from "../Grid/Grid";
-import {Helmet} from 'react-helmet';
+import { Helmet } from 'react-helmet';
 
 import CalendarGrid from "../CalendarGrid/CalendarGrid";
 import { A, Heading } from "../Elements/Elements";
+import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
+
+const breadcrumbData = [
+  {
+    title: 'Home',
+    url: '/'
+  },
+  {
+    title: 'Calendar'
+  }
+]
 
 export default function CalendarPage() {
   return (
     <Wrapper>
-      <Container mt={'1.5rem'}>
-      <Helmet>
-        <title>TLED Calendar</title>
-      </Helmet>
+      <Container>
+        <Helmet>
+          <title>TLED Calendar</title>
+        </Helmet>
+        <Breadcrumbs data={breadcrumbData} />
         <Row>
           <Column width={1}>
             <Heading as="h1" caps={true} underline={true}>
               Calendar
             </Heading>
-<ButtonContainer>
-<A href="https://goo.gl/forms/0qht2jFfY2gqACcq2" className="button">Submit Event</A>
-</ButtonContainer>
+            <ButtonContainer>
+              <A href="https://goo.gl/forms/0qht2jFfY2gqACcq2" className="button">Submit Event</A>
+            </ButtonContainer>
             <CalendarGrid />
           </Column>
         </Row>

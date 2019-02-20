@@ -4,12 +4,14 @@ import decode from "unescape";
 import styled from 'styled-components';
 import { Section, Heading } from 'iw-react-elements';
 import { Redirect } from 'react-router';
-import {Helmet} from 'react-helmet';
+import { Helmet } from 'react-helmet';
 
 import { Container, Row, Column } from '../Grid/Grid';
 import ACF from '../ACF/ACF';
 import Hero from '../ACF/Hero';
 import Parser from '../Parser/Parser';
+import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
+import { replaceUrl } from '../../helpers';
 
 export default class WPPage extends Component {
   state = {
@@ -27,12 +29,12 @@ export default class WPPage extends Component {
         console.error("*** ERROR *** WPPage.js: ", error);
       })
       .then(response => {
-        console.log("Response: ", response);
+        // console.log("Response: ", response);
         const html = response.data[0];
         let pageTitle = '';
-        try{
+        try {
           pageTitle = html.title.rendered;
-        }catch(e){
+        } catch (e) {
           console.log(e)
         }
         this.setState({
@@ -40,11 +42,30 @@ export default class WPPage extends Component {
           slug: slug,
           pageTitle: pageTitle
         })
+
+        Axios.get(`https://instruction.austincc.edu/tled/wp-json/bcn/v1/post/${html.id}`)
+          .catch(function (error) {
+            console.error('breadcrumb error', error);
+          })
+          .then(response => {
+            // console.log('breadcrumb data', response.data.itemListElement.slice(1));
+            const breadcrumbData = response.data.itemListElement.slice(1);
+            breadcrumbData[0].item.name = "Home";
+
+            const cleanedCrumbUrls = breadcrumbData.map(crumb => {
+              crumb.item['@id'] = replaceUrl(crumb.item['@id'], '/');
+              return crumb;
+            })
+
+            this.setState({
+              breadcrumbs: cleanedCrumbUrls
+            })
+          })
       });
   }
 
   getSlug = params => {
-      return params.param5 || params.param4 || params.param3 || params.param2 || params.param1;
+    return params.param5 || params.param4 || params.param3 || params.param2 || params.param1;
   }
 
   componentDidMount() {
@@ -54,7 +75,7 @@ export default class WPPage extends Component {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const getSlug = params => {
-        return params.param5 || params.param4 || params.param3 || params.param2 || params.param1;
+      return params.param5 || params.param4 || params.param3 || params.param2 || params.param1;
     }
     const nextSlug = getSlug(nextProps.match.params);
     return nextSlug !== prevState.slug ? { slug: nextSlug } : null;
@@ -78,14 +99,16 @@ export default class WPPage extends Component {
     return (
       <React.Fragment>
         <Container>
-        <Helmet>
+          <Helmet>
             <title>{pageTitle}</title>
-        </Helmet>
+          </Helmet>
           {ACFData && ACFData.hero_content && (
             <div className="hero" style={{ marginTop: '1.5rem' }}>
               {ACFData.hero_content[0].acf_fc_layout && <Hero data={ACFData.hero_content[0]} />}
             </div>
           )}
+
+          <Breadcrumbs data={this.state.breadcrumbs} />
 
           {/*
               Yeah this isn't very DRY
@@ -107,7 +130,7 @@ export default class WPPage extends Component {
                   {pageContent && (<Section>
                     <Heading as="h1" underline={true} caps={true}>{decode(pageContent.title.rendered)}</Heading>
                     <div>
-                    <Parser>{pageContent.content.rendered}</Parser>
+                      <Parser>{pageContent.content.rendered}</Parser>
                     </div>
                   </Section>)}
                 </Column>
