@@ -51,9 +51,10 @@ export default class WPPage extends Component {
             // console.log('breadcrumb data', response.data.itemListElement.slice(1));
             const breadcrumbData = response.data.itemListElement.slice(1);
             breadcrumbData[0].item.name = "Home";
+            breadcrumbData[0].item['@id'] = '/';
 
             const cleanedCrumbUrls = breadcrumbData.map(crumb => {
-              crumb.item['@id'] = replaceUrl(crumb.item['@id'], '/');
+              crumb.item['@id'] = replaceUrl(crumb.item['@id']);
               crumb.item.name = decode(crumb.item.name);
               return crumb;
             })

@@ -156,7 +156,8 @@ $header-font-family: $body-font-family;
 $header-font-weight: 700;
 $header-font-style: normal;
 $font-family-monospace: Consolas, 'Liberation Mono', Courier, monospace;
-$header-color: rgb(26, 82, 118);
+// $header-color: rgb(26, 82, 118);
+$header-color:$body-font-color;
 $header-lineheight: 1.4;
 $header-margin-bottom: 0.5rem;
 $header-styles: (
