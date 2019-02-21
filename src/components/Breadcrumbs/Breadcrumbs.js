@@ -10,7 +10,7 @@ export default function Breadcrumbs(props) {
         {props.data && props.data[0].item && props.data.map(({ item }, index, arr) => {
           // last item in list
           if (index + 1 === arr.length) {
-            return (<li role="menuitem" aria-current="page" class="current">{item.name}</li>)
+            return (<li role="menuitem" aria-current="page" className="current">{item.name}</li>)
           }
 
           // anything else
@@ -22,7 +22,7 @@ export default function Breadcrumbs(props) {
           props.data && !props.data[0].item && props.data.map((item, index, arr) => {
             // last item in list
             if (index + 1 === arr.length) {
-              return (<li role="menuitem" aria-current="page" class="current">{item.title}</li>)
+              return (<li role="menuitem" aria-current="page" className="current">{item.title}</li>)
             }
 
             // anything else

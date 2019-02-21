@@ -54,7 +54,7 @@ export default class HomeSlider extends Component {
               <Slide key={index} className="slide" id={slide.title} index={index}>
 
 
-                <MediaContainer ratio="41.4%" className="slide__wrapper">
+                <MediaContainer ratio="41.4%" maxHeight="700px" className="slide__wrapper">
                   {mediaLoaded => <Img src={slide.url} sizes={slide.sizes} alt={slide.alt} onLoad={mediaLoaded} className="slide__image" />}
                 </MediaContainer>
 
