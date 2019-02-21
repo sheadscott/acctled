@@ -54,6 +54,7 @@ export default class WPPage extends Component {
 
             const cleanedCrumbUrls = breadcrumbData.map(crumb => {
               crumb.item['@id'] = replaceUrl(crumb.item['@id'], '/');
+              crumb.item.name = decode(crumb.item.name);
               return crumb;
             })
 
@@ -100,7 +101,7 @@ export default class WPPage extends Component {
       <React.Fragment>
         <Container>
           <Helmet>
-            <title>{pageTitle}</title>
+            <title>{decode(pageTitle)}</title>
           </Helmet>
           {ACFData && ACFData.hero_content && (
             <div className="hero" style={{ marginTop: '1.5rem' }}>
