@@ -184,13 +184,14 @@ const DropdownMenu = styled(Dropdown)`
     // column-gap: 2rem;
     // columns: 5
     margin: 0 auto;
-    max-width: 60em;
+    max-width: 75em;
     padding: 0 1rem;
+    display: flex;
+    justify-content: center;
 
-      display: flex;
-      & ul:not(:last-child) {
-        margin-right: 2rem !important;
-      }
+    & ul:not(:last-child) {
+      margin-right: 2rem !important;
+    }
   }
   .iw-dropdown__subItem {
     margin-bottom: 1rem;
