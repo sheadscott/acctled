@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import axios from "axios";
-import "./carousel.scss";
-import { Carousel } from "react-responsive-carousel";
+import React, { Component } from 'react';
+import axios from 'axios';
+import './carousel.scss';
+import { Carousel } from 'react-responsive-carousel';
 import styled from 'styled-components';
 import { Img } from '../Elements/Elements';
 import MediaContainer from '../MediaContainer/MediaContainer';
@@ -16,12 +16,12 @@ export default class HomeSlider extends Component {
 
   componentDidMount() {
     axios
-      .get("https://instruction.austincc.edu/tled/wp-json/acf/v3/pages/226")
+      .get('https://instruction.austincc.edu/tled/wp-json/acf/v3/pages/226')
       .then(response => {
         const slideData = [];
         const slideShowItems =
           response.data.acf.hero_content[0].carousel_content;
-        slideShowItems.forEach(function (slide) {
+        slideShowItems.forEach(function(slide) {
           const info = {};
           info.alt = slide.image_content.alt;
           info.title = slide.image_content.title;
@@ -35,9 +35,9 @@ export default class HomeSlider extends Component {
       });
   }
 
-  changeCarousel = (slide) => {
+  changeCarousel = slide => {
     this.setState({ currentSlide: slide });
-  }
+  };
   render() {
     return (
       <React.Fragment>
@@ -47,38 +47,71 @@ export default class HomeSlider extends Component {
           showStatus={false}
           showIndicators={false}
           selectedItem={this.state.currentSlide}
-          onChange={(slide) => { this.changeCarousel(slide) }}
+          onChange={slide => {
+            this.changeCarousel(slide);
+          }}
         >
-          {this.state.slideData.length && this.state.slideData.map((slide, index) => {
-            return (
-              <Slide key={index} className="slide" id={slide.title} index={index}>
+          {this.state.slideData.length &&
+            this.state.slideData.map((slide, index) => {
+              return (
+                <Slide
+                  key={index}
+                  className="slide"
+                  id={slide.title}
+                  index={index}
+                >
+                  <MediaContainer
+                    ratio="41.4%"
+                    maxHeight="700px"
+                    className="slide__wrapper"
+                  >
+                    {mediaLoaded => (
+                      <Img
+                        src={slide.url}
+                        sizes={slide.sizes}
+                        alt={slide.alt}
+                        onLoad={mediaLoaded}
+                        className="slide__image"
+                      />
+                    )}
+                  </MediaContainer>
 
-
-                <MediaContainer ratio="41.4%" maxHeight="700px" className="slide__wrapper">
-                  {mediaLoaded => <Img src={slide.url} sizes={slide.sizes} alt={slide.alt} onLoad={mediaLoaded} className="slide__image" />}
-                </MediaContainer>
-
-
-                <div className="legend">
-                  <Container>
-                    <Row>
-                      <SlideText>
-                        <Parser>{slide.description}</Parser>
-                      </SlideText>
-                    </Row>
-                  </Container>
-                </div>
-              </Slide>
-            );
-          })}
+                  <div className="legend">
+                    <Container>
+                      <Row>
+                        <SlideText>
+                          <Parser>{slide.description}</Parser>
+                        </SlideText>
+                      </Row>
+                    </Container>
+                  </div>
+                </Slide>
+              );
+            })}
         </Carousel>
-
 
         <CarouselControls>
           {this.state.slideData.map((item, index) => (
             <li key={`thumbnail-${item.url}`}>
-              <CarouselControl onClick={() => { this.changeCarousel(index) }} className={this.state.currentSlide === index ? 'active' : null} bg={item.url} title={item.title} index={index}>
-                <div style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden' }}>Skip to Slide {index + 1}</div>
+              <CarouselControl
+                onClick={() => {
+                  this.changeCarousel(index);
+                }}
+                className={this.state.currentSlide === index ? 'active' : null}
+                bg={item.url}
+                title={item.title}
+                index={index}
+              >
+                <div
+                  style={{
+                    position: 'absolute',
+                    width: 1,
+                    height: 1,
+                    overflow: 'hidden'
+                  }}
+                >
+                  Skip to Slide {index + 1}
+                </div>
                 <div>{item.title}</div>
               </CarouselControl>
             </li>
@@ -89,13 +122,7 @@ export default class HomeSlider extends Component {
   }
 }
 
-const colors = [
-  '#295b82',
-  '#7d484c',
-  '#ad8d6e',
-  '#20a2b1',
-  '#9977a7'
-];
+const colors = ['#295b82', '#7d484c', '#ad8d6e', '#20a2b1', '#9977a7'];
 
 const Slide = styled.div`
   h2 {
@@ -132,9 +159,9 @@ const SlideText = styled(Column)`
   a.button {
     display: inline-block;
     margin-top: 2rem;
-    background: white; 
-    padding: 1rem 2rem; 
-    text-decoration: none; 
+    background: white;
+    padding: 1rem 2rem;
+    text-decoration: none;
     color: #113953;
   }
 `;
@@ -179,7 +206,7 @@ const CarouselControl = styled.button`
   font-weight: 700;
   font-size: 0.9rem;
   font-family: Montserrat;
-  text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
   outline: none;
   margin-bottom: 0.75rem;
 
@@ -194,7 +221,7 @@ const CarouselControl = styled.button`
     // bottom: 0;
     left: 0;
     top: 0;
-    z-index:-1;
+    z-index: -1;
     transition: transform 0.3s;
   }
 
@@ -213,7 +240,7 @@ const CarouselControl = styled.button`
       transform: translate3d(0, 0.75rem, 0);
     }
   }
-  
+
   background-color: #7fb7e3;
   background-color: ${props => colors[props.index]};
 
@@ -224,11 +251,11 @@ const CarouselControl = styled.button`
   background-blend-mode: soft-light;
   background-size: cover;
 
-img {
-  display: block;
-  width: 100 %;
-  height: 100 %;
-  object-fit: cover;
-  object-position: center;
-}
+  img {
+    display: block;
+    width: 100 %;
+    height: 100 %;
+    object-fit: cover;
+    object-position: center;
+  }
 `;
