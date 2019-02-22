@@ -5,7 +5,7 @@ import Parser from 'html-react-parser';
 import { Img } from '../Elements/Elements';
 
 export default function Hero(props) {
-  console.log(props.data.acf_fc_layout);
+  // console.log(props.data.acf_fc_layout);
   const layout = props.data.acf_fc_layout;
 
   if (layout === 'html') {
@@ -20,7 +20,7 @@ export default function Hero(props) {
 
         <HTMLContentBox>{Parser(props.data.html_content, {
           replace: function (data) {
-            console.log('element', data.name, data);
+            // console.log('element', data.name, data);
             return data.name === 'iframe' ? (<MediaContainer ratio="30%">{mediaLoaded => <iframe title="iframe content" onLoad={mediaLoaded} {...data.attribs} />}</MediaContainer>) : null;
           }
         })}</HTMLContentBox>

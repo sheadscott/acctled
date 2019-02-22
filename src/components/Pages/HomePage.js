@@ -53,7 +53,7 @@ export default class HomePage extends Component {
                   <section style={{ textAlign: "center" }}>
                     <Parser>{ACFData.sidebar_left}</Parser>
                   </section>
-                  
+
                 </Column>
                 {/* Empowering Segement */}
                 <Column
@@ -162,7 +162,7 @@ export default class HomePage extends Component {
               </StayUpdated>
               <SocialMediaList>
                 <li>
-                  <a href="https://sites.austincc.edu/tledupdates/newsletter/" className="button">
+                  <a href="https://visitor.r20.constantcontact.com/manage/optin?v=001FlfxD6VXczHtBgSW4c7sKZ6ZZ9JT6B4sGA-YwBavyDl_eONpTi0Tuy1dZmuL_qMyhMgAC4ilOdju5zlRCGpyRDfKiRQqWXWi-IdIg7hPoxQ%3D" className="button">
                     TLED NEWSLETTER
                   </a>
                 </li>

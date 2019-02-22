@@ -6,7 +6,7 @@ import Accordion from './Accordion';
 import FlickityCarousel from '../Flickity/Flickity';
 
 export default (props) => {
-  console.log('layouts', props.layouts);
+  // console.log('layouts', props.layouts);
   return (
     <React.Fragment>
       {props.layouts && props.layouts.map((layout, index) => {

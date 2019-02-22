@@ -8,11 +8,11 @@ const parseContent = content => {
   return HTMLParser(content, {
     replace: function ({ name, attribs, children }) {
       if (name === "a" && attribs.href) {
-        console.log(attribs);
+        // console.log(attribs);
         const url = attribs.href.match(/\/uploads\//) ?
           attribs.href :
           attribs.href.replace("https://instruction.austincc.edu/tled", "");
-        if(attribs.target === "_blank") {
+        if (attribs.target === "_blank") {
           return <A href={url} className={attribs.class} target="_blank" rel="noopener">{domToReact(children)}</A>;
         }
         return <A href={url} className={attribs.class}>{domToReact(children)}</A>;

@@ -18,7 +18,7 @@ export default (props) => {
               </Heading>
             </Col>
           )}
-          <Col sm={12} style={{paddingTop: props.layout.background=="Color"&& !props.layout.heading ? "1rem" : '0rem'}}>
+          <Col sm={12} style={{ paddingTop: props.layout.background === "Color" && !props.layout.heading ? "1rem" : '0rem' }}>
             <Parser>{props.layout.column_1}</Parser>
           </Col>
         </Row>

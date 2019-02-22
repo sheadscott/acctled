@@ -20,13 +20,23 @@ class MediaContainer extends React.Component {
 
   render() {
     return (
-      <Container mediaLoaded={this.state.mediaLoaded} {...this.props}>
-        {this.state.mediaLoaded ? null : <Spinner />}
-        {this.props.children(this.onMediaLoad)}
-      </Container>
+      <Wrapper maxHeight={this.props.maxHeight}>
+        <Container mediaLoaded={this.state.mediaLoaded} {...this.props}>
+          {this.state.mediaLoaded ? null : <Spinner />}
+          {this.props.children(this.onMediaLoad)}
+        </Container>
+      </Wrapper>
     );
   }
 }
+
+const Wrapper = styled.div`
+  max-height: ${props => props.maxHeight || 'auto'};
+  display: flex;
+  align-items: center;
+  width: 100%;
+  overflow: hideen;
+`;
 
 const Container = styled.div`
   width: 100%;
@@ -55,6 +65,7 @@ const Container = styled.div`
   img {
     object-fit: cover;
     object-position: center;
+    font-family: 'object-fit: cover; object-position: center;';
   }
 `;
 
