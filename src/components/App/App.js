@@ -15,6 +15,7 @@ import HomePage from "../Pages/HomePage";
 import CalendarPage from "../Pages/CalendarPage";
 import ReportsPage from "../Pages/ReportsPage";
 import SearchPage from "../Pages/SearchPage";
+import StaffDirectoryPage from "../Pages/StaffDirectoryPage";
 import NotFoundPage from "../Pages/NotFoundPage";
 
 import theme from './theme';
@@ -144,9 +145,10 @@ class App extends Component {
             <Main>
               <Switch>
                 <Route path="/" exact component={HomePage} />
-                <Route path="/search/:query" component={SearchPage} />
                 <Route path="/calendar" component={CalendarPage} />
+                <Route path="/directory" component={StaffDirectoryPage} />
                 <Route path="/reports" component={ReportsPage} />
+                <Route path="/search/:query" component={SearchPage} />
                 <Route path="/404" component={NotFoundPage} />
                 <Route path="/:param1?/:param2?/:param3?/:param4?/:param5?" component={WPPage} />
               </Switch>
