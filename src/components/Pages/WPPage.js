@@ -147,6 +147,7 @@ export default class WPPage extends Component {
                 >
                   <Aside
                     backgroundColor={
+                      ACFData.sidebar_left_background &&
                       ACFData.sidebar_left_background.background === 'Color'
                         ? ACFData.sidebar_left_background.background_color
                         : null
@@ -177,6 +178,7 @@ export default class WPPage extends Component {
                 >
                   <Aside
                     backgroundColor={
+                      ACFData.sidebar_right_background &&
                       ACFData.sidebar_right_background.background === 'Color'
                         ? ACFData.sidebar_right_background.background_color
                         : null
@@ -207,6 +209,7 @@ export default class WPPage extends Component {
                 <Column width={[1, 1 / 4]} pl={[0, '2rem']}>
                   <Aside
                     backgroundColor={
+                      ACFData.sidebar_right_background &&
                       ACFData.sidebar_right_background.background === 'Color'
                         ? ACFData.sidebar_right_background.background_color
                         : null
@@ -226,6 +229,7 @@ export default class WPPage extends Component {
                 <Column width={[1, 1 / 4]} pr={[0, '2rem']} order={[2, 1]}>
                   <Aside
                     backgroundColor={
+                      ACFData.sidebar_left_background &&
                       ACFData.sidebar_left_background.background === 'Color'
                         ? ACFData.sidebar_left_background.background_color
                         : null
