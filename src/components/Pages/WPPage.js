@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import decode from "unescape";
+import decode from 'unescape';
 import styled from 'styled-components';
 import { Section, Heading } from 'iw-react-elements';
 import { Redirect } from 'react-router';
@@ -18,15 +18,17 @@ export default class WPPage extends Component {
     slug: '',
     pageContent: 'some value',
     pageTitle: 'TLED Site'
-  }
+  };
 
   getData(slug) {
     console.log('component received new props', slug);
 
-    Axios.get(`https://instruction.austincc.edu/tled/wp-json/wp/v2/pages?slug=${slug}`)
-      .catch(function (error) {
+    Axios.get(
+      `https://instruction.austincc.edu/tled/wp-json/wp/v2/pages?slug=${slug}`
+    )
+      .catch(function(error) {
         // handle error
-        console.error("*** ERROR *** WPPage.js: ", error);
+        console.error('*** ERROR *** WPPage.js: ', error);
       })
       .then(response => {
         // console.log("Response: ", response);
@@ -35,50 +37,63 @@ export default class WPPage extends Component {
         try {
           pageTitle = html.title.rendered;
         } catch (e) {
-          console.log(e)
+          console.log(e);
         }
         this.setState({
           pageContent: html,
           slug: slug,
           pageTitle: pageTitle
-        })
+        });
 
-        Axios.get(`https://instruction.austincc.edu/tled/wp-json/bcn/v1/post/${html.id}`)
-          .catch(function (error) {
+        Axios.get(
+          `https://instruction.austincc.edu/tled/wp-json/bcn/v1/post/${html.id}`
+        )
+          .catch(function(error) {
             console.error('breadcrumb error', error);
           })
           .then(response => {
             // console.log('breadcrumb data', response.data.itemListElement.slice(1));
             const breadcrumbData = response.data.itemListElement.slice(1);
-            breadcrumbData[0].item.name = "Home";
+            breadcrumbData[0].item.name = 'Home';
             breadcrumbData[0].item['@id'] = '/';
 
             const cleanedCrumbUrls = breadcrumbData.map(crumb => {
               crumb.item['@id'] = replaceUrl(crumb.item['@id']);
               crumb.item.name = decode(crumb.item.name);
               return crumb;
-            })
+            });
 
             this.setState({
               breadcrumbs: cleanedCrumbUrls
-            })
-          })
+            });
+          });
       });
   }
 
   getSlug = params => {
-    return params.param5 || params.param4 || params.param3 || params.param2 || params.param1;
-  }
+    return (
+      params.param5 ||
+      params.param4 ||
+      params.param3 ||
+      params.param2 ||
+      params.param1
+    );
+  };
 
   componentDidMount() {
-
     this.getData(this.getSlug(this.props.match.params));
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const getSlug = params => {
-      return params.param5 || params.param4 || params.param3 || params.param2 || params.param1;
-    }
+      return (
+        params.param5 ||
+        params.param4 ||
+        params.param3 ||
+        params.param2 ||
+        params.param1
+      );
+    };
     const nextSlug = getSlug(nextProps.match.params);
     return nextSlug !== prevState.slug ? { slug: nextSlug } : null;
   }
@@ -95,7 +110,7 @@ export default class WPPage extends Component {
     const ACFData = pageContent ? this.state.pageContent.acf : null;
 
     if (!pageContent) {
-      return <Redirect to='/404' />
+      return <Redirect to="/404" />;
     }
 
     return (
@@ -106,7 +121,9 @@ export default class WPPage extends Component {
           </Helmet>
           {ACFData && ACFData.hero_content && (
             <div className="hero" style={{ marginTop: '1.5rem' }}>
-              {ACFData.hero_content[0].acf_fc_layout && <Hero data={ACFData.hero_content[0]} />}
+              {ACFData.hero_content[0].acf_fc_layout && (
+                <Hero data={ACFData.hero_content[0]} />
+              )}
             </div>
           )}
 
@@ -122,23 +139,49 @@ export default class WPPage extends Component {
           {ACFData && ACFData.sidebar_left && ACFData.sidebar_right && (
             <Section>
               <Row>
-                <Column width={[1, 1 / 4]} order={[2, 1]} pr={[0, '2rem']}>
-                  <Aside>
+                <Column
+                  width={[1, 1 / 4]}
+                  order={[2, 1]}
+                  pr={[0, '2rem']}
+                  className="leftSidebar"
+                >
+                  <Aside
+                    backgroundColor={
+                      ACFData.sidebar_left_background.background === 'Color'
+                        ? ACFData.sidebar_left_background.background_color
+                        : null
+                    }
+                  >
                     <Parser>{ACFData.sidebar_left}</Parser>
                   </Aside>
                 </Column>
 
                 <Column width={[1, 1 / 2]} order={[1, 2]}>
-                  {pageContent && (<Section>
-                    <Heading as="h1" underline={true} caps={true}>{decode(pageContent.title.rendered)}</Heading>
-                    <div>
-                      <Parser>{pageContent.content.rendered}</Parser>
-                    </div>
-                  </Section>)}
+                  {pageContent && (
+                    <Section>
+                      <Heading as="h1" underline={true} caps={true}>
+                        {decode(pageContent.title.rendered)}
+                      </Heading>
+                      <div>
+                        <Parser>{pageContent.content.rendered}</Parser>
+                      </div>
+                    </Section>
+                  )}
                 </Column>
 
-                <Column width={[1, 1 / 4]} order={[3, 3]} pl={[0, '2rem']}>
-                  <Aside>
+                <Column
+                  width={[1, 1 / 4]}
+                  order={[3, 3]}
+                  pl={[0, '2rem']}
+                  className="rightSidebar"
+                >
+                  <Aside
+                    backgroundColor={
+                      ACFData.sidebar_right_background.background === 'Color'
+                        ? ACFData.sidebar_right_background.background_color
+                        : null
+                    }
+                  >
                     <Parser>{ACFData.sidebar_right}</Parser>
                   </Aside>
                 </Column>
@@ -151,17 +194,24 @@ export default class WPPage extends Component {
             <Section>
               <Row>
                 <Column width={[1, 3 / 4]}>
-                  <Heading as="h1" underline={true} caps={true}>{decode(pageContent.title.rendered)}</Heading>
+                  <Heading as="h1" underline={true} caps={true}>
+                    {decode(pageContent.title.rendered)}
+                  </Heading>
                   {pageContent && (
                     <section>
                       <Parser>{pageContent.content.rendered}</Parser>
                     </section>
                   )}
-
                 </Column>
 
                 <Column width={[1, 1 / 4]} pl={[0, '2rem']}>
-                  <Aside>
+                  <Aside
+                    backgroundColor={
+                      ACFData.sidebar_right_background.background === 'Color'
+                        ? ACFData.sidebar_right_background.background_color
+                        : null
+                    }
+                  >
                     <Parser>{ACFData.sidebar_right}</Parser>
                   </Aside>
                 </Column>
@@ -174,13 +224,21 @@ export default class WPPage extends Component {
             <Section>
               <Row>
                 <Column width={[1, 1 / 4]} pr={[0, '2rem']} order={[2, 1]}>
-                  <Aside>
+                  <Aside
+                    backgroundColor={
+                      ACFData.sidebar_left_background.background === 'Color'
+                        ? ACFData.sidebar_left_background.background_color
+                        : null
+                    }
+                  >
                     <Parser>{ACFData.sidebar_left}</Parser>
                   </Aside>
                 </Column>
 
                 <Column width={[1, 3 / 4]} order={[1, 2]}>
-                  <Heading as="h1" underline={true} caps={true}>{decode(pageContent.title.rendered)}</Heading>
+                  <Heading as="h1" underline={true} caps={true}>
+                    {decode(pageContent.title.rendered)}
+                  </Heading>
                   {pageContent && (
                     <section>
                       <Parser>{pageContent.content.rendered}</Parser>
@@ -192,25 +250,38 @@ export default class WPPage extends Component {
           )}
 
           {/* no sidebars */}
-          {ACFData && !ACFData.sidebar_left && !ACFData.sidebar_right && pageContent.content.rendered && (
-            <Section>
-              <Row flexWrap="nowrap">
-                <Column width={1}>
-                  <Heading as="h1" underline={true} caps={true}>{decode(pageContent.title.rendered)}</Heading>
-                  {pageContent && <Parser>{pageContent.content.rendered}</Parser>}
-                </Column>
-              </Row>
-            </Section>
-          )}
-
+          {ACFData &&
+            !ACFData.sidebar_left &&
+            !ACFData.sidebar_right &&
+            pageContent.content.rendered && (
+              <Section>
+                <Row flexWrap="nowrap">
+                  <Column width={1}>
+                    <Heading as="h1" underline={true} caps={true}>
+                      {decode(pageContent.title.rendered)}
+                    </Heading>
+                    {pageContent && (
+                      <Parser>{pageContent.content.rendered}</Parser>
+                    )}
+                  </Column>
+                </Row>
+              </Section>
+            )}
         </Container>
 
         {ACFData && <ACF layouts={ACFData.layouts} />}
       </React.Fragment>
-    )
+    );
   }
 }
 
 const Aside = styled.aside`
   margin-top: 2rem;
+  ${props =>
+    props.backgroundColor &&
+    `
+      background-color: ${props.backgroundColor};
+      padding: 1rem;
+      height: 100%;
+    `}
 `;
