@@ -125,7 +125,7 @@ export default class HomeSlider extends Component {
 const colors = ['#295b82', '#7d484c', '#ad8d6e', '#20a2b1', '#9977a7'];
 
 const Slide = styled.div`
-  h2 {
+  h3 {
     border-bottom: 4px solid white;
 
     border-bottom-color: ${props => colors[props.index]};
@@ -253,8 +253,8 @@ const CarouselControl = styled.button`
 
   img {
     display: block;
-    width: 100 %;
-    height: 100 %;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     object-position: center;
   }
