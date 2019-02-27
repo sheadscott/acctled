@@ -49,43 +49,45 @@ export default class WPPage extends Component {
           pageTitle: pageTitle
         });
 
-        Axios.get(
-          `https://instruction.austincc.edu/${site}/wp-json/bcn/v1/post/${
-            html.id
-          }`
-        )
-          .catch(function(error) {
-            console.error("breadcrumb error", error);
-          })
-          .then(response => {
-            console.log("breadcrumb data", response.data.itemListElement);
-            // console.log('breadcrumb data', response.data.itemListElement.slice(1));
-            let breadcrumbData;
+        if (html) {
+          Axios.get(
+            `https://instruction.austincc.edu/${site}/wp-json/bcn/v1/post/${
+              html.id
+            }`
+          )
+            .catch(function(error) {
+              console.error("breadcrumb error", error);
+            })
+            .then(response => {
+              console.log("breadcrumb data", response.data.itemListElement);
+              // console.log('breadcrumb data', response.data.itemListElement.slice(1));
+              let breadcrumbData;
 
-            if (site === "tled") {
-              breadcrumbData = response.data.itemListElement.slice(1);
-              breadcrumbData[0].item.name = "Home";
-              breadcrumbData[0].item["@id"] = "/";
-            }
+              if (site === "tled") {
+                breadcrumbData = response.data.itemListElement.slice(1);
+                breadcrumbData[0].item.name = "Home";
+                breadcrumbData[0].item["@id"] = "/";
+              }
 
-            if (site === "ocei") {
-              breadcrumbData = response.data.itemListElement;
-              breadcrumbData[0].item.name = "Home";
-              breadcrumbData[0].item["@id"] = "/";
-              breadcrumbData[1].item.name = "OCEI";
-              breadcrumbData[1].item["@id"] = "/ocei";
-            }
+              if (site === "ocei") {
+                breadcrumbData = response.data.itemListElement;
+                breadcrumbData[0].item.name = "Home";
+                breadcrumbData[0].item["@id"] = "/";
+                breadcrumbData[1].item.name = "OCEI";
+                breadcrumbData[1].item["@id"] = "/ocei";
+              }
 
-            const cleanedCrumbUrls = breadcrumbData.map(crumb => {
-              crumb.item["@id"] = replaceUrl(crumb.item["@id"]);
-              crumb.item.name = decode(crumb.item.name);
-              return crumb;
+              const cleanedCrumbUrls = breadcrumbData.map(crumb => {
+                crumb.item["@id"] = replaceUrl(crumb.item["@id"]);
+                crumb.item.name = decode(crumb.item.name);
+                return crumb;
+              });
+
+              this.setState({
+                breadcrumbs: cleanedCrumbUrls
+              });
             });
-
-            this.setState({
-              breadcrumbs: cleanedCrumbUrls
-            });
-          });
+        }
       });
   }
 
