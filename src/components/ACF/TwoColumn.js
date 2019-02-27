@@ -1,17 +1,22 @@
 import React from 'react';
 import { Container, Row, Column as Col } from '../Grid/Grid';
 import styled, { css } from 'styled-components';
-import { Heading } from '../Elements/Elements';
+import { Heading } from 'iw-react-elements';
 import Parser from '../Parser/Parser';
 
-export default (props) => {
+export default props => {
   return (
     <Section layout={props.layout}>
       <Container>
         {props.layout.heading && (
           <Row>
             <Col width={1}>
-              <Heading as="h2" caps={false} underline={false} color={props.layout.text_mode}>
+              <Heading
+                as="h2"
+                caps={false}
+                underline={false}
+                color={props.layout.text_mode}
+              >
                 <Parser>{props.layout.heading}</Parser>
               </Heading>
             </Col>
@@ -27,19 +32,23 @@ export default (props) => {
         </Row>
       </Container>
     </Section>
-  )
-}
+  );
+};
 
 const Section = styled.section`
-  ${props => props.layout.background === 'Color' && css`
-    background-color: ${props.layout.background_color};
-  `}
+  ${props =>
+    props.layout.background === 'Color' &&
+    css`
+      background-color: ${props.layout.background_color};
+    `}
 
-  ${props => props.layout.background === 'Image' && css`
-    background-image: url(${props.layout.background_image.url});
-    background-repeat: repeat;
-    background-position: center center;
-  `}
+  ${props =>
+    props.layout.background === 'Image' &&
+    css`
+      background-image: url(${props.layout.background_image.url});
+      background-repeat: repeat;
+      background-position: center center;
+    `}
 
   padding: 2rem 0;
 `;

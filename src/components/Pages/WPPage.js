@@ -158,8 +158,20 @@ export default class WPPage extends Component {
           {ACFData && ACFData.sidebar_left && ACFData.sidebar_right && (
             <Section>
               <Row>
-                <Column width={[1, 1 / 4]} order={[2, 1]} pr={[0, "2rem"]}>
-                  <Aside>
+                <Column
+                  width={[1, 1 / 4]}
+                  order={[2, 1]}
+                  pr={[0, "2rem"]}
+                  className="leftSidebar"
+                >
+                  <Aside
+                    backgroundColor={
+                      ACFData.sidebar_left_background &&
+                      ACFData.sidebar_left_background.background === "Color"
+                        ? ACFData.sidebar_left_background.background_color
+                        : null
+                    }
+                  >
                     <Parser>{ACFData.sidebar_left}</Parser>
                   </Aside>
                 </Column>
@@ -177,8 +189,20 @@ export default class WPPage extends Component {
                   )}
                 </Column>
 
-                <Column width={[1, 1 / 4]} order={[3, 3]} pl={[0, "2rem"]}>
-                  <Aside>
+                <Column
+                  width={[1, 1 / 4]}
+                  order={[3, 3]}
+                  pl={[0, "2rem"]}
+                  className="rightSidebar"
+                >
+                  <Aside
+                    backgroundColor={
+                      ACFData.sidebar_right_background &&
+                      ACFData.sidebar_right_background.background === "Color"
+                        ? ACFData.sidebar_right_background.background_color
+                        : null
+                    }
+                  >
                     <Parser>{ACFData.sidebar_right}</Parser>
                   </Aside>
                 </Column>
@@ -202,7 +226,14 @@ export default class WPPage extends Component {
                 </Column>
 
                 <Column width={[1, 1 / 4]} pl={[0, "2rem"]}>
-                  <Aside>
+                  <Aside
+                    backgroundColor={
+                      ACFData.sidebar_right_background &&
+                      ACFData.sidebar_right_background.background === "Color"
+                        ? ACFData.sidebar_right_background.background_color
+                        : null
+                    }
+                  >
                     <Parser>{ACFData.sidebar_right}</Parser>
                   </Aside>
                 </Column>
@@ -215,7 +246,14 @@ export default class WPPage extends Component {
             <Section>
               <Row>
                 <Column width={[1, 1 / 4]} pr={[0, "2rem"]} order={[2, 1]}>
-                  <Aside>
+                  <Aside
+                    backgroundColor={
+                      ACFData.sidebar_left_background &&
+                      ACFData.sidebar_left_background.background === "Color"
+                        ? ACFData.sidebar_left_background.background_color
+                        : null
+                    }
+                  >
                     <Parser>{ACFData.sidebar_left}</Parser>
                   </Aside>
                 </Column>
@@ -262,4 +300,11 @@ export default class WPPage extends Component {
 
 const Aside = styled.aside`
   margin-top: 2rem;
+  ${props =>
+    props.backgroundColor &&
+    `
+      background-color: ${props.backgroundColor};
+      padding: 1rem;
+      height: 100%;
+    `}
 `;
