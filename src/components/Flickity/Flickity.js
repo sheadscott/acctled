@@ -99,7 +99,11 @@ class FlickityCarousel extends React.Component {
 
 export default FlickityCarousel;
 
-const Carousel = styled.div``;
+const Carousel = styled.div`
+  button.flickity-button {
+    border-radius: 50% !important;
+  }
+`;
 
 const Cell = styled.div`
   width: 100%;
