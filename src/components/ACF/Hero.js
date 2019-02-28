@@ -6,7 +6,7 @@ import FlickityCarousel from '../Flickity/Flickity';
 import { Img } from '../Elements/Elements';
 
 // import './carousel.scss';
-import { Carousel } from 'react-responsive-carousel';
+// import { Carousel } from 'react-responsive-carousel';
 
 export default function Hero(props) {
   // console.log(props.data.acf_fc_layout);

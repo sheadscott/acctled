@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import Axios from "axios";
-import decode from "unescape";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { Container, Row, Column } from "../Grid/Grid";
-import { ReactComponent as TLEDLogo } from "../../img/tledLogo.svg";
+import React, { Component } from 'react';
+import Axios from 'axios';
+import decode from 'unescape';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { Container, Row, Column } from '../Grid/Grid';
+import { ReactComponent as TLEDLogo } from '../../img/tledLogo.svg';
 
 export default class Footer extends Component {
   state = {
@@ -12,7 +12,7 @@ export default class Footer extends Component {
   };
   componentDidMount() {
     Axios.get(
-      "https://instruction.austincc.edu/tled/wp-json/wp-api-menus/v2/menus/5"
+      'https://instruction.austincc.edu/tled/wp-json/wp-api-menus/v2/menus/5'
     ).then(response => {
       const footerItems = response.data.items;
       this.setState({ footerItems });
@@ -21,7 +21,7 @@ export default class Footer extends Component {
 
   renderChildren = child => {
     // Internal links using React Router
-    if (child.type === "post_type") {
+    if (child.type === 'post_type') {
       return (
         <li key={child.id}>
           <Link to={`/${child.object_slug}`}>{decode(child.title)}</Link>
@@ -31,9 +31,7 @@ export default class Footer extends Component {
     // external links
     return (
       <li key={child.id}>
-        <a href={child.url}>
-          {decode(child.title)}
-        </a>
+        <a href={child.url}>{decode(child.title)}</a>
       </li>
     );
   };
@@ -43,12 +41,15 @@ export default class Footer extends Component {
       <Wrapper>
         <Container>
           <Row py="3rem">
-
             <WpLinks width={[1, 1, 3 / 4]} mb={['2rem', '2rem', 0]}>
               {this.state.footerItems.map(item => {
                 return (
-                  <ul key={item.id + "ul"}>
-                    {item.url !== '#' && <li className="stand-alone"><a href={item.url}>{item.title}</a></li>}
+                  <ul key={item.id + 'ul'}>
+                    {item.url !== '#' && (
+                      <li className="stand-alone">
+                        <a href={item.url}>{item.title}</a>
+                      </li>
+                    )}
                     {item.url === '#' && <h4>{item.title}</h4>}
 
                     {item.children && item.children.map(this.renderChildren)}
@@ -63,7 +64,9 @@ export default class Footer extends Component {
               <div className="vcard" style={{ marginLeft: '10px' }}>
                 <div className="org">Austin Community College District</div>
                 <div className="adr">
-                  <div className="street-address">5930 Middle Fiskville Rd.</div>
+                  <div className="street-address">
+                    5930 Middle Fiskville Rd.
+                  </div>
                   <div>
                     <span className="locality">Austin</span>,
                     <span className="region"> Texas</span>
@@ -80,17 +83,15 @@ export default class Footer extends Component {
   }
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.footer`
   width: 100%;
   background: #133952;
-  margin-top: 2rem;
   * {
     color: white;
   }
 `;
 
 const WpLinks = styled(Column)`
-
   @media (min-width: 400px) {
     columns: 2;
   }
@@ -104,7 +105,6 @@ const WpLinks = styled(Column)`
     font-weight: 700;
     color: rgb(244, 239, 172);
   }
-
 
   ul {
     list-style: none inside none;
@@ -123,12 +123,12 @@ const WpLinks = styled(Column)`
       a:active {
         color: white;
       }
-      a:focus{
+      a:focus {
         color: white;
       }
     }
   }
-  .stand-alone > a{
+  .stand-alone > a {
     color: rgb(244, 239, 172);
     :hover {
       color: rgb(244, 239, 172);
