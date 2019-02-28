@@ -1,43 +1,43 @@
-import React, { Component } from "react";
-import Axios from "axios";
-import decode from "unescape";
-import styled from "styled-components";
-import { Section, Heading } from "iw-react-elements";
-import { Redirect } from "react-router";
-import { Helmet } from "react-helmet";
+import React, { Component } from 'react';
+import Axios from 'axios';
+import decode from 'unescape';
+import styled from 'styled-components';
+import { Section, Heading } from 'iw-react-elements';
+import { Redirect } from 'react-router';
+import { Helmet } from 'react-helmet';
 
-import { Container, Row, Column } from "../Grid/Grid";
-import ACF from "../ACF/ACF";
-import Hero from "../ACF/Hero";
-import Parser from "../Parser/Parser";
-import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
-import { replaceUrl } from "../../helpers";
+import { Container, Row, Column } from '../Grid/Grid';
+import ACF from '../ACF/ACF';
+import Hero from '../ACF/Hero';
+import Parser from '../Parser/Parser';
+import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
+import { replaceUrl } from '../../helpers';
 
 export default class WPPage extends Component {
   state = {
-    slug: "",
-    pageContent: "some value",
-    pageTitle: "TLED Site"
+    slug: '',
+    pageContent: 'some value',
+    pageTitle: 'TLED Site'
   };
 
   getData(slug) {
-    console.log("component received new props", slug);
+    console.log('component received new props', slug);
 
-    console.log("Param1: ", this.props.match.params.param1);
+    console.log('Param1: ', this.props.match.params.param1);
 
-    const site = this.props.match.params.param1 === "ocei" ? "ocei" : "tled";
+    const site = this.props.match.params.param1 === 'ocei' ? 'ocei' : 'tled';
 
     Axios.get(
       `https://instruction.austincc.edu/${site}/wp-json/wp/v2/pages?slug=${slug}`
     )
       .catch(function(error) {
         // handle error
-        console.error("*** ERROR *** WPPage.js: ", error);
+        console.error('*** ERROR *** WPPage.js: ', error);
       })
       .then(response => {
-        console.log("Response: ", response);
+        console.log('Response: ', response);
         const html = response.data[0];
-        let pageTitle = "";
+        let pageTitle = '';
         try {
           pageTitle = html.title.rendered;
         } catch (e) {
@@ -56,29 +56,29 @@ export default class WPPage extends Component {
             }`
           )
             .catch(function(error) {
-              console.error("breadcrumb error", error);
+              console.error('breadcrumb error', error);
             })
             .then(response => {
-              console.log("breadcrumb data", response.data.itemListElement);
+              console.log('breadcrumb data', response.data.itemListElement);
               // console.log('breadcrumb data', response.data.itemListElement.slice(1));
               let breadcrumbData;
 
-              if (site === "tled") {
+              if (site === 'tled') {
                 breadcrumbData = response.data.itemListElement.slice(1);
-                breadcrumbData[0].item.name = "Home";
-                breadcrumbData[0].item["@id"] = "/";
+                breadcrumbData[0].item.name = 'Home';
+                breadcrumbData[0].item['@id'] = '/';
               }
 
-              if (site === "ocei") {
+              if (site === 'ocei') {
                 breadcrumbData = response.data.itemListElement;
-                breadcrumbData[0].item.name = "Home";
-                breadcrumbData[0].item["@id"] = "/";
-                breadcrumbData[1].item.name = "OCEI";
-                breadcrumbData[1].item["@id"] = "/ocei";
+                breadcrumbData[0].item.name = 'Home';
+                breadcrumbData[0].item['@id'] = '/';
+                breadcrumbData[1].item.name = 'OCEI';
+                breadcrumbData[1].item['@id'] = '/ocei';
               }
 
               const cleanedCrumbUrls = breadcrumbData.map(crumb => {
-                crumb.item["@id"] = replaceUrl(crumb.item["@id"]);
+                crumb.item['@id'] = replaceUrl(crumb.item['@id']);
                 crumb.item.name = decode(crumb.item.name);
                 return crumb;
               });
@@ -141,7 +141,7 @@ export default class WPPage extends Component {
             <title>{decode(pageTitle)}</title>
           </Helmet>
           {ACFData && ACFData.hero_content && (
-            <div className="hero" style={{ marginTop: "1.5rem" }}>
+            <div className="hero" style={{ marginTop: '1.5rem' }}>
               {ACFData.hero_content[0].acf_fc_layout && (
                 <Hero data={ACFData.hero_content[0]} />
               )}
@@ -157,20 +157,20 @@ export default class WPPage extends Component {
             */}
 
           {/* sidebar right and left */}
-          {ACFData && ACFData.sidebar_left && ACFData.sidebar_right && (
+          {ACFData && pageContent.template === 'page-sidebar-left-right.php' && (
             <Section>
               <Row>
                 <Column
                   width={[1, 1 / 4]}
                   order={[2, 1]}
-                  pr={[0, "2rem"]}
+                  pr={[0, '2rem']}
                   className="leftSidebar"
                 >
                   <Aside
                     backgroundColor={
                       ACFData.sidebar_left_background &&
-                      ACFData.sidebar_left_background.background === "Color"
-                        ? ACFData.sidebar_left_background.background_color
+                      ACFData.sidebar_left_background.background_a === 'Color'
+                        ? ACFData.sidebar_left_background.background_color_a
                         : null
                     }
                   >
@@ -194,14 +194,14 @@ export default class WPPage extends Component {
                 <Column
                   width={[1, 1 / 4]}
                   order={[3, 3]}
-                  pl={[0, "2rem"]}
+                  pl={[0, '2rem']}
                   className="rightSidebar"
                 >
                   <Aside
                     backgroundColor={
                       ACFData.sidebar_right_background &&
-                      ACFData.sidebar_right_background.background === "Color"
-                        ? ACFData.sidebar_right_background.background_color
+                      ACFData.sidebar_right_background.background_b === 'Color'
+                        ? ACFData.sidebar_right_background.background_color_b
                         : null
                     }
                   >
@@ -213,7 +213,7 @@ export default class WPPage extends Component {
           )}
 
           {/* sidebar right only */}
-          {ACFData && ACFData.sidebar_right && !ACFData.sidebar_left && (
+          {ACFData && pageContent.template === 'page-sidebar-right.php' && (
             <Section>
               <Row>
                 <Column width={[1, 3 / 4]}>
@@ -227,12 +227,12 @@ export default class WPPage extends Component {
                   )}
                 </Column>
 
-                <Column width={[1, 1 / 4]} pl={[0, "2rem"]}>
+                <Column width={[1, 1 / 4]} pl={[0, '2rem']}>
                   <Aside
                     backgroundColor={
                       ACFData.sidebar_right_background &&
-                      ACFData.sidebar_right_background.background === "Color"
-                        ? ACFData.sidebar_right_background.background_color
+                      ACFData.sidebar_right_background.background_b === 'Color'
+                        ? ACFData.sidebar_right_background.background_color_b
                         : null
                     }
                   >
@@ -244,15 +244,15 @@ export default class WPPage extends Component {
           )}
 
           {/* sidebar left only */}
-          {ACFData && ACFData.sidebar_left && !ACFData.sidebar_right && (
+          {ACFData && pageContent.template === 'page-sidebar-left.php' && (
             <Section>
               <Row>
-                <Column width={[1, 1 / 4]} pr={[0, "2rem"]} order={[2, 1]}>
+                <Column width={[1, 1 / 4]} pr={[0, '2rem']} order={[2, 1]}>
                   <Aside
                     backgroundColor={
                       ACFData.sidebar_left_background &&
-                      ACFData.sidebar_left_background.background === "Color"
-                        ? ACFData.sidebar_left_background.background_color
+                      ACFData.sidebar_left_background.background_a === 'Color'
+                        ? ACFData.sidebar_left_background.background_color_a
                         : null
                     }
                   >
@@ -307,6 +307,6 @@ const Aside = styled.aside`
     `
       background-color: ${props.backgroundColor};
       padding: 1rem;
-      height: 100%;
+      height: calc(100% - 2rem);
     `}
 `;
