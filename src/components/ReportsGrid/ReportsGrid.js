@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import Axios from "axios";
 import Reports from "../Reports/Reports";
+import { A, Heading } from "../Elements/Elements";
 
 export default class ReportsGrid extends Component {
   constructor(props) {
@@ -11,22 +12,49 @@ export default class ReportsGrid extends Component {
       tags: [],
       activeTags: [],
       activeReports: [],
-      searchResults: []
+      searchResults: [],
+      sheetNumber: 1,
+      sheetTitles: [],
+      selectedSheet: ""
     };
   }
 
   componentDidMount() {
+    this.fetchReports(this.state.sheetNumber);
+    this.fetchArchives();
+  }
+
+  fetchReports = sheetNumber => {
     const sheetId = "1VD4KvNmgoBBoVo2ukDLtD_CNFiYnrWcw2CPRIb2Ba3M";
     Axios.get(
-      `https://spreadsheets.google.com/feeds/list/${sheetId}/1/public/values?alt=json`
+      `https://spreadsheets.google.com/feeds/list/${sheetId}/${sheetNumber}/public/values?alt=json`
     ).then(response => {
       const reports = response.data.feed.entry;
-      console.log(reports);
-      this.setState({ reports, activeReports: reports }, () => {
-        this.setState({ tags: this.getUniqueTags() });
-      });
+      console.log("Response: ", response);
+      this.setState(
+        {
+          reports,
+          activeReports: reports,
+          selectedSheet: response.data.feed.title.$t
+        },
+        () => {
+          this.setState({ tags: this.getUniqueTags() });
+        }
+      );
     });
-  }
+  };
+
+  // Set the sheetTitles property when the component mounts
+  fetchArchives = () => {
+    const sheetId = "1VD4KvNmgoBBoVo2ukDLtD_CNFiYnrWcw2CPRIb2Ba3M";
+    Axios.get(
+      `https://spreadsheets.google.com/feeds/list/${sheetId}/2/public/values?alt=json`
+    ).then(response => {
+      const sheetTitles = response.data.feed.entry;
+      // console.log(sheetTitles);
+      this.setState({ sheetTitles });
+    });
+  };
 
   filterSessions = (allSessions, sessionTag) => {
     return allSessions.filter(session => session.gsx$session.$t === sessionTag);
@@ -109,49 +137,81 @@ export default class ReportsGrid extends Component {
     // e.preventDefault();
   };
 
+  handleSheetSelect = e => {
+    const sheetNumber = e.target.value;
+    // console.log(e.target.value);
+    this.fetchReports(sheetNumber);
+  };
+
   render() {
     return (
       <ReportsWrapper>
+        <Header>
+          <div id="archives">
+            <p>View reports by date:</p>
+            <select onChange={this.handleSheetSelect}>
+              <option value="1">Current Report</option>
+              {this.state.sheetTitles.map((title, index) => {
+                const length = this.state.sheetTitles.length;
+                return (
+                  <option key={index} value={length - index + 2}>
+                    {title.gsx$sheettitle.$t}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <div id="subscribe">
+            <p>Subscribe to receive monthly reports via email:</p>
+            <A href="https://www.google.com/url?q=https%3A%2F%2Fvisitor.r20.constantcontact.com%2Fmanage%2Foptin%3Fv%3D001FlfxD6VXczHtBgSW4c7sKbK08TU1SvSHju-DnsJTlVs9oi0dPJGPS6qxN1NT_EG3XxvmlAt-ZeQ7q77Fjnq5fYTgP28jcSc8TXAWNeKbXrMF2PVbVk2V4HQ5pY0-imQ9bICePyk4kbp1NHYNF5o7vsagbLd1HVkTQp6MjpBOb-2QtSuvpnS7NfI-o-GxbQvKBUFAueqc-Uo-KtoOY4ABS1plm1Vmv2uRGlTdheaDCxAGb8oYbNAbS3ZUvDHSJBKKTGtkpGR2uVEQBdbNYlQz5v8FtGYuLr9q34065UKWaRYO9OQoroROogOkgn7ohCoRW7Rl030iOE6928uTSRYl73T_mccg1xufVGE7JYVq2JSx5wFeOL6APY5_JIrD_yTfWQecCeVdUeg%253D&sa=D&ust=1551722394342000&usg=AFQjCNE_1OAkt3Sd21MZP04Ui3bH11MA3Q">
+              <button className="button">Subscribe</button>
+            </A>
+          </div>
+        </Header>
+        <Heading as="h2">{this.state.selectedSheet}</Heading>
         {this.state.tags.length > 0 && (
-          <TagWrapper>
-            <Tags>
-              {this.state.tags.map((tag, i) => (
-                <Tag
-                  key={i}
-                  onClick={() => this.toggleTag(tag)}
-                  active={this.state.activeTags.includes(tag)}
-                >
-                  {tag}
-                </Tag>
-              ))}
-            </Tags>
-            <SearchForm onSubmit={this.handleSearchFormSubmit}>
-              <input
-                type="text"
-                placeholder="Search for Tag"
-                onChange={this.handleSearch}
-              />
-              <div>
-                {this.state.searchResults.length > 0 && (
-                  <ul>
-                    <button className="close" onClick={this.handleClose}>
-                      &times;
-                    </button>
-                    {this.state.searchResults.map((result, i) => (
-                      <li key={i}>
-                        <Tag
-                          onClick={() => this.toggleTag(result)}
-                          active={this.state.activeTags.includes(result)}
-                        >
-                          {result}
-                        </Tag>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </SearchForm>
-          </TagWrapper>
+          <React.Fragment>
+            <p>Click on the tags to filter reports by category:</p>
+            <TagWrapper>
+              <Tags>
+                {this.state.tags.map((tag, i) => (
+                  <Tag
+                    key={i}
+                    onClick={() => this.toggleTag(tag)}
+                    active={this.state.activeTags.includes(tag)}
+                  >
+                    {tag}
+                  </Tag>
+                ))}
+              </Tags>
+              <SearchForm onSubmit={this.handleSearchFormSubmit}>
+                <input
+                  type="text"
+                  placeholder="Search for Tag"
+                  onChange={this.handleSearch}
+                />
+                <div>
+                  {this.state.searchResults.length > 0 && (
+                    <ul>
+                      <button className="close" onClick={this.handleClose}>
+                        &times;
+                      </button>
+                      {this.state.searchResults.map((result, i) => (
+                        <li key={i}>
+                          <Tag
+                            onClick={() => this.toggleTag(result)}
+                            active={this.state.activeTags.includes(result)}
+                          >
+                            {result}
+                          </Tag>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </SearchForm>
+            </TagWrapper>
+          </React.Fragment>
         )}
         <Reports elements={this.state.activeReports} tags={this.state.tags} />
       </ReportsWrapper>
@@ -161,6 +221,32 @@ export default class ReportsGrid extends Component {
 
 const ReportsWrapper = styled.div``;
 
+const Header = styled.header`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+
+  div {
+    border: 1px solid rgb(224, 230, 234);
+    flex: 1;
+    text-align: center;
+    max-width: 48.5%;
+    padding: 2rem 3rem;
+
+    &#archives {
+      background: #efefef;
+    }
+
+    &#subscribe {
+      background: rgb(241, 245, 248);
+    }
+
+    select,
+    button {
+      margin-bottom: 0;
+    }
+  }
+`;
 const TagWrapper = styled.div`
   display: flex;
 
@@ -192,8 +278,10 @@ const SearchForm = styled.form`
       margin-left: 0;
       z-index: 9999;
 
+      border: 1px solid #ccc;
+
       li {
-        // border-bottom: 1px solid #ccc;
+        /* border-bottom: 1px solid #ccc; */
       }
 
       .close {

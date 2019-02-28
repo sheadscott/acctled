@@ -1,20 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import { Container, Row, Column } from "../Grid/Grid";
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet";
 import ReportsGrid from "../ReportsGrid/ReportsGrid";
 import { Heading } from "../Elements/Elements";
-import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
+import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 
 const breadcrumbData = [
   {
-    title: 'Home',
-    url: '/'
+    title: "Home",
+    url: "/"
   },
   {
-    title: 'Reports'
+    title: "Reports"
   }
-]
+];
 
 export default function CalendarPage() {
   return (
@@ -29,6 +29,9 @@ export default function CalendarPage() {
             <Heading as="h1" caps={true} underline={true}>
               TLED EXECUTIVE REPORT
             </Heading>
+            <Heading as="h3">
+              Timely updates for enhanced internal communication.
+            </Heading>
             <ReportsGrid />
           </Column>
         </Row>
@@ -40,4 +43,10 @@ export default function CalendarPage() {
 const Wrapper = styled.div`
   width: 80%;
   margin: 0 auto;
+
+  h3 {
+    font-size: 1.2rem;
+    font-weight: normal;
+    padding: 1rem 0;
+  }
 `;
