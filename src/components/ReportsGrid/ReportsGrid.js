@@ -152,9 +152,9 @@ export default class ReportsGrid extends Component {
             <select onChange={this.handleSheetSelect}>
               <option value="1">Current Report</option>
               {this.state.sheetTitles.map((title, index) => {
-                const length = this.state.sheetTitles.length;
+                // const length = this.state.sheetTitles.length;
                 return (
-                  <option key={index} value={length - index + 2}>
+                  <option key={index} value={index + 3}>
                     {title.gsx$sheettitle.$t}
                   </option>
                 );
@@ -163,7 +163,10 @@ export default class ReportsGrid extends Component {
           </div>
           <div id="subscribe">
             <p>Subscribe to receive monthly reports via email:</p>
-            <A href="https://www.google.com/url?q=https%3A%2F%2Fvisitor.r20.constantcontact.com%2Fmanage%2Foptin%3Fv%3D001FlfxD6VXczHtBgSW4c7sKbK08TU1SvSHju-DnsJTlVs9oi0dPJGPS6qxN1NT_EG3XxvmlAt-ZeQ7q77Fjnq5fYTgP28jcSc8TXAWNeKbXrMF2PVbVk2V4HQ5pY0-imQ9bICePyk4kbp1NHYNF5o7vsagbLd1HVkTQp6MjpBOb-2QtSuvpnS7NfI-o-GxbQvKBUFAueqc-Uo-KtoOY4ABS1plm1Vmv2uRGlTdheaDCxAGb8oYbNAbS3ZUvDHSJBKKTGtkpGR2uVEQBdbNYlQz5v8FtGYuLr9q34065UKWaRYO9OQoroROogOkgn7ohCoRW7Rl030iOE6928uTSRYl73T_mccg1xufVGE7JYVq2JSx5wFeOL6APY5_JIrD_yTfWQecCeVdUeg%253D&sa=D&ust=1551722394342000&usg=AFQjCNE_1OAkt3Sd21MZP04Ui3bH11MA3Q">
+            <A
+              target="_blank"
+              href="https://visitor.r20.constantcontact.com/manage/optin?v=001FlfxD6VXczHtBgSW4c7sKbK08TU1SvSHju-DnsJTlVs9oi0dPJGPS6qxN1NT_EG3XxvmlAt-ZeQ7q77Fjnq5fYTgP28jcSc8TXAWNeKbXrMF2PVbVk2V4HQ5pY0-imQ9bICePyk4kbp1NHYNF5o7vsagbLd1HVkTQp6MjpBOb-2QtSuvpnS7NfI-o-GxbQvKBUFAueqc-Uo-KtoOY4ABS1plm1Vmv2uRGlTdheaDCxAGb8oYbNAbS3ZUvDHSJBKKTGtkpGR2uVEQBdbNYlQz5v8FtGYuLr9q34065UKWaRYO9OQoroROogOkgn7ohCoRW7Rl030iOE6928uTSRYl73T_mccg1xufVGE7JYVq2JSx5wFeOL6APY5_JIrD_yTfWQecCeVdUeg%3D"
+            >
               <button className="button">Subscribe</button>
             </A>
           </div>
@@ -214,6 +217,19 @@ export default class ReportsGrid extends Component {
           </React.Fragment>
         )}
         <Reports elements={this.state.activeReports} tags={this.state.tags} />
+        <Contact>
+          <Heading as="h3" caps={true} underline={true}>
+            Contact Us
+          </Heading>
+          <p>
+            If you need to reach us regarding the content of this page, please
+            send an email to:
+            <br />
+            <A href="mailto:tledwebsite@austincc.edu">
+              tledwebsite@austincc.edu
+            </A>
+          </p>
+        </Contact>
       </ReportsWrapper>
     );
   }
@@ -320,5 +336,11 @@ const Tag = styled.button`
 
   &:hover {
     background: ${props => (props.active ? "#4e79a6" : "#efefef")};
+  }
+`;
+
+const Contact = styled.div`
+  p {
+    /* margin: -1rem 0 1.6rem; */
   }
 `;

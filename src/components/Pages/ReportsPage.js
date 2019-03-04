@@ -29,7 +29,7 @@ export default function CalendarPage() {
             <Heading as="h1" caps={true} underline={true}>
               TLED EXECUTIVE REPORT
             </Heading>
-            <Heading as="h3">
+            <Heading as="h3" className="subhead">
               Timely updates for enhanced internal communication.
             </Heading>
             <ReportsGrid />
@@ -44,7 +44,7 @@ const Wrapper = styled.div`
   width: 80%;
   margin: 0 auto;
 
-  h3 {
+  h3.subhead {
     font-size: 1.2rem;
     font-weight: normal;
     padding: 1rem 0;
