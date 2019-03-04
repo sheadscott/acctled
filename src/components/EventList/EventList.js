@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { A, Heading } from '../Elements/Elements';
+import { A, Heading } from "../Elements/Elements";
 import Axios from "axios";
 
 export default class EventList extends Component {
@@ -14,16 +14,25 @@ export default class EventList extends Component {
       `https://spreadsheets.google.com/feeds/list/${sheetId}/1/public/values?alt=json`
     ).then(response => {
       const events = response.data.feed.entry;
-      const filteredEvents = events.filter(event => {
-        return new Date(event.gsx$dateforautocheck.$t.replace(/.*?,\s/, "")).valueOf() > Date.now();
-      })
-      .sort((a, b) => {
-        // Take the day of the week off the front of the string and convert to Date # value
-        // Probably unnecessary since the events are returned in the order in sheet
-        a = new Date(a.gsx$dateforautocheck.$t.replace(/.*?,\s/, "")).valueOf();
-        b = new Date(b.gsx$dateforautocheck.$t.replace(/.*?,\s/, "")).valueOf();
-        return a - b;
-      });
+      const filteredEvents = events
+        .filter(event => {
+          return (
+            new Date(
+              event.gsx$dateforautocheck.$t.replace(/.*?,\s/, "")
+            ).valueOf() > Date.now()
+          );
+        })
+        .sort((a, b) => {
+          // Take the day of the week off the front of the string and convert to Date # value
+          // Probably unnecessary since the events are returned in the order in sheet
+          a = new Date(
+            a.gsx$dateforautocheck.$t.replace(/.*?,\s/, "")
+          ).valueOf();
+          b = new Date(
+            b.gsx$dateforautocheck.$t.replace(/.*?,\s/, "")
+          ).valueOf();
+          return a - b;
+        });
       // console.log("Events: ", filteredEvents);
       this.setState({ events: filteredEvents });
     });
@@ -33,14 +42,23 @@ export default class EventList extends Component {
     const listLength = this.props.length;
     return (
       <MainWrapper>
-        <Heading as="h2" caps={true} mb={'1.5rem'} fontSize={"1.3rem"}>Events & Important Dates</Heading>
+        <Heading as="h2" caps={true} mb={"1.5rem"} fontSize={"1.3rem"}>
+          Events & Important Dates
+        </Heading>
 
         <EventWrapper>
           {this.state.events.slice(0, listLength - 1).map((event, i) => {
+            console.log(event);
             return (
               <Event key={i}>
                 {event.gsx$webdisplaydate.$t}
-                <A href={event.gsx$linktoregister.$t}>{event.gsx$eventtitle.$t}</A>
+                {event.gsx$linktoregister.$t ? (
+                  <A href={event.gsx$linktoregister.$t}>
+                    {event.gsx$eventtitle.$t}
+                  </A>
+                ) : (
+                  <span>{event.gsx$eventtitle.$t}</span>
+                )}
               </Event>
             );
           })}
@@ -65,11 +83,10 @@ const EventWrapper = styled.ul`
   li {
     margin-bottom: 1rem;
     font-weight: bold;
-  }
-
-  a {
-    margin-left: 1rem;
-    font-weight: normal;
+    a,
+    span {
+      margin-left: 1rem;
+    }
   }
 `;
 
