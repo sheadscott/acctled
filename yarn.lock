@@ -5050,10 +5050,10 @@ istanbul-reports@^1.5.1:
   dependencies:
     handlebars "^4.0.3"
 
-iw-react-elements@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/iw-react-elements/-/iw-react-elements-1.0.7.tgz#a9a1eda2c97152a1000f325fb5958005b565b44e"
-  integrity sha512-BbJAKGWjSeGrv0yAclJLzpN5/hG/n6wg1fsrfReEpkh9LYg4HVuz/HH5CMHftQwxKF6OC8szeahNA8tWFC5Plw==
+iw-react-elements@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/iw-react-elements/-/iw-react-elements-1.0.8.tgz#3ff316feaef70b5ece98f059cd785a58f15fa375"
+  integrity sha512-yU927NeaPmhnYu+T/osI2AbdXqYf+56f+zXHqMSKdwDoGUfgpG73L7kULO6CHRCu2+UL9F8Q5XxVMViGY6EvHw==
   dependencies:
     "@babel/cli" "^7.2.3"
     "@babel/core" "^7.2.2"

@@ -21,6 +21,12 @@ img.alignright {
   margin-bottom: 1rem;
 }
 
+hr {
+  border-bottom-width: 2px;
+  border-bottom-color: rgb(26, 82, 118);
+  opacity: 0.35;
+}
+
 /* a:not([href^="/"]) {
   color: greenyellow !important;
 } */
