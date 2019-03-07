@@ -123,17 +123,25 @@ export default class StaffDirectoryPage extends Component {
                                   {row.gsx$firstname.$t} {row.gsx$lastname.$t}
                                 </td>
                                 <td>{row.gsx$title.$t}</td>
-                                <td>223-{row.gsx$extension.$t}</td>
                                 <td>
-                                  <A
-                                    href={
-                                      "mailto:" +
-                                      row.gsx$email.$t +
-                                      "austincc.edu"
-                                    }
-                                  >
-                                    {row.gsx$email.$t + "@austincc.edu"}
-                                  </A>
+                                  {row.gsx$extension.$t && (
+                                    <span>223-{row.gsx$extension.$t}</span>
+                                  )}
+                                </td>
+                                <td>
+                                  {row.gsx$email.$t && (
+                                    <span>
+                                      <A
+                                        href={
+                                          "mailto:" +
+                                          row.gsx$email.$t +
+                                          "austincc.edu"
+                                        }
+                                      >
+                                        {row.gsx$email.$t + "@austincc.edu"}
+                                      </A>
+                                    </span>
+                                  )}
                                 </td>
                                 <td>{row.gsx$roomnumber.$t}</td>
                               </tr>
@@ -194,17 +202,28 @@ export default class StaffDirectoryPage extends Component {
                                       <tr key={index}>
                                         <td>{row.gsx$name.$t}</td>
                                         <td>{row.gsx$title.$t}</td>
-                                        <td>223-{row.gsx$extension.$t}</td>
                                         <td>
-                                          <A
-                                            href={
-                                              "mailto:" +
-                                              row.gsx$email.$t +
-                                              "austincc.edu"
-                                            }
-                                          >
-                                            {row.gsx$email.$t + "@austincc.edu"}
-                                          </A>
+                                          {row.gsx$extension.$t && (
+                                            <span>
+                                              223-{row.gsx$extension.$t}
+                                            </span>
+                                          )}
+                                        </td>
+                                        <td>
+                                          {row.gsx$email.$t && (
+                                            <span>
+                                              <A
+                                                href={
+                                                  "mailto:" +
+                                                  row.gsx$email.$t +
+                                                  "austincc.edu"
+                                                }
+                                              >
+                                                {row.gsx$email.$t +
+                                                  "@austincc.edu"}
+                                              </A>
+                                            </span>
+                                          )}
                                         </td>
                                       </tr>
                                     );
