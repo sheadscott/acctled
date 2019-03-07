@@ -275,23 +275,20 @@ export default class WPPage extends Component {
           )}
 
           {/* no sidebars */}
-          {ACFData &&
-            !ACFData.sidebar_left &&
-            !ACFData.sidebar_right &&
-            pageContent.content.rendered && (
-              <Section>
-                <Row flexWrap="nowrap">
-                  <Column width={1}>
-                    <Heading as="h1" underline={true} caps={true}>
-                      {decode(pageContent.title.rendered)}
-                    </Heading>
-                    {pageContent && (
-                      <Parser>{pageContent.content.rendered}</Parser>
-                    )}
-                  </Column>
-                </Row>
-              </Section>
-            )}
+          {pageContent.template === '' && pageContent.content.rendered && (
+            <Section>
+              <Row flexWrap="nowrap">
+                <Column width={1}>
+                  <Heading as="h1" underline={true} caps={true}>
+                    {decode(pageContent.title.rendered)}
+                  </Heading>
+                  {pageContent && (
+                    <Parser>{pageContent.content.rendered}</Parser>
+                  )}
+                </Column>
+              </Row>
+            </Section>
+          )}
         </Container>
 
         {ACFData && <ACF layouts={ACFData.layouts} />}

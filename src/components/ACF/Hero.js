@@ -27,13 +27,18 @@ export default function Hero(props) {
         <HTMLContentBox>
           {Parser(props.data.html_content, {
             replace: function(data) {
-              // console.log('element', data.name, data);
+              console.log('element', data.attribs);
+              if (data.attribs) {
+                delete data.attribs.style;
+              }
+
               return data.name === 'iframe' ? (
                 <MediaContainer ratio="30%">
                   {mediaLoaded => (
                     <iframe
                       title="iframe content"
                       onLoad={mediaLoaded}
+                      style={{ border: 'none' }}
                       {...data.attribs}
                     />
                   )}
