@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import objectFitImages from 'object-fit-images';
-import Spinner from "../Spinner/Spinner";
+import Spinner from '../Spinner/Spinner';
 
 class MediaContainer extends React.Component {
   state = {
@@ -28,6 +28,12 @@ class MediaContainer extends React.Component {
       </Wrapper>
     );
   }
+
+  getDefaultProps() {
+    return {
+      objectPosition: 'center'
+    };
+  }
 }
 
 const Wrapper = styled.div`
@@ -38,6 +44,7 @@ const Wrapper = styled.div`
   overflow: hideen;
 `;
 
+// prettier-ignore
 const Container = styled.div`
   width: 100%;
   height: 0;
@@ -59,13 +66,17 @@ const Container = styled.div`
     bottom: 0;
     opacity: 0;
     transition: opacity 0.5s;
-    ${props => props.mediaLoaded && css`opacity: 1;`};
+    ${props =>
+      props.mediaLoaded &&
+      css`
+        opacity: 1;
+      `};
   }
 
   img {
     object-fit: cover;
-    object-position: center;
-    font-family: 'object-fit: cover; object-position: center;';
+    object-position: ${props => props.objectPosition};
+    font-family: 'object-fit: cover; object-position: ${props => props.objectPosition};';
   }
 `;
 

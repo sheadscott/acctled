@@ -64,6 +64,7 @@ export default class HomeSlider extends Component {
                     ratio="41.4%"
                     maxHeight="700px"
                     className="slide__wrapper"
+                    objectPosition="top"
                   >
                     {mediaLoaded => (
                       <Img
