@@ -7,31 +7,59 @@ export default function Breadcrumbs(props) {
     <Breadcrumb role="navigation" aria-label="Breadcrumb">
       <ul role="menu">
         {/* data from WordPress */}
-        {props.data && props.data[0].item && props.data.map(({ item }, index, arr) => {
-          // last item in list
-          if (index + 1 === arr.length) {
-            return (<li role="menuitem" aria-current="page" className="current">{item.name}</li>)
-          }
-
-          // anything else
-          return (<li role="menuitem"><a href={item['@id']}>{item.name}</a></li>)
-        })}
-
-        {/* data from js object */}
-        {
-          props.data && !props.data[0].item && props.data.map((item, index, arr) => {
+        {props.data &&
+          props.data[0].item &&
+          props.data.map(({ item }, index, arr) => {
             // last item in list
             if (index + 1 === arr.length) {
-              return (<li role="menuitem" aria-current="page" className="current">{item.title}</li>)
+              return (
+                <li
+                  key={`breadcrumb-${index}`}
+                  role="menuitem"
+                  aria-current="page"
+                  className="current"
+                >
+                  {item.name}
+                </li>
+              );
             }
 
             // anything else
-            return (<li role="menuitem"><a href={item.url}>{item.title}</a></li>)
-          })
-        }
+            return (
+              <li key={`breadcrumb-${index}`} role="menuitem">
+                <a href={item['@id']}>{item.name}</a>
+              </li>
+            );
+          })}
+
+        {/* data from js object */}
+        {props.data &&
+          !props.data[0].item &&
+          props.data.map((item, index, arr) => {
+            // last item in list
+            if (index + 1 === arr.length) {
+              return (
+                <li
+                  key={`breadcrumb-${index}`}
+                  role="menuitem"
+                  aria-current="page"
+                  className="current"
+                >
+                  {item.title}
+                </li>
+              );
+            }
+
+            // anything else
+            return (
+              <li key={`breadcrumb-${index}`} role="menuitem">
+                <a href={item.url}>{item.title}</a>
+              </li>
+            );
+          })}
       </ul>
     </Breadcrumb>
-  )
+  );
 }
 
 const Breadcrumb = styled.nav`
@@ -57,7 +85,7 @@ const Breadcrumb = styled.nav`
     position: relative;
     margin: 0 0.75rem;
     opacity: 1;
-    content: "/";
+    content: '/';
     color: #cacaca;
   }
 
@@ -65,4 +93,3 @@ const Breadcrumb = styled.nav`
     font-weight: 400;
   }
 `;
-
