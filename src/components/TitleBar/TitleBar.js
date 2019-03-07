@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 // Import Images
-import { ReactComponent as ACCLogo } from "../../img/ACC.svg";
+import { ReactComponent as ACCLogo } from '../../img/ACC.svg';
 // import tledLogo from "../../img/tledLogo.svg";
-import { ReactComponent as CalendarIcon } from "../../img/calendarIcon.svg";
-import { ReactComponent as SearchIcon } from "../../img/searchIcon.svg";
-import { ReactComponent as HamburgerMenu } from "../../img/hamburgerMenu.svg";
+import { ReactComponent as CalendarIcon } from '../../img/calendarIcon.svg';
+import { ReactComponent as SearchIcon } from '../../img/searchIcon.svg';
+import { ReactComponent as HamburgerMenu } from '../../img/hamburgerMenu.svg';
 
 export default class TitleBar extends Component {
   render() {
@@ -26,7 +26,7 @@ export default class TitleBar extends Component {
         <TitleBarNav>
           {this.props.titleBarItems.map(item => {
             // Internal links using React Router
-            if (item.type === "post_type") {
+            if (item.type === 'post_type') {
               return (
                 <Link key={item.id} to={`/${item.object_slug}`}>
                   {item.title}
@@ -47,14 +47,14 @@ export default class TitleBar extends Component {
           <Link
             to="/calendar"
             title="Link to Calendar Page"
-            style={{ marginRight: "15px" }}
+            style={{ marginRight: '15px' }}
           >
             <CalendarIcon />
           </Link>
 
           <a
             role="button"
-            style={{ marginRight: "15px" }}
+            style={{ marginRight: '15px' }}
             href="/#searchForm"
             onClick={e => this.props.toggleSearch(e)}
             aria-controls="searchForm"
@@ -88,6 +88,8 @@ const SiteIdentity = styled.div`
   flex-wrap: nowrap;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+  width: 175px;
 `;
 
 const TitleBarNav = styled.div`
@@ -122,6 +124,8 @@ const TitleBarNav = styled.div`
 const TitleBarControls = styled.div`
   display: flex;
   flex-wrap: nowrap;
+  width: 175px;
+  justify-content: flex-end;
 `;
 
 const SiteTitle = styled.div`

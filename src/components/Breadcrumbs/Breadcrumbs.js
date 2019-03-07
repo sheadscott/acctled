@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 export default function Breadcrumbs(props) {
-  console.log('breadcrumbs', props.data);
+  // console.log('breadcrumbs', props.data);
   return (
     <Breadcrumb role="navigation" aria-label="Breadcrumb">
       <ul role="menu">
