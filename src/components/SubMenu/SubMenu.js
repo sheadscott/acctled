@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Container } from '../Grid/Grid';
-import { A } from '../Elements/Elements';
+import React from "react";
+import styled from "styled-components";
+import { Container } from "../Grid/Grid";
+import { A } from "../Elements/Elements";
 import decode from "unescape";
 
 /*
@@ -9,9 +9,9 @@ import decode from "unescape";
   visibility should be controlled by its parent, MenuItem
 */
 
-export default (props) => {
+export default props => {
   return (
-    <SubMenuWrapper className={props.expanded ? 'expanded' : null}>
+    <SubMenuWrapper className={props.expanded ? "expanded" : null}>
       <StyledContainer p={4}>
         <SubMenu>
           {/*
@@ -20,7 +20,7 @@ export default (props) => {
           {props.items.map(item => {
             if (item.children) {
               return (
-                <li style={{ breakInside: 'avoid' }} key={item.id}>
+                <li style={{ breakInside: "avoid" }} key={item.id}>
                   <ListHeading>{item.title}</ListHeading>
 
                   <SubMenuList>
@@ -29,7 +29,14 @@ export default (props) => {
                       if (subitem.type === "custom") {
                         return (
                           <li key={subitem.id}>
-                            <A color="#4c4d4f" hovercolor="#065589" data={subitem} href={subitem.url}>{decode(subitem.title)}</A>
+                            <A
+                              color="#4c4d4f"
+                              hovercolor="#065589"
+                              data={subitem}
+                              href={subitem.url}
+                            >
+                              {decode(subitem.title)}
+                            </A>
                           </li>
                         );
                       }
@@ -37,22 +44,34 @@ export default (props) => {
                       // external links
                       return (
                         <li key={subitem.id}>
-                          <A color="#4c4d4f" hovercolor="#065589" data={subitem}>{decode(subitem.title)}</A>
+                          <A
+                            color="#4c4d4f"
+                            hovercolor="#065589"
+                            data={subitem}
+                          >
+                            {decode(subitem.title)}
+                          </A>
                         </li>
                       );
                     })}
                   </SubMenuList>
                 </li>
-              )
+              );
             }
 
-            return <li key={item.id}><A color="#4c4d4f" data={item}>{decode(item.title)}</A></li>
+            return (
+              <li key={item.id}>
+                <A color="#4c4d4f" data={item}>
+                  {decode(item.title)}
+                </A>
+              </li>
+            );
           })}
         </SubMenu>
       </StyledContainer>
     </SubMenuWrapper>
-  )
-}
+  );
+};
 
 const SubMenuWrapper = styled.div`
   position: absolute;
@@ -109,7 +128,7 @@ const SubMenuList = styled.ul`
     line-height: 1.3rem;
 
     &:before {
-      content: '•';
+      content: "•";
       display: block;
       position: absolute;
       left: -0.75rem;

@@ -1,13 +1,16 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { fontSize, color, bgColor } from 'styled-system';
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { fontSize, color, bgColor } from "styled-system";
 
 const A = props => {
   const url = window.location.pathname;
-  const lastSlash = url.lastIndexOf('/');
+  const lastSlash = url.lastIndexOf("/");
   const pageName = url.substring(lastSlash);
-  const object_slug = props.data ? props.data.object_slug : '';
+  const object_slug = props.data ? props.data.object_slug : "";
+  const pageURL = props.data
+    ? props.data.url.replace("https://instruction.austincc.edu/tled", "")
+    : null;
 
   if (props.href) {
     return (
@@ -17,20 +20,16 @@ const A = props => {
     );
   }
 
-  if ('/' + object_slug === pageName) {
+  if ("/" + object_slug === pageName) {
     return (
-      <StyledLink
-        to={`/${object_slug}`}
-        className="active object_slug"
-        {...props}
-      >
+      <StyledLink to={`${pageURL}`} className="active object_slug" {...props}>
         {props.children}
       </StyledLink>
     );
   }
 
   return (
-    <StyledLink to={`/${object_slug}`} className="object_slug" {...props}>
+    <StyledLink to={`${pageURL}`} className="object_slug" {...props}>
       {props.children}
     </StyledLink>
   );
