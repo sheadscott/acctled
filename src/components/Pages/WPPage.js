@@ -216,7 +216,7 @@ export default class WPPage extends Component {
           {ACFData && pageContent.template === 'page-sidebar-right.php' && (
             <Section>
               <Row>
-                <Column width={[1, 3 / 4]}>
+                <Column width={[1, 2 / 3]}>
                   <Heading as="h1" underline={true} caps={true}>
                     {decode(pageContent.title.rendered)}
                   </Heading>
@@ -227,7 +227,7 @@ export default class WPPage extends Component {
                   )}
                 </Column>
 
-                <Column width={[1, 1 / 4]} pl={[0, '2rem']}>
+                <Column width={[1, 1 / 3]} pl={[0, '2rem']}>
                   <Aside
                     backgroundColor={
                       ACFData.sidebar_right_background &&
@@ -247,7 +247,7 @@ export default class WPPage extends Component {
           {ACFData && pageContent.template === 'page-sidebar-left.php' && (
             <Section>
               <Row>
-                <Column width={[1, 1 / 4]} pr={[0, '2rem']} order={[2, 1]}>
+                <Column width={[1, 1 / 3]} pr={[0, '2rem']} order={[2, 1]}>
                   <Aside
                     backgroundColor={
                       ACFData.sidebar_left_background &&
@@ -260,7 +260,7 @@ export default class WPPage extends Component {
                   </Aside>
                 </Column>
 
-                <Column width={[1, 3 / 4]} order={[1, 2]}>
+                <Column width={[1, 2 / 3]} order={[1, 2]}>
                   <Heading as="h1" underline={true} caps={true}>
                     {decode(pageContent.title.rendered)}
                   </Heading>
