@@ -28,13 +28,11 @@ class MediaContainer extends React.Component {
       </Wrapper>
     );
   }
-
-  getDefaultProps() {
-    return {
-      objectPosition: 'center'
-    };
-  }
 }
+
+MediaContainer.defaultProps = {
+  objectPosition: 'center'
+};
 
 const Wrapper = styled.div`
   max-height: ${props => props.maxHeight || 'auto'};
