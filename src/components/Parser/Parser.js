@@ -1,18 +1,18 @@
-import React from 'react';
-import HTMLParser from 'html-react-parser';
-import domToReact from 'html-react-parser/lib/dom-to-react';
-import MediaContainer from '../MediaContainer/MediaContainer';
-import { A } from '../Elements/Elements';
+import React from "react";
+import HTMLParser from "html-react-parser";
+import domToReact from "html-react-parser/lib/dom-to-react";
+import MediaContainer from "../MediaContainer/MediaContainer";
+import { A } from "../Elements/Elements";
 
 const parseContent = content => {
   return HTMLParser(content, {
     replace: function({ name, attribs, children }) {
-      if (name === 'a' && attribs.href) {
+      if (name === "a" && attribs.href) {
         // console.log(attribs);
         const url = attribs.href.match(/\/uploads\//)
           ? attribs.href
-          : attribs.href.replace('https://instruction.austincc.edu/tled', '');
-        if (attribs.target === '_blank') {
+          : attribs.href.replace("https://instruction.austincc.edu/tled/", "/");
+        if (attribs.target === "_blank") {
           return (
             <A
               href={url}
@@ -31,19 +31,19 @@ const parseContent = content => {
         );
       }
 
-      if (name === 'iframe') {
-        attribs.style = { border: 'none' };
+      if (name === "iframe") {
+        attribs.style = { border: "none" };
 
-        if (attribs.hasOwnProperty('class')) {
+        if (attribs.hasOwnProperty("class")) {
           delete attribs.class;
         }
 
-        if (attribs.hasOwnProperty('allowfullscreen')) {
+        if (attribs.hasOwnProperty("allowfullscreen")) {
           attribs.allowFullScreen = true;
           delete attribs.allowfullscreen;
         }
 
-        if (attribs.hasOwnProperty('frameborder')) {
+        if (attribs.hasOwnProperty("frameborder")) {
           attribs.frameBorder = attribs.frameborder;
           delete attribs.frameborder;
         }
