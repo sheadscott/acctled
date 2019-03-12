@@ -13,12 +13,15 @@ img.alignright {
   margin: 0 0 1rem 1.5rem;
 }
 
+figcaption,
 .wp-caption-text {
-  font-size: 0.75rem;
+  font-size: 0.68rem;
   text-align: right;
-  color: #696969;
   font-style: italic;
-  margin-bottom: 1rem;
+  font-style: italic;
+  padding: 0.5rem 1rem;
+  background: hsl(0, 0%, 30%);
+  color: white;
 }
 
 hr {
@@ -30,3 +33,7 @@ hr {
 /* a:not([href^="/"]) {
   color: greenyellow !important;
 } */
+
+main li:not([role="menuitem"]) {
+  margin-bottom: 1.5rem;
+}
