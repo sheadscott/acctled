@@ -38,9 +38,24 @@ export default class StaffDirectoryPage extends Component {
     nrg: [7, "Northridge"]
   };
 
-  handleClick(e, sheet, sheets, sheetId) {
-    const deptContainer = document.getElementById(sheet);
+  componentDidMount() {
+    const hash = this.props.location.hash;
+    console.log(hash ? hash : "hash doesn't exist");
+    if (hash) {
+      const hashName = hash.replace(/^#/, "");
+      this.setState({ expanded: hashName }, () =>
+        console.log("Expanded: ", this.state.expanded)
+      );
 
+      if (hash !== "#library") {
+        this.handleClick(null, hashName, this.tledSheets, this.tledSheetId);
+      }
+    }
+  }
+
+  handleClick(e, sheet, sheets, sheetId) {
+    // const deptContainer = document.getElementById(sheet);
+    const deptContainer = this[sheet + "Ref"];
     if (!this.state[sheet]) {
       console.log("deptContainer: ", deptContainer);
 
@@ -55,20 +70,20 @@ export default class StaffDirectoryPage extends Component {
         .catch(function(error) {
           // handle error
           console.error("*** ERROR *** StaffDirectoryPage.js: ", error);
-          // this.loading = false;
         })
         .then(response => {
           const title = sheets[sheet][1];
           const staffData = response.data.feed.entry;
           this.setState({ [sheet]: { title, staffData } }, () => {
-            const deptContainer = document.getElementById(sheet);
+            // const deptContainer = document.getElementById(sheet);
+            const deptContainer = this[sheet + "Ref"];
             // Re-enable onclick
             deptContainer.style.cssText = "pointer-events: auto;";
             deptContainer.querySelector(".loading").classList.add("loaded");
+            deptContainer.classList.toggle("active");
           });
         });
     } else {
-      console.log(deptContainer);
       deptContainer.classList.toggle("active");
     }
   }
@@ -82,81 +97,106 @@ export default class StaffDirectoryPage extends Component {
           <title>{title}</title>
         </Helmet>
         <Section>
-          <Heading as="h1" caps={true} underline={true}>
+          <Heading
+            as="h1"
+            caps={true}
+            underline={true}
+            ref={el => (this.heading = el)}
+          >
             {title}
           </Heading>
 
           <Accordion accordion={false}>
-            {Object.keys(this.tledSheets).map((sheet, index) => (
-              <AccordionItem
-                key={index}
-                id={sheet}
-                onClick={e => {
-                  this.handleClick(e, sheet, this.tledSheets, this.tledSheetId);
-                }}
-              >
-                <StyledAccordionItemTitle>
-                  {this.tledSheets[sheet][1]}
-                  <ArrowIcon role="presentation" />
-                </StyledAccordionItemTitle>
-                <StyledAccordionItemBody>
-                  <Loading className="loading">Loading...</Loading>
-                  {this.state[sheet] && (
-                    <Department>
-                      <tbody>
-                        {this.state[sheet].staffData &&
-                          this.state[sheet].staffData.map((row, index) => {
-                            if (row.gsx$lastname.$t.match(/vacant/i)) {
-                              return (
-                                <tr key={index} className="vacant">
-                                  <td>Vacant</td>
-                                  <td>{row.gsx$title.$t}</td>
-                                  <td />
-                                  <td />
-                                  <td />
-                                </tr>
-                              );
-                            }
-                            return (
-                              <tr key={index}>
-                                <td>
-                                  {row.gsx$firstname.$t} {row.gsx$lastname.$t}
-                                </td>
-                                <td>{row.gsx$title.$t}</td>
-                                <td>
-                                  {row.gsx$extension.$t && (
-                                    <span>223-{row.gsx$extension.$t}</span>
-                                  )}
-                                </td>
-                                <td>
-                                  {row.gsx$email.$t && (
-                                    <span>
-                                      <A
-                                        href={
-                                          "mailto:" +
-                                          row.gsx$email.$t +
-                                          "austincc.edu"
-                                        }
-                                      >
-                                        {row.gsx$email.$t + "@austincc.edu"}
-                                      </A>
-                                    </span>
-                                  )}
-                                </td>
-                                <td>{row.gsx$roomnumber.$t}</td>
-                              </tr>
-                            );
-                          })}
-                      </tbody>
-                    </Department>
-                  )}
-                </StyledAccordionItemBody>
-              </AccordionItem>
-            ))}
+            {Object.keys(this.tledSheets).map((sheet, index) => {
+              // console.log(sheet + "Ref");
+              return (
+                <div
+                  id={sheet}
+                  ref={el => (this[sheet + "Ref"] = el)}
+                  key={sheet}
+                >
+                  <AccordionItem
+                    key={index}
+                    expanded={this.state.expanded === sheet}
+                    onClick={e => {
+                      this.handleClick(
+                        e,
+                        sheet,
+                        this.tledSheets,
+                        this.tledSheetId
+                      );
+                    }}
+                  >
+                    <StyledAccordionItemTitle>
+                      {this.tledSheets[sheet][1]}
+                      <ArrowIcon role="presentation" />
+                    </StyledAccordionItemTitle>
+                    <StyledAccordionItemBody>
+                      <Loading className="loading">Loading...</Loading>
+                      {this.state[sheet] && (
+                        <Department>
+                          <tbody>
+                            {this.state[sheet].staffData &&
+                              this.state[sheet].staffData.map((row, index) => {
+                                if (row.gsx$lastname.$t.match(/vacant/i)) {
+                                  return (
+                                    <tr key={index} className="vacant">
+                                      <td>Vacant</td>
+                                      <td>{row.gsx$title.$t}</td>
+                                      <td />
+                                      <td />
+                                      <td />
+                                    </tr>
+                                  );
+                                }
+                                return (
+                                  <tr key={index}>
+                                    <td>
+                                      {row.gsx$firstname.$t}{" "}
+                                      {row.gsx$lastname.$t}
+                                    </td>
+                                    <td>{row.gsx$title.$t}</td>
+                                    <td>
+                                      {row.gsx$extension.$t && (
+                                        <span>
+                                          (512) 223-{row.gsx$extension.$t}
+                                        </span>
+                                      )}
+                                    </td>
+                                    <td>
+                                      {row.gsx$email.$t && (
+                                        <span>
+                                          <A
+                                            href={
+                                              "mailto:" +
+                                              row.gsx$email.$t +
+                                              "austincc.edu"
+                                            }
+                                          >
+                                            {row.gsx$email.$t + "@austincc.edu"}
+                                          </A>
+                                        </span>
+                                      )}
+                                    </td>
+                                    <td>{row.gsx$roomnumber.$t}</td>
+                                  </tr>
+                                );
+                              })}
+                          </tbody>
+                        </Department>
+                      )}
+                    </StyledAccordionItemBody>
+                  </AccordionItem>
+                </div>
+              );
+            })}
 
             {/* ##### Library ##### */}
 
-            <AccordionItem id="library">
+            <AccordionItem
+              id="library"
+              expanded={this.state.expanded === "library"}
+            >
               <StyledAccordionItemTitle>
                 Library Staff
                 <ArrowIcon role="presentation" />
@@ -205,7 +245,7 @@ export default class StaffDirectoryPage extends Component {
                                         <td>
                                           {row.gsx$extension.$t && (
                                             <span>
-                                              223-{row.gsx$extension.$t}
+                                              (512) 223-{row.gsx$extension.$t}
                                             </span>
                                           )}
                                         </td>
