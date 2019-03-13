@@ -93,11 +93,7 @@ export default function Hero(props) {
                 />
               )}
             </MediaContainer>
-            <figcaption
-              style={{ textAlign: 'right', opacity: 0.5, fontStyle: 'italic' }}
-            >
-              {props.data.image_description}
-            </figcaption>
+            <figcaption>{props.data.image_description}</figcaption>
           </figure>
         </div>
       );
