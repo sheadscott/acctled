@@ -39,6 +39,7 @@
     "eject": "react-scripts eject",
     "proxy": "browser-sync start --https --proxy 'localhost:3000' --files 'src/**/*.js'",
     "devdeploy": "yarn build && aws s3 --region 'us-west-2' sync build/ s3://dev.tled.austincc.edu --cache-control public,max-age=0 --delete",
+    "proddeploy": "yarn build && aws s3 --region 'us-west-2' sync build/ s3://tled.austincc.edu --delete",
     "devcomments": "### The url for the dev bucket is http://dev.tled.austincc.edu.s3-website-us-west-2.amazonaws.com"
   },
   "eslintConfig": {
