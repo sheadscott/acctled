@@ -39,13 +39,11 @@ export default class StaffDirectoryPage extends Component {
   };
 
   componentDidMount() {
+    // Get the named anchor ie. #tled
     const hash = this.props.location.hash;
-    console.log(hash ? hash : "hash doesn't exist");
     if (hash) {
       const hashName = hash.replace(/^#/, "");
-      this.setState({ expanded: hashName }, () =>
-        console.log("Expanded: ", this.state.expanded)
-      );
+      this.setState({ expanded: hashName });
 
       if (hash !== "#library") {
         this.handleClick(null, hashName, this.tledSheets, this.tledSheetId);
@@ -54,11 +52,8 @@ export default class StaffDirectoryPage extends Component {
   }
 
   handleClick(e, sheet, sheets, sheetId) {
-    // const deptContainer = document.getElementById(sheet);
     const deptContainer = this[sheet + "Ref"];
     if (!this.state[sheet]) {
-      console.log("deptContainer: ", deptContainer);
-
       // Disable onclick while loading
       deptContainer.style.cssText = "pointer-events: none;";
 
@@ -75,8 +70,6 @@ export default class StaffDirectoryPage extends Component {
           const title = sheets[sheet][1];
           const staffData = response.data.feed.entry;
           this.setState({ [sheet]: { title, staffData } }, () => {
-            // const deptContainer = document.getElementById(sheet);
-            const deptContainer = this[sheet + "Ref"];
             // Re-enable onclick
             deptContainer.style.cssText = "pointer-events: auto;";
             deptContainer.querySelector(".loading").classList.add("loaded");
