@@ -1,61 +1,61 @@
-import React, { Component } from "react";
-import Axios from "axios";
-import styled from "styled-components";
+import React, { Component } from 'react';
+import Axios from 'axios';
+import styled from 'styled-components';
 import {
   Accordion,
   AccordionItem,
   AccordionItemTitle,
   AccordionItemBody
-} from "react-accessible-accordion";
-import { Helmet } from "react-helmet";
-import { Container } from "../Grid/Grid";
-import { A, Section, Heading } from "../Elements/Elements";
-import { ReactComponent as DownArrowIcon } from "../../img/arrowDown.svg";
+} from 'react-accessible-accordion';
+import { Helmet } from 'react-helmet';
+import { Container } from '../Grid/Grid';
+import { A, Section, Heading } from '../Elements/Elements';
+import { ReactComponent as DownArrowIcon } from '../../img/arrowDown.svg';
 
 export default class StaffDirectoryPage extends Component {
   state = {};
 
-  tledSheetId = "1hPYNTqMM-lQuiMNNYfOj2g6NfUhsnZoDb8eaVDodyd0";
-  libSheetId = "1pchnW3O4xtOB_GGU7fJsbqzYTc4nOucBlqf7gx2gOhw";
+  tledSheetId = '1hPYNTqMM-lQuiMNNYfOj2g6NfUhsnZoDb8eaVDodyd0';
+  libSheetId = '1pchnW3O4xtOB_GGU7fJsbqzYTc4nOucBlqf7gx2gOhw';
 
   tledSheets = {
-    tled: [1, "Teaching & Learning Excellence Division"],
-    facdev: [2, "Office of Faculty & Instructional Development"],
-    media: [3, "Media Support Services"],
-    multimedia: [4, "Multimedia & Classroom Technology"],
-    instructionaltech: [5, "Office of Instructional Technology"],
-    curriculumdev: [6, "Office of Curriculum Development"],
-    internships: [7, "Office of Cooperative Education & Internships"]
+    tled: [1, 'Teaching & Learning Excellence Division'],
+    facdev: [2, 'Office of Faculty & Instructional Development'],
+    media: [3, 'Media Support Services'],
+    multimedia: [4, 'Multimedia & Classroom Technology'],
+    instructionaltech: [5, 'Office of Instructional Technology'],
+    curriculumdev: [6, 'Office of Curriculum Development'],
+    internships: [7, 'Office of Cooperative Education & Internships']
   };
 
   libSheets = {
-    main: [1, "Administrators"],
-    cyp: [2, "Cypress Creek"],
-    evc: [3, "Eastview"],
-    elg: [4, "Elgin"],
-    hlc: [5, "Highland"],
-    hys: [6, "Hays"],
-    nrg: [7, "Northridge"]
+    main: [1, 'Administrators'],
+    cyp: [2, 'Cypress Creek'],
+    evc: [3, 'Eastview'],
+    elg: [4, 'Elgin'],
+    hlc: [5, 'Highland'],
+    hys: [6, 'Hays'],
+    nrg: [7, 'Northridge']
   };
 
   componentDidMount() {
     // Get the named anchor ie. #tled
     const hash = this.props.location.hash;
     if (hash) {
-      const hashName = hash.replace(/^#/, "");
+      const hashName = hash.replace(/^#/, '');
       this.setState({ expanded: hashName });
 
-      if (hash !== "#library") {
+      if (hash !== '#library') {
         this.handleClick(null, hashName, this.tledSheets, this.tledSheetId);
       }
     }
   }
 
   handleClick(e, sheet, sheets, sheetId) {
-    const deptContainer = this[sheet + "Ref"];
+    const deptContainer = this[sheet + 'Ref'];
     if (!this.state[sheet]) {
       // Disable onclick while loading
-      deptContainer.style.cssText = "pointer-events: none;";
+      deptContainer.style.cssText = 'pointer-events: none;';
 
       Axios.get(
         `https://spreadsheets.google.com/feeds/list/${sheetId}/${
@@ -64,25 +64,25 @@ export default class StaffDirectoryPage extends Component {
       )
         .catch(function(error) {
           // handle error
-          console.error("*** ERROR *** StaffDirectoryPage.js: ", error);
+          console.error('*** ERROR *** StaffDirectoryPage.js: ', error);
         })
         .then(response => {
           const title = sheets[sheet][1];
           const staffData = response.data.feed.entry;
           this.setState({ [sheet]: { title, staffData } }, () => {
             // Re-enable onclick
-            deptContainer.style.cssText = "pointer-events: auto;";
-            deptContainer.querySelector(".loading").classList.add("loaded");
-            deptContainer.classList.toggle("active");
+            deptContainer.style.cssText = 'pointer-events: auto;';
+            deptContainer.querySelector('.loading').classList.add('loaded');
+            deptContainer.classList.toggle('active');
           });
         });
     } else {
-      deptContainer.classList.toggle("active");
+      deptContainer.classList.toggle('active');
     }
   }
 
   render() {
-    const title = "TLED Staff Directory";
+    const title = 'TLED Staff Directory';
 
     return (
       <Container>
@@ -105,7 +105,7 @@ export default class StaffDirectoryPage extends Component {
               return (
                 <div
                   id={sheet}
-                  ref={el => (this[sheet + "Ref"] = el)}
+                  ref={el => (this[sheet + 'Ref'] = el)}
                   key={sheet}
                 >
                   <AccordionItem
@@ -142,18 +142,22 @@ export default class StaffDirectoryPage extends Component {
                                     </tr>
                                   );
                                 }
+                                let phone = row.gsx$extension.$t;
+                                if (phone) {
+                                  phone = phone.match(/^[\d]{4}$/)
+                                    ? `(512) 223-${phone}`
+                                    : `(512) ${phone}`;
+                                }
                                 return (
                                   <tr key={index}>
                                     <td>
-                                      {row.gsx$firstname.$t}{" "}
+                                      {row.gsx$firstname.$t}{' '}
                                       {row.gsx$lastname.$t}
                                     </td>
                                     <td>{row.gsx$title.$t}</td>
-                                    <td>
+                                    <td className="phone">
                                       {row.gsx$extension.$t && (
-                                        <span>
-                                          (512) 223-{row.gsx$extension.$t}
-                                        </span>
+                                        <span>{phone}</span>
                                       )}
                                     </td>
                                     <td>
@@ -161,12 +165,12 @@ export default class StaffDirectoryPage extends Component {
                                         <span>
                                           <A
                                             href={
-                                              "mailto:" +
+                                              'mailto:' +
                                               row.gsx$email.$t +
-                                              "austincc.edu"
+                                              'austincc.edu'
                                             }
                                           >
-                                            {row.gsx$email.$t + "@austincc.edu"}
+                                            {row.gsx$email.$t + '@austincc.edu'}
                                           </A>
                                         </span>
                                       )}
@@ -188,7 +192,7 @@ export default class StaffDirectoryPage extends Component {
 
             <AccordionItem
               id="library"
-              expanded={this.state.expanded === "library"}
+              expanded={this.state.expanded === 'library'}
             >
               <StyledAccordionItemTitle>
                 Library Staff
@@ -196,77 +200,85 @@ export default class StaffDirectoryPage extends Component {
               </StyledAccordionItemTitle>
               <StyledAccordionItemBody>
                 <Accordion accordion={false}>
-                  {Object.keys(this.libSheets).map((sheet, index) => (
-                    <AccordionItem
-                      key={index}
+                  {Object.keys(this.libSheets).map(sheet => (
+                    <div
                       id={sheet}
-                      onClick={e => {
-                        this.handleClick(
-                          e,
-                          sheet,
-                          this.libSheets,
-                          this.libSheetId
-                        );
-                      }}
+                      ref={el => (this[sheet + 'Ref'] = el)}
+                      key={sheet}
                     >
-                      <StyledAccordionItemTitle>
-                        {this.libSheets[sheet][1]}
-                        <ArrowIcon role="presentation" />
-                      </StyledAccordionItemTitle>
-                      <StyledAccordionItemBody>
-                        <Loading className="loading">Loading...</Loading>
-                        {this.state[sheet] && (
-                          <Department>
-                            <tbody>
-                              {this.state[sheet].staffData &&
-                                this.state[sheet].staffData.map(
-                                  (row, index) => {
-                                    if (row.gsx$name.$t.match(/vacant/i)) {
+                      <AccordionItem
+                        onClick={e => {
+                          this.handleClick(
+                            e,
+                            sheet,
+                            this.libSheets,
+                            this.libSheetId
+                          );
+                        }}
+                      >
+                        <StyledAccordionItemTitle>
+                          {this.libSheets[sheet][1]}
+                          <ArrowIcon role="presentation" />
+                        </StyledAccordionItemTitle>
+                        <StyledAccordionItemBody>
+                          <Loading className="loading">Loading...</Loading>
+                          {this.state[sheet] && (
+                            <Department>
+                              <tbody>
+                                {this.state[sheet].staffData &&
+                                  this.state[sheet].staffData.map(
+                                    (row, index) => {
+                                      if (row.gsx$name.$t.match(/vacant/i)) {
+                                        return (
+                                          <tr key={index} className="vacant">
+                                            <td>Vacant</td>
+                                            <td>{row.gsx$title.$t}</td>
+                                            <td />
+                                            <td />
+                                          </tr>
+                                        );
+                                      }
+                                      let phone = row.gsx$extension.$t;
+                                      if (phone) {
+                                        phone = phone.match(/^[\d]{4}$/)
+                                          ? `(512) 223-${phone}`
+                                          : `(512) ${phone}`;
+                                      }
                                       return (
-                                        <tr key={index} className="vacant">
-                                          <td>Vacant</td>
+                                        <tr key={index}>
+                                          <td>{row.gsx$name.$t}</td>
                                           <td>{row.gsx$title.$t}</td>
-                                          <td />
-                                          <td />
+                                          <td className="phone">
+                                            {row.gsx$extension.$t && (
+                                              <span>{phone}</span>
+                                            )}
+                                          </td>
+                                          <td>
+                                            {row.gsx$email.$t && (
+                                              <span>
+                                                <A
+                                                  href={
+                                                    'mailto:' +
+                                                    row.gsx$email.$t +
+                                                    'austincc.edu'
+                                                  }
+                                                >
+                                                  {row.gsx$email.$t +
+                                                    '@austincc.edu'}
+                                                </A>
+                                              </span>
+                                            )}
+                                          </td>
                                         </tr>
                                       );
                                     }
-                                    return (
-                                      <tr key={index}>
-                                        <td>{row.gsx$name.$t}</td>
-                                        <td>{row.gsx$title.$t}</td>
-                                        <td>
-                                          {row.gsx$extension.$t && (
-                                            <span>
-                                              (512) 223-{row.gsx$extension.$t}
-                                            </span>
-                                          )}
-                                        </td>
-                                        <td>
-                                          {row.gsx$email.$t && (
-                                            <span>
-                                              <A
-                                                href={
-                                                  "mailto:" +
-                                                  row.gsx$email.$t +
-                                                  "austincc.edu"
-                                                }
-                                              >
-                                                {row.gsx$email.$t +
-                                                  "@austincc.edu"}
-                                              </A>
-                                            </span>
-                                          )}
-                                        </td>
-                                      </tr>
-                                    );
-                                  }
-                                )}
-                            </tbody>
-                          </Department>
-                        )}
-                      </StyledAccordionItemBody>
-                    </AccordionItem>
+                                  )}
+                              </tbody>
+                            </Department>
+                          )}
+                        </StyledAccordionItemBody>
+                      </AccordionItem>
+                    </div>
                   ))}
                 </Accordion>
               </StyledAccordionItemBody>
@@ -325,6 +337,10 @@ const Department = styled.table`
   a {
     text-decoration: underline;
   }
+
+  td.phone {
+    min-width: 140px;
+  }
 `;
 
 const Loading = styled.div`
@@ -357,7 +373,7 @@ const StyledAccordionItemTitle = styled(AccordionItemTitle)`
     margin-top: -0.55rem;
   }
 
-  &[aria-expanded="true"] > svg {
+  &[aria-expanded='true'] > svg {
     transform: scaleY(-1);
   }
 `;
