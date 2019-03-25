@@ -25,7 +25,11 @@ export default class WPPage extends Component {
 
     console.log('Param1: ', this.props.match.params.param1);
 
-    const site = this.props.match.params.param1 === 'ocei' ? 'ocei' : 'tled';
+    const site =
+      this.props.match.params.param1 ===
+      'office-cooperative-education-internships'
+        ? 'ocei'
+        : 'tled';
 
     Axios.get(
       `https://instruction.austincc.edu/${site}/wp-json/wp/v2/pages?slug=${slug}`
