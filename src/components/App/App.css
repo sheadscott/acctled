@@ -33,7 +33,3 @@ hr {
 /* a:not([href^="/"]) {
   color: greenyellow !important;
 } */
-
-main li:not([role="menuitem"]) {
-  margin-bottom: 1.5rem;
-}
