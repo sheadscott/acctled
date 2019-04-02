@@ -99,6 +99,7 @@ export default class HomeSlider extends Component {
                   this.changeCarousel(index);
                 }}
                 className={this.state.currentSlide === index ? 'active' : null}
+                disabled={this.state.currentSlide === index ? 'true' : null}
                 bg={item.url}
                 title={item.title}
                 index={index}
@@ -210,6 +211,11 @@ const CarouselControl = styled.button`
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
   outline: none;
   margin-bottom: 0.75rem;
+  cursor: pointer;
+
+  &[disabled] {
+    cursor: not-allowed;
+  }
 
   &:before {
     content: '';
