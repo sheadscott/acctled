@@ -22,12 +22,12 @@ export default class StaffDirectoryPage extends Component {
 
   tledSheets = {
     tled: [1, 'Teaching & Learning Excellence Division'],
-    facdev: [2, 'Office of Faculty & Instructional Development'],
     media: [3, 'Media Support Services'],
     multimedia: [4, 'Multimedia & Classroom Technology'],
-    instructionaltech: [5, 'Office of Instructional Technology'],
     curriculumdev: [6, 'Office of Curriculum Development'],
-    internships: [7, 'Office of Cooperative Education & Internships']
+    facdev: [2, 'Office of Faculty & Instructional Development'],
+    internships: [7, 'Office of Experiential Learning'],
+    instructionaltech: [5, 'Office of Instructional Technology'],
   };
 
   libSheets = {
@@ -42,6 +42,7 @@ export default class StaffDirectoryPage extends Component {
     rrc: [9, 'Round Rock'],
     sgc: [10, 'San Gabriel'],
     sac: [11, 'South Austin'],
+    techservices: [12, 'Technical Services'],
   };
 
   componentDidMount() {
