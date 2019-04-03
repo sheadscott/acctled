@@ -11,6 +11,8 @@ import { Helmet } from 'react-helmet';
 import { Container } from '../Grid/Grid';
 import { A, Section, Heading } from '../Elements/Elements';
 import { ReactComponent as DownArrowIcon } from '../../img/arrowDown.svg';
+import TLEDStaff from '../directory/TLEDStaff'
+import LibraryStaff from '../directory/LibraryStaff';
 
 export default class StaffDirectoryPage extends Component {
   state = {};
@@ -33,9 +35,13 @@ export default class StaffDirectoryPage extends Component {
     cyp: [2, 'Cypress Creek'],
     evc: [3, 'Eastview'],
     elg: [4, 'Elgin'],
-    hlc: [5, 'Highland'],
-    hys: [6, 'Hays'],
-    nrg: [7, 'Northridge']
+    hys: [5, 'Hays'],
+    hlc: [6, 'Highland'],
+    nrg: [7, 'Northridge'],
+    rvs: [8, 'Riverside'],
+    rrc: [9, 'Round Rock'],
+    sgc: [10, 'San Gabriel'],
+    sac: [11, 'South Austin'],
   };
 
   componentDidMount() {
@@ -128,58 +134,8 @@ export default class StaffDirectoryPage extends Component {
                       <Loading className="loading">Loading...</Loading>
                       {this.state[sheet] && (
                         <Department>
-                          <tbody>
-                            {this.state[sheet].staffData &&
-                              this.state[sheet].staffData.map((row, index) => {
-                                if (row.gsx$lastname.$t.match(/vacant/i)) {
-                                  return (
-                                    <tr key={index} className="vacant">
-                                      <td>Vacant</td>
-                                      <td>{row.gsx$title.$t}</td>
-                                      <td />
-                                      <td />
-                                      <td />
-                                    </tr>
-                                  );
-                                }
-                                let phone = row.gsx$extension.$t;
-                                if (phone) {
-                                  phone = phone.match(/^[\d]{4}$/)
-                                    ? `(512) 223-${phone}`
-                                    : `(512) ${phone}`;
-                                }
-                                return (
-                                  <tr key={index}>
-                                    <td>
-                                      {row.gsx$firstname.$t}{' '}
-                                      {row.gsx$lastname.$t}
-                                    </td>
-                                    <td>{row.gsx$title.$t}</td>
-                                    <td className="phone">
-                                      {row.gsx$extension.$t && (
-                                        <span>{phone}</span>
-                                      )}
-                                    </td>
-                                    <td>
-                                      {row.gsx$email.$t && (
-                                        <span>
-                                          <A
-                                            href={
-                                              'mailto:' +
-                                              row.gsx$email.$t +
-                                              'austincc.edu'
-                                            }
-                                          >
-                                            {row.gsx$email.$t + '@austincc.edu'}
-                                          </A>
-                                        </span>
-                                      )}
-                                    </td>
-                                    <td>{row.gsx$roomnumber.$t}</td>
-                                  </tr>
-                                );
-                              })}
-                          </tbody>
+                          {this.state[sheet].staffData &&
+                            <TLEDStaff data={this.state[sheet].staffData} />}
                         </Department>
                       )}
                     </StyledAccordionItemBody>
@@ -224,56 +180,8 @@ export default class StaffDirectoryPage extends Component {
                           <Loading className="loading">Loading...</Loading>
                           {this.state[sheet] && (
                             <Department>
-                              <tbody>
-                                {this.state[sheet].staffData &&
-                                  this.state[sheet].staffData.map(
-                                    (row, index) => {
-                                      if (row.gsx$name.$t.match(/vacant/i)) {
-                                        return (
-                                          <tr key={index} className="vacant">
-                                            <td>Vacant</td>
-                                            <td>{row.gsx$title.$t}</td>
-                                            <td />
-                                            <td />
-                                          </tr>
-                                        );
-                                      }
-                                      let phone = row.gsx$extension.$t;
-                                      if (phone) {
-                                        phone = phone.match(/^[\d]{4}$/)
-                                          ? `(512) 223-${phone}`
-                                          : `(512) ${phone}`;
-                                      }
-                                      return (
-                                        <tr key={index}>
-                                          <td>{row.gsx$name.$t}</td>
-                                          <td>{row.gsx$title.$t}</td>
-                                          <td className="phone">
-                                            {row.gsx$extension.$t && (
-                                              <span>{phone}</span>
-                                            )}
-                                          </td>
-                                          <td>
-                                            {row.gsx$email.$t && (
-                                              <span>
-                                                <A
-                                                  href={
-                                                    'mailto:' +
-                                                    row.gsx$email.$t +
-                                                    'austincc.edu'
-                                                  }
-                                                >
-                                                  {row.gsx$email.$t +
-                                                    '@austincc.edu'}
-                                                </A>
-                                              </span>
-                                            )}
-                                          </td>
-                                        </tr>
-                                      );
-                                    }
-                                  )}
-                              </tbody>
+                              {this.state[sheet].staffData &&
+                              <LibraryStaff data={this.state[sheet].staffData} />} 
                             </Department>
                           )}
                         </StyledAccordionItemBody>
@@ -289,30 +197,6 @@ export default class StaffDirectoryPage extends Component {
     );
   }
 }
-
-const DeptContainer = styled.section`
-  cursor: pointer;
-
-  h1 {
-    padding: 0.2rem 0.8rem;
-    background: ${props => props.theme.colors.blue};
-    color: white;
-    font-size: 1.2rem;
-    font-weight: normal;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  table {
-    /* display: none; */
-  }
-
-  &.active table {
-    display: table;
-  }
-`;
 
 const Department = styled.table`
   margin-bottom: 1rem;

@@ -4,6 +4,7 @@ import decode from 'unescape';
 import styled from 'styled-components';
 import { Section, Heading } from 'iw-react-elements';
 import { Redirect } from 'react-router';
+import { withRouter } from "react-router-dom";
 import { Helmet } from 'react-helmet';
 
 import { Container, Row, Column } from '../Grid/Grid';
@@ -13,7 +14,7 @@ import Parser from '../Parser/Parser';
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
 import { replaceUrl } from '../../helpers';
 
-export default class WPPage extends Component {
+class WPPage extends Component {
   state = {
     slug: '',
     pageContent: 'some value',
@@ -24,7 +25,7 @@ export default class WPPage extends Component {
     console.log('component received new props', slug);
 
     console.log('Param1: ', this.props.match.params.param1);
-
+      
     const site =
       this.props.match.params.param1 ===
       'office-cooperative-education-internships'
@@ -63,11 +64,13 @@ export default class WPPage extends Component {
               console.error('breadcrumb error', error);
             })
             .then(response => {
+              console.log('Site = ', site);
               console.log('breadcrumb data', response.data.itemListElement);
               // console.log('breadcrumb data', response.data.itemListElement.slice(1));
               let breadcrumbData;
 
               if (site === 'tled') {
+                console.log('Inside TLED');
                 breadcrumbData = response.data.itemListElement.slice(1);
                 breadcrumbData[0].item.name = 'Home';
                 breadcrumbData[0].item['@id'] = '/';
@@ -78,7 +81,14 @@ export default class WPPage extends Component {
                 breadcrumbData[0].item.name = 'Home';
                 breadcrumbData[0].item['@id'] = '/';
                 breadcrumbData[1].item.name = 'OCEI';
-                breadcrumbData[1].item['@id'] = '/ocei';
+                breadcrumbData[1].item['@id'] =
+                  '/office-cooperative-education-internships';
+                if (
+                  breadcrumbData[2].item.name ===
+                  'Office of Cooperative Education and Internships'
+                ) {
+                  breadcrumbData.splice(2);
+                }
               }
 
               const cleanedCrumbUrls = breadcrumbData.map(crumb => {
@@ -96,6 +106,11 @@ export default class WPPage extends Component {
   }
 
   getSlug = params => {
+    // Redirect for TLEDv1 http://tled.austincc.edu/office-curriculum-development
+    if(this.props.match.params.param1 === "office-curriculum-development") {
+      this.props.history.push("/tled-offices/office-of-curriculum-development");
+      return "office-of-curriculum-development";
+    }
     return (
       params.param5 ||
       params.param4 ||
@@ -135,6 +150,7 @@ export default class WPPage extends Component {
     const ACFData = pageContent ? this.state.pageContent.acf : null;
 
     if (!pageContent) {
+      console.log("PARAM1: ", this.props.match.params.param1);
       return <Redirect to="/404" />;
     }
 
@@ -301,6 +317,8 @@ export default class WPPage extends Component {
   }
 }
 
+export default withRouter(WPPage);
+
 const Aside = styled.aside`
   margin-top: 2rem;
   ${props =>
@@ -310,4 +328,7 @@ const Aside = styled.aside`
       padding: 1rem;
       height: calc(100% - 2rem);
     `}
+  ul li{
+    margin-bottom: .6rem;
+  }
 `;
