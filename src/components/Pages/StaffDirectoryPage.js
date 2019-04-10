@@ -31,17 +31,17 @@ export default class StaffDirectoryPage extends Component {
   };
 
   libSheets = {
-    main: [1, 'Administrators'],
+    main: [1, 'Dean\'s Office'],
     cyp: [2, 'Cypress Creek'],
-    evc: [3, 'Eastview'],
-    elg: [4, 'Elgin'],
-    hys: [5, 'Hays'],
-    hlc: [6, 'Highland'],
+    elg: [3, 'Elgin'],
+    evc: [4, 'Eastview'],
+    hlc: [5, 'Highland'],
+    hys: [6, 'Hays'],
     nrg: [7, 'Northridge'],
-    rvs: [8, 'Riverside'],
-    rrc: [9, 'Round Rock'],
-    sgc: [10, 'San Gabriel'],
-    sac: [11, 'South Austin'],
+    rrc: [8, 'Round Rock'],
+    rvs: [9, 'Riverside'],
+    sac: [10, 'South Austin'],
+    sgc: [11, 'San Gabriel'],
     techservices: [12, 'Technical Services'],
   };
 
@@ -152,7 +152,7 @@ export default class StaffDirectoryPage extends Component {
               expanded={this.state.expanded === 'library'}
             >
               <StyledAccordionItemTitle>
-                Library Staff
+                Library Services
                 <ArrowIcon role="presentation" />
               </StyledAccordionItemTitle>
               <StyledAccordionItemBody>

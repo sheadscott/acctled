@@ -115,7 +115,7 @@ class App extends Component {
             <Helmet>
               <meta charSet="utf-8" />
               <title>TLED</title>
-              link rel="canonical" href="https://tled.austincc.edu" />
+              <link rel="canonical" href="https://tled.austincc.edu" />
             </Helmet>
             <Header className="App-header">
               <Drawer

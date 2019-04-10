@@ -16,10 +16,11 @@ export default class EventList extends Component {
       const events = response.data.feed.entry;
       const filteredEvents = events
         .filter(event => {
+          // Return if date is in the future
           return (
             new Date(
               event.gsx$dateforautocheck.$t.replace(/.*?,\s/, "")
-            ).valueOf() > Date.now()
+            ).valueOf() > (Date.now() - (1000 * 60 * 60 * 24)) // Today - 24 hours in milliseconds
           );
         })
         .sort((a, b) => {
