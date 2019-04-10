@@ -1,25 +1,27 @@
-import React, { Component } from "react";
-import axios from "axios";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import styled, { ThemeProvider } from "styled-components";
-import {Helmet} from "react-helmet";
+import React, { Component } from 'react';
+import axios from 'axios';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import styled, { ThemeProvider } from 'styled-components';
+import { Helmet } from 'react-helmet';
+import ReactGA from 'react-ga';
+import { createBrowserHistory } from 'history';
 
-import Drawer from "../Drawer/Drawer";
-import Search from "../Search/Search";
-import TitleBar from "../TitleBar/TitleBar";
-import SecondaryNav from "../SecondaryNav/SecondaryNav";
-import Footer from "../Footer/Footer";
+import Drawer from '../Drawer/Drawer';
+import Search from '../Search/Search';
+import TitleBar from '../TitleBar/TitleBar';
+import SecondaryNav from '../SecondaryNav/SecondaryNav';
+import Footer from '../Footer/Footer';
 
-import WPPage from "../Pages/WPPage";
-import HomePage from "../Pages/HomePage";
-import CalendarPage from "../Pages/CalendarPage";
-import ReportsPage from "../Pages/ReportsPage";
-import SearchPage from "../Pages/SearchPage";
-import StaffDirectoryPage from "../Pages/StaffDirectoryPage";
-import NotFoundPage from "../Pages/NotFoundPage";
+import WPPage from '../Pages/WPPage';
+import HomePage from '../Pages/HomePage';
+import CalendarPage from '../Pages/CalendarPage';
+import ReportsPage from '../Pages/ReportsPage';
+import SearchPage from '../Pages/SearchPage';
+import StaffDirectoryPage from '../Pages/StaffDirectoryPage';
+import NotFoundPage from '../Pages/NotFoundPage';
 
 import theme from './theme';
-import "./App.css";
+import './App.css';
 
 class App extends Component {
   state = {
@@ -31,14 +33,22 @@ class App extends Component {
   };
 
   componentDidMount() {
+    // Tracking Code
+    ReactGA.initialize('UA-107121372-1');
+    console.log('React GA initialized');
+    ReactGA.pageview(window.location.pathname + window.location.search);
+    const history = createBrowserHistory();
+    history.listen(location => ReactGA.pageview(location.pathname));
+
     // Primary Nav - passed to Drawer and TitleBar
+
     axios
       .get(
-        "https://instruction.austincc.edu/tled/wp-json/wp-api-menus/v2/menus/3"
+        'https://instruction.austincc.edu/tled/wp-json/wp-api-menus/v2/menus/3'
       )
-      .catch(function (error) {
+      .catch(function(error) {
         // handle error
-        console.log("Primary Nav: ", error);
+        console.log('Primary Nav: ', error);
       })
       .then(response => {
         this.setState({
@@ -48,11 +58,11 @@ class App extends Component {
     // Secondary Nav - passed to Drawer and SecondaryNav
     axios
       .get(
-        "https://instruction.austincc.edu/tled/wp-json/wp-api-menus/v2/menus/4"
+        'https://instruction.austincc.edu/tled/wp-json/wp-api-menus/v2/menus/4'
       )
-      .catch(function (error) {
+      .catch(function(error) {
         // handle error
-        console.log("SecondaryNav: ", error);
+        console.log('SecondaryNav: ', error);
       })
       .then(response => {
         console.log(response.data.items);
@@ -150,13 +160,15 @@ class App extends Component {
                 <Route path="/reports" component={ReportsPage} />
                 <Route path="/search/:query" component={SearchPage} />
                 <Route path="/404" component={NotFoundPage} />
-                <Route path="/:param1?/:param2?/:param3?/:param4?/:param5?" component={WPPage} />
+                <Route
+                  path="/:param1?/:param2?/:param3?/:param4?/:param5?"
+                  component={WPPage}
+                />
               </Switch>
             </Main>
 
             <Footer />
           </div>
-
         </Router>
       </ThemeProvider>
     );
@@ -179,7 +191,7 @@ const Main = styled.main`
 
   a:not(.button) {
     font-weight: 700;
-    color: rgb(26, 82, 118);;
+    color: rgb(26, 82, 118);
 
     &:hover,
     &:focus {
