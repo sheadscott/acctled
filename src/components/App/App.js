@@ -33,15 +33,13 @@ class App extends Component {
   };
 
   componentDidMount() {
-    // Tracking Code
+    // Tracking Initialization
     ReactGA.initialize('UA-107121372-1');
-    console.log('React GA initialized');
     ReactGA.pageview(window.location.pathname + window.location.search);
     const history = createBrowserHistory();
     history.listen(location => ReactGA.pageview(location.pathname));
 
     // Primary Nav - passed to Drawer and TitleBar
-
     axios
       .get(
         'https://instruction.austincc.edu/tled/wp-json/wp-api-menus/v2/menus/3'
