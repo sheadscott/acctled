@@ -6,6 +6,7 @@ import { Section, Heading } from 'iw-react-elements';
 import { Redirect } from 'react-router';
 import { withRouter } from "react-router-dom";
 import { Helmet } from 'react-helmet';
+import ReactGA from 'react-ga';
 
 import { Container, Row, Column } from '../Grid/Grid';
 import ACF from '../ACF/ACF';
@@ -27,7 +28,7 @@ class WPPage extends Component {
     console.log('component received new props', slug);
 
     console.log('Param1: ', this.props.match.params.param1);
-      
+
     const site =
       this.props.match.params.param1 ===
       'office-cooperative-education-internships'
@@ -143,6 +144,8 @@ class WPPage extends Component {
 
   componentDidMount() {
     this.getData(this.getSlug(this.props.match.params));
+    ReactGA.initialize('UA-107121372-1');
+    ReactGA.pageview(window.location.pathname + window.location.search);
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -163,6 +166,7 @@ class WPPage extends Component {
     if (prevState.slug !== this.state.slug) {
       this.getData(this.state.slug);
     }
+    ReactGA.pageview(window.location.pathname + window.location.search);
   }
 
   render() {
