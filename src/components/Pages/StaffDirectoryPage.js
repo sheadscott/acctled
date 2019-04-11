@@ -9,7 +9,7 @@ import {
 } from 'react-accessible-accordion';
 import { Helmet } from 'react-helmet';
 import { Container } from '../Grid/Grid';
-import { A, Section, Heading } from '../Elements/Elements';
+import { Section, Heading } from '../Elements/Elements';
 import { ReactComponent as DownArrowIcon } from '../../img/arrowDown.svg';
 import TLEDStaff from '../directory/TLEDStaff'
 import LibraryStaff from '../directory/LibraryStaff';

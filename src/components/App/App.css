@@ -34,10 +34,14 @@ hr {
   color: greenyellow !important;
 } */
 
-main li:not([role="menuitem"]) {
+/* main li:not([role="menuitem"]) {
   margin-bottom: 1.5rem;
 }
 
 main li.menu-item {
+  margin-bottom: 0.6rem;
+} */
+
+main li {
   margin-bottom: 0.6rem;
 }
