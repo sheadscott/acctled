@@ -110,7 +110,6 @@ class WPPage extends Component {
 
   getSlug = params => {
     const param1 = this.props.match.params.param1;
-
     // ##### Internal Redirects
     // Redirect for TLEDv1 http://tled.austincc.edu/office-curriculum-development
     if(param1 === "office-curriculum-development") {
@@ -126,7 +125,10 @@ class WPPage extends Component {
     //   this.props.history.push("/office-of-experiential-learning");
     //   return "office-of-experiential-learning";
     // }
-
+    if(params.param3==="schedule-a-course-design-consultation"){
+      this.props.history.push("/faculty-support/services/course-design-consultations");
+      return "course-design-consultations";
+    }
     // ##### External Redirects
     if(param1 === "office-cooperative-education-internships") {
       window.location = "https://instruction.austincc.edu/internships/";
