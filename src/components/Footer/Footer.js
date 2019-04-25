@@ -62,6 +62,7 @@ export default class Footer extends Component {
               <TLEDLogo />
 
               <div className="vcard" style={{ marginLeft: "10px" }}>
+                <div className="email"><a href="tledwebsite@austincc.edu">tledwebsite@austincc.edu</a></div>
                 <div className="org">Austin Community College District</div>
                 <div className="adr">
                   <div className="street-address">
@@ -142,10 +143,19 @@ const Contact = styled(Column)`
 
   .vcard {
     font-size: 0.8rem;
+
+    .email {
+      margin-bottom: 1.2rem
+
+      a:hover {
+        color: #fff;
+        text-decoration: underline;
+      }
+    }
   }
 
   svg {
     max-width: 240px;
-    margin-bottom: 2rem;
+    margin-bottom: 0.8rem;
   }
 `;
