@@ -9,9 +9,14 @@ import MediaContainer from '../MediaContainer/MediaContainer';
 import { Container, Row, Column } from '../Grid/Grid';
 import Parser from '../Parser/Parser';
 import './carousel.scss';
-const links = ["/faculty-support/services/", "acc-library-faculty-teaching-toolbox/", "/faculty-support/on-campus-assistance/technology-help/", "/faculty-support/tools/", "/teaching-online-at-acc/"];
 
 export default class HomeSlider extends Component {
+
+  constructor() {
+    super();
+    this.links= ["/faculty-support/services/", "acc-library-faculty-teaching-toolbox/", "/faculty-support/on-campus-assistance/technology-help/", "/faculty-support/tools/", "/teaching-online-at-acc/"];
+
+  }
 
   state = {
     slideData: [],
@@ -98,7 +103,7 @@ export default class HomeSlider extends Component {
         <CarouselControls>
           {this.state.slideData.map((item, index) => (
             <li key={`thumbnail-${item.url}`}>
-              <Link to={links[index]}>
+              <Link to={this.links[index]}>
                 <CarouselControl
                   className={this.state.currentSlide === index ? 'active' : null}
                   bg={item.url}
