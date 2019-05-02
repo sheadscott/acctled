@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom'
+
 import './carousel.scss';
 import { Carousel } from 'react-responsive-carousel';
 import styled from 'styled-components';
@@ -7,6 +9,7 @@ import { Img } from '../Elements/Elements';
 import MediaContainer from '../MediaContainer/MediaContainer';
 import { Container, Row, Column } from '../Grid/Grid';
 import Parser from '../Parser/Parser';
+const links = ["/faculty-support/services/","acc-library-faculty-teaching-toolbox/","/faculty-support/on-campus-assistance/technology-help/","/faculty-support/tools/","/teaching-online-at-acc/"];
 
 export default class HomeSlider extends Component {
   state = {
@@ -37,7 +40,7 @@ export default class HomeSlider extends Component {
 
   changeCarousel = slide => {
     this.setState({ currentSlide: slide });
-  };
+    };
   render() {
     return (
       <React.Fragment>
@@ -94,12 +97,9 @@ export default class HomeSlider extends Component {
         <CarouselControls>
           {this.state.slideData.map((item, index) => (
             <li key={`thumbnail-${item.url}`}>
+            <Link to={links[index]}>
               <CarouselControl
-                onClick={() => {
-                  this.changeCarousel(index);
-                }}
                 className={this.state.currentSlide === index ? 'active' : null}
-                disabled={this.state.currentSlide === index ? 'true' : null}
                 bg={item.url}
                 title={item.title}
                 index={index}
@@ -116,6 +116,7 @@ export default class HomeSlider extends Component {
                 </div>
                 <div>{item.title}</div>
               </CarouselControl>
+              </Link>
             </li>
           ))}
         </CarouselControls>
