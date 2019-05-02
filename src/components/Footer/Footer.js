@@ -62,7 +62,7 @@ export default class Footer extends Component {
               <TLEDLogo />
 
               <div className="vcard" style={{ marginLeft: "10px" }}>
-                <div className="email"><a href="tledwebsite@austincc.edu">tledwebsite@austincc.edu</a></div>
+                <div className="email"><a href="mailto:tledwebsite@austincc.edu">tledwebsite@austincc.edu</a></div>
                 <div className="org">Austin Community College District</div>
                 <div className="adr">
                   <div className="street-address">
@@ -147,7 +147,7 @@ const Contact = styled(Column)`
     .email {
       margin-bottom: 1.2rem
 
-      a:hover {
+      a:hover, a:visited, a:link, a:active {
         color: #fff;
         text-decoration: underline;
       }

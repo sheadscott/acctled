@@ -31,6 +31,7 @@ export default class HomeSlider extends Component {
           slideData.push(info);
         });
 
+        // console.log(slideData);
         this.setState({ slideData });
       });
   }
