@@ -108,9 +108,6 @@ export default class HomeSlider extends Component {
                   title={item.title}
                   index={index}
                 >
-                  <AccessibleDiv>
-                    Skip to Slide {index + 1}
-                  </AccessibleDiv>
                   <div>{item.title}</div>
                 </CarouselControl>
               </Link>
@@ -130,12 +127,7 @@ const Slide = styled.div`
     border-bottom-color: ${props => colors[props.index]};
   }
 `;
-const AccessibleDiv = styled.div`
-    position: 'absolute',
-    width: 1,
-    height: 1,
-    overflow: 'hidden'
-`;
+
 const SlideText = styled(Column)`
   h2 {
     color: white;
