@@ -12,22 +12,18 @@ import './carousel.scss';
 
 export default class HomeSlider extends Component {
 
-  constructor() {
-    super();
-    this.links= ["/faculty-support/services/", "acc-library-faculty-teaching-toolbox/", "/faculty-support/on-campus-assistance/technology-help/", "/faculty-support/tools/", "/teaching-online-at-acc/"];
-
-  }
-
   state = {
     slideData: [],
     currentSlide: 0
   };
 
   componentDidMount() {
+    const re = /(?<=tled)(.*)(\/)(?=")/;
     axios
       .get('https://instruction.austincc.edu/tled/wp-json/acf/v3/pages/226')
       .then(response => {
         const slideData = [];
+
         const slideShowItems =
           response.data.acf.hero_content[0].carousel_content;
         slideShowItems.forEach(function (slide) {
@@ -37,6 +33,8 @@ export default class HomeSlider extends Component {
           info.url = slide.image_content.url;
           info.sizes = slide.image_content.sizes;
           info.description = slide.image_description;
+          info.page_url = re.exec(slide.image_description)[0];
+          console.log(`THE URL IS ${info.page_url}`);
           slideData.push(info);
         });
 
@@ -103,23 +101,16 @@ export default class HomeSlider extends Component {
         <CarouselControls>
           {this.state.slideData.map((item, index) => (
             <li key={`thumbnail-${item.url}`}>
-              <Link to={this.links[index]}>
+              <Link to={item.page_url}>
                 <CarouselControl
                   className={this.state.currentSlide === index ? 'active' : null}
                   bg={item.url}
                   title={item.title}
                   index={index}
                 >
-                  <div
-                    style={{
-                      position: 'absolute',
-                      width: 1,
-                      height: 1,
-                      overflow: 'hidden'
-                    }}
-                  >
+                  <AccessibleDiv>
                     Skip to Slide {index + 1}
-                  </div>
+                  </AccessibleDiv>
                   <div>{item.title}</div>
                 </CarouselControl>
               </Link>
@@ -139,7 +130,12 @@ const Slide = styled.div`
     border-bottom-color: ${props => colors[props.index]};
   }
 `;
-
+const AccessibleDiv = styled.div`
+    position: 'absolute',
+    width: 1,
+    height: 1,
+    overflow: 'hidden'
+`;
 const SlideText = styled(Column)`
   h2 {
     color: white;
