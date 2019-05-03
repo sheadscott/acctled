@@ -18,7 +18,6 @@ export default class HomeSlider extends Component {
   };
 
   componentDidMount() {
-    const re = /(tled).*?(\/?)(?=")/;
     axios
       .get('https://instruction.austincc.edu/tled/wp-json/acf/v3/pages/226')
       .then(response => {
@@ -33,7 +32,7 @@ export default class HomeSlider extends Component {
           info.url = slide.image_content.url;
           info.sizes = slide.image_content.sizes;
           info.description = slide.image_description;
-          info.page_url = (re.exec(slide.image_description)[0]).replace("tled","");
+          info.page_url = slide.image_description.replace(/((.|\n)*)(tled)(.*?)(?=")(.*)/,"$4");
           slideData.push(info);
         });
 
