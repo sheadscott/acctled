@@ -32,7 +32,8 @@ export default class HomeSlider extends Component {
           info.url = slide.image_content.url;
           info.sizes = slide.image_content.sizes;
           info.description = slide.image_description;
-          info.page_url = slide.image_description.replace(/((.|\n)*)(tled)(.*?)(?=")(.*)/,"$4");
+          info.page_url = slide.image_description.match(/\/tled\/(.*?)"/)[1];
+          console.log(info.page_url)
           slideData.push(info);
         });
 
