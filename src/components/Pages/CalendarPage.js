@@ -31,7 +31,7 @@ export default function CalendarPage() {
               Calendar
             </Heading>
             <ButtonContainer>
-              <A href="https://goo.gl/forms/0qht2jFfY2gqACcq2" className="button">Submit Event</A>
+              <A href="https://tled.austincc.edu/faculty-communications/" className="button">Submit Event</A>
             </ButtonContainer>
             <CalendarGrid />
           </Column>

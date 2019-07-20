@@ -113,10 +113,10 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   transition: height 0.2s linear;
-  height: ${props => props.searchExpanded ? '180px' : '0px'}
+  height: ${props => props.searchExpanded ? '180px' : '0px'};
 
   @media (min-width: 640px) {
-    height: ${props => props.searchExpanded ? '120px' : '0px'}
+    height: ${props => props.searchExpanded ? '120px' : '0px'};
   }
 `;
 
