@@ -15,7 +15,7 @@
     "html-react-parser": "^0.6.1",
     "iw-react-elements": "^1.0.8",
     "jest-dom": "^3.1.1",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "material-icons-react": "^1.0.4",
     "node-sass": "^4.10.0",
     "object-fit-images": "^3.2.4",
