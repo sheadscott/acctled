@@ -7,7 +7,7 @@
     "@babel/polyfill": "^7.4.3",
     "@emotion/core": "^10.0.2",
     "@rebass/grid": "^6.0.0-6",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bootstrap": "4",
     "flickity": "^2.1.2",
     "foundation-sites": "^6.5.1",
